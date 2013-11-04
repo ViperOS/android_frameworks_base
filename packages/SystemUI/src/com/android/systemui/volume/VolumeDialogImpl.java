@@ -304,8 +304,13 @@ public class VolumeDialogImpl implements VolumeDialog {
             addRow(AudioManager.STREAM_MUSIC,
                     R.drawable.ic_volume_media, R.drawable.ic_volume_media_mute, true, true);
             if (!AudioSystem.isSingleVolume(mContext)) {
-                addRow(AudioManager.STREAM_RING, R.drawable.ic_volume_ringer,
-                        R.drawable.ic_volume_ringer_mute, true, false);
+              if (Util.isVoiceCapable(mContext)) {
+                  addRow(AudioManager.STREAM_RING, R.drawable.ic_volume_ringer,
+                          R.drawable.ic_volume_ringer_mute, true, false);
+              } else {
+                  addRow(AudioManager.STREAM_RING, R.drawable.ic_volume_notification,
+                          R.drawable.ic_volume_notification_mute, true, false);
+              }
                 addRow(AudioManager.STREAM_NOTIFICATION,
                         R.drawable.ic_volume_notification, R.drawable.ic_volume_notification_mute, true, false);
                 addRow(STREAM_ALARM,
@@ -895,6 +900,10 @@ public class VolumeDialogImpl implements VolumeDialog {
             }
         }
 
+        if (Util.isVoiceCapable(mContext)) {
+            updateNotificationRowH();
+        }
+
         if (mActiveStream != state.activeStream) {
             mPrevActiveStream = mActiveStream;
             mActiveStream = state.activeStream;
@@ -911,6 +920,16 @@ public class VolumeDialogImpl implements VolumeDialog {
 
     CharSequence composeWindowTitle() {
         return mContext.getString(R.string.volume_dialog_title, getStreamLabelH(getActiveRow().ss));
+    }
+
+    private void updateNotificationRowH() {
+        VolumeRow notificationRow = findRow(AudioManager.STREAM_NOTIFICATION);
+        if (notificationRow != null && mState.linkedNotification) {
+            removeRow(notificationRow);
+        } else if (notificationRow == null && !mState.linkedNotification) {
+            addRow(AudioManager.STREAM_NOTIFICATION, R.drawable.ic_volume_notification,
+                    R.drawable.ic_volume_notification_mute, true, false);
+        }
     }
 
     private void updateVolumeRowH(VolumeRow row) {

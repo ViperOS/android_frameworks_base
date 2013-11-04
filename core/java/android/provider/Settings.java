@@ -4475,7 +4475,7 @@ public final class Settings {
          * @hide
          */
         public static final String FONT_INFO = "font_info";
-        
+
 	 /**
          * Hold list of installed font provider packages. Uses "|" as a delimiter
          * @hide
