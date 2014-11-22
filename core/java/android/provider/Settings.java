@@ -3829,6 +3829,12 @@ public final class Settings {
         public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
 
         /**
+         * The delay when killing the app on long press takes place
+         * @hide
+         */
+        public static final String LONG_PRESS_KILL_DELAY = "long_press_kill_delay";
+
+        /**
          * Dyanamic Navbar Switch
          * @hide
          */
