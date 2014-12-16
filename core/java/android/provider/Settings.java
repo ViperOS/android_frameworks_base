@@ -3744,6 +3744,12 @@ public final class Settings {
         public static final String PIXEL_NAV_ANIMATION = "pixel_nav_animation";
 
         /**
+         * Whether to enable status and navigation bar color in battery saver mode.
+         * @hide
+         */
+        public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
+
+        /**
          * Enable vibration when double tapping the power button for camera
          * @hide
          */
