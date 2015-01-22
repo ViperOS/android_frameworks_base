@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2014 The Android Open Source Project
+ * Copyright (C) 2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +27,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -37,7 +40,7 @@ import java.util.List;
 /**
  * Quick settings common detail list view with line items.
  */
-public class QSDetailItemsList extends LinearLayout {
+public class QSDetailItemsList extends FrameLayout {
     private static final String TAG = "QSDetailItemsList";
 
     private ListView mListView;
@@ -47,8 +50,6 @@ public class QSDetailItemsList extends LinearLayout {
 
     public QSDetailItemsList(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
-        mTag = TAG;
     }
 
     public static QSDetailItemsList convertOrInflate(Context context,
