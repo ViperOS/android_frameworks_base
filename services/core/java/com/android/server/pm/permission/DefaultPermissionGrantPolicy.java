@@ -955,9 +955,8 @@ public final class DefaultPermissionGrantPolicy {
             grantRuntimePermissions(vendingPackage, SMS_PERMISSIONS, userId);
             grantRuntimePermissions(vendingPackage, STORAGE_PERMISSIONS, userId);
         }
-
         // Project Fi
-        PackageParser.Package fiPackage = getDefaultProviderAuthorityPackageLPr(
+        PackageParser.Package fiPackage = getDefaultProviderAuthorityPackage(
                 "com.google.android.apps.tycho", userId);
         if (fiPackage != null) {
             grantRuntimePermissions(fiPackage, CONTACTS_PERMISSIONS, userId);
@@ -966,7 +965,13 @@ public final class DefaultPermissionGrantPolicy {
             grantRuntimePermissions(fiPackage, LOCATION_PERMISSIONS, userId);
             grantRuntimePermissions(fiPackage, SMS_PERMISSIONS, userId);
         }
-
+        // Chromium Sign-in
+        PackageParser.Package chromiumPackage = getDefaultProviderAuthorityPackage(
+                "org.chromium.chrome", userId);
+        if (chromiumPackage != null) {
+            grantRuntimePermissions(chromiumPackage, CONTACTS_PERMISSIONS, userId);
+            grantRuntimePermissions(chromiumPackage, STORAGE_PERMISSIONS, true, userId);
+        }
     }
 
     private void grantDefaultPermissionsToDefaultSystemDialerApp(
