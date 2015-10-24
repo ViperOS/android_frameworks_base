@@ -3687,6 +3687,12 @@ public final class Settings {
          */
 
         /**
+         * This preference enables showing the power menu on LockScreen.
+         * @hide
+         */
+        public static final String LOCKSCREEN_ENABLE_POWER_MENU = "lockscreen_enable_power_menu";
+
+        /**
          * Boolean value on whether to show weather in the statusbar
          * @hide
          */
