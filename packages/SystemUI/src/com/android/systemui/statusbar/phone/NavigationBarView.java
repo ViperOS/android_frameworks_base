@@ -31,12 +31,14 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
+import android.view.GestureDetector;
 import android.view.IDockedStackListener.Stub;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -111,6 +113,7 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
     private final SparseArray<ButtonDispatcher> mButtonDisatchers = new SparseArray<>();
     private Configuration mConfiguration;
     private SlideTouchEvent mSlideTouchEvent;
+    private GestureDetector mDoubleTapGesture;
 
     private NavigationBarInflaterView mNavigationInflaterView;
 
@@ -215,6 +218,16 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
         mButtonDisatchers.put(R.id.menu_always_show, new ButtonDispatcher(R.id.menu_always_show));
         mButtonDisatchers.put(R.id.search, new ButtonDispatcher(R.id.search));
         mButtonDisatchers.put(R.id.ime_switcher, new ButtonDispatcher(R.id.ime_switcher));
+
+        mDoubleTapGesture = new GestureDetector(mContext,
+                new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                if (pm != null) pm.goToSleep(e.getEventTime());
+                return true;
+            }
+        });
     }
 
     public BarTransitions getBarTransitions() {
@@ -238,6 +251,10 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
         }
         if (mDeadZone != null && event.getAction() == MotionEvent.ACTION_OUTSIDE) {
             mDeadZone.poke(event);
+        }
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 0, UserHandle.USER_CURRENT) == 1) {
+            mDoubleTapGesture.onTouchEvent(event);
         }
         return super.onTouchEvent(event);
     }
