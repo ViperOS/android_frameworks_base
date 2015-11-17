@@ -37,4 +37,12 @@
     <!-- Fastscroller -->
     <java-symbol type="color" name="fastscroller_text_color" />
 
+  <!-- Immersive cling -->
+  <java-symbol type="color" name="immersive_cling_bg_color" />
+  <java-symbol type="color" name="immersive_cling_text_color" />
+  <java-symbol type="color" name="immersive_cling_button_text_color" />
+
+  <!-- Two target preference vertical divider color -->
+  <java-symbol type="color" name="list_divider_dark" />
+
 </resources>
