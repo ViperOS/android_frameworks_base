@@ -108,7 +108,6 @@ import com.android.systemui.statusbar.NotificationGuts.OnGutsClosedListener;
 import com.android.systemui.statusbar.notification.VisualStabilityManager;
 import com.android.systemui.statusbar.phone.NavigationBarView;
 import com.android.systemui.statusbar.phone.NotificationGroupManager;
-import com.android.systemui.statusbar.phone.NotificationPanelView;
 import com.android.systemui.statusbar.phone.StatusBarKeyguardViewManager;
 import com.android.systemui.statusbar.policy.HeadsUpManager;
 import com.android.systemui.statusbar.policy.PreviewInflater;
@@ -2033,8 +2032,7 @@ public abstract class BaseStatusBar extends SystemUI implements
 
                     // close the shade if it was open
                     animateCollapsePanels(CommandQueue.FLAG_EXCLUDE_RECENTS_PANEL,
-                            true /* force */, true /* delayed */,
-                            NotificationPanelView.SPEED_UP_FACTOR_CLICKED);
+                            true /* force */, true /* delayed */);
                     visibilityChanged(false);
 
                     return true;
@@ -2067,10 +2065,6 @@ public abstract class BaseStatusBar extends SystemUI implements
     }
 
     public void animateCollapsePanels(int flags, boolean force, boolean delayed) {
-    }
-
-    public void animateCollapsePanels(int flags, boolean force, boolean delayed,
-            float speedUpFactor) {
     }
 
     public void overrideActivityPendingAppTransition(boolean keyguardShowing) {
