@@ -44,6 +44,7 @@ import com.android.systemui.qs.tiles.AirplaneModeTile;
 import com.android.systemui.qs.tiles.VenomTile;
 import com.android.systemui.qs.tiles.BatteryTile;
 import com.android.systemui.qs.tiles.BluetoothTile;
+import com.android.systemui.qs.tiles.BrightnessTile;
 import com.android.systemui.qs.tiles.CastTile;
 import com.android.systemui.qs.tiles.CellularTile;
 import com.android.systemui.qs.tiles.ColorInversionTile;
@@ -449,6 +450,7 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("nfc")) return new NfcTile(this);
         else if (tileSpec.equals("venom")) return new VenomTile(this);
         else if (tileSpec.equals("weather")) return new WeatherTile(this);
+        else if (tileSpec.equals("brightness")) return new BrightnessTile(this);
         else if (tileSpec.equals("music")) return new MusicTile(this);
         else if (tileSpec.equals("screenshot")) return new ScreenshotTile(this);
         else if (tileSpec.equals("sync")) return new SyncTile(this);
