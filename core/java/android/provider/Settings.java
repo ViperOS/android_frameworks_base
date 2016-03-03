@@ -9843,6 +9843,13 @@ public final class Settings {
         public static final String DATABASE_DOWNGRADE_REASON = "database_downgrade_reason";
 
         /**
+         * Whether to ignore the representation of outgoing calls set by the network.
+         *
+         * @hide
+         */
+         public static final String CONNECTED_LINE_IDENTIFICATION = "connected_line_identification";
+
+        /**
          * Audio focus mode for ringtones when a wired headset is connected
          * @hide
          */
