@@ -65,4 +65,7 @@
   <java-symbol type="id" name="shutdown_message" />
   <java-symbol type="id" name="shutdown_progress" />
 
+  <!-- Whether device has dash charging support -->
+  <java-symbol type="bool" name="config_hasDashCharger" />
+
 </resources>

@@ -20,4 +20,7 @@
     backgrounds (requires config_allowNotificationIconTextTinting to be true)-->
     <bool name="config_useDarkBgNotificationIconTextTinting">false</bool>
 
+     <!-- Whether device has dash charging support -->
+     <bool name="config_hasDashCharger">false</bool>
+
 </resources>
