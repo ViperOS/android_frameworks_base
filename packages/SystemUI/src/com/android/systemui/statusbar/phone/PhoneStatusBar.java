@@ -501,14 +501,17 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.NAV_BAR_DYNAMIC),
                   false, this, UserHandle.USER_ALL);
-                updateSettings();
+	    resolver.registerContentObserver(Settings.System.getUriFor(
+                  Settings.System.SHOW_FOURG),
+                  false, this, UserHandle.USER_ALL);
+            updateSettings();
         }
 		
         void unobserve() {
             ContentResolver resolver = mContext.getContentResolver();
             resolver.unregisterContentObserver(this);
         }
-		
+
         @Override
         public void onChange(boolean selfChange, Uri uri) {
             super.onChange(selfChange, uri);
@@ -518,6 +521,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_SHOW_CARRIER))) {
                     updateSettings();
                     updateCarrier();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.SHOW_FOURG))) {
+                    mShow4G = Settings.System.getIntForUser(
+                            mContext.getContentResolver(),
+                            Settings.System.SHOW_FOURG,
+                            0, UserHandle.USER_CURRENT) == 1;
+                mNetworkController.onConfigurationChanged();
             }
             updateSettings();
         }
