@@ -230,6 +230,7 @@ public class NotificationPanelView extends PanelView implements
     private boolean mDoubleTapToSleepEnabled;
     private int mStatusBarHeaderHeight;
     private GestureDetector mDoubleTapGesture;
+    private boolean mDozeWakeupDoubleTap;
 
     private boolean mKeyguardWeatherEnabled;
     private TextView mKeyguardWeatherInfo;
@@ -814,7 +815,10 @@ public class NotificationPanelView extends PanelView implements
         }
         if ((!mIsExpanding || mHintAnimationRunning)
                 && !mQsExpanded
-                && mStatusBar.getBarState() != StatusBarState.SHADE) {
+                && mStatusBar.getBarState() != StatusBarState.SHADE
+                && !(mDozeWakeupDoubleTap
+                     && mStatusBarState == StatusBarState.KEYGUARD
+                     && mStatusBar.isDozing())) {
             mAfforanceHelper.onTouchEvent(event);
         }
         if (mOnlyAffordanceInThisMotion) {
@@ -2449,6 +2453,40 @@ public class NotificationPanelView extends PanelView implements
                     WeatherUtils.formatTemperature(info.temp, info.tempUnit),
                     info.condition));
             mKeyguardWeatherInfo.setVisibility(VISIBLE);
+        }
+    }
+
+    class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.DOUBLE_TAP_WAKE_DOZE), false, this, UserHandle.USER_ALL);
+            update();
+        }
+
+        void unobserve() {
+            ContentResolver resolver = mContext.getContentResolver();
+            resolver.unregisterContentObserver(this);
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            update();
+        }
+
+        public void update() {
+            ContentResolver resolver = mContext.getContentResolver();
+            mDozeWakeupDoubleTap = Settings.System.getIntForUser(resolver,
+                    Settings.System.DOUBLE_TAP_WAKE_DOZE, 0, UserHandle.USER_CURRENT) == 1;
         }
     }
 
