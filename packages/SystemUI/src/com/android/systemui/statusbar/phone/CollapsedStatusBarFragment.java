@@ -21,7 +21,12 @@ import static android.app.StatusBarManager.DISABLE_SYSTEM_INFO;
 import android.annotation.Nullable;
 import android.app.Fragment;
 import android.app.StatusBarManager;
+import android.content.ContentResolver;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.UserHandle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +70,30 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mOperatorNameFrame;
     private ClockController mClockController;
     private boolean mIsClockBlacklisted;
+    private final Handler mHandler = new Handler();
+    private ContentResolver mContentResolver;
+
+    // custom carrier label
+    private View mCustomCarrierLabel;
+    private int mShowCarrierLabel;
+
+    private class SettingsObserver extends ContentObserver {
+       SettingsObserver(Handler handler) {
+           super(handler);
+       }
+
+       void observe() {
+         mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    false, this, UserHandle.USER_ALL);
+       }
+
+       @Override
+       public void onChange(boolean selfChange) {
+           updateSettings(true);
+       }
+    }
+    private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
 
     private SignalCallback mSignalCallback = new SignalCallback() {
         @Override
@@ -101,6 +130,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mCustomIconArea = mStatusBar.findViewById(R.id.left_icon_area);
         mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
         mClockController = new ClockController(mStatusBar);
+        mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
         initOperatorName();
@@ -165,8 +195,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if ((diff1 & DISABLE_NOTIFICATION_ICONS) != 0) {
             if ((state1 & DISABLE_NOTIFICATION_ICONS) != 0) {
                 hideNotificationIconArea(animate);
+                hideCarrierName(animate);
             } else {
                 showNotificationIconArea(animate);
+                showCarrierName(animate);
             }
         }
     }
@@ -245,6 +277,18 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         }
     }
 
+    public void hideCarrierName(boolean animate) {
+        if (mCustomCarrierLabel != null) {
+            animateGone(mCustomCarrierLabel);
+        }
+    }
+
+    public void showCarrierName(boolean animate) {
+        if (mCustomCarrierLabel != null) {
+            setCarrierLabel(animate);
+        }
+    }
+
     /**
      * Animate a view to INVISIBLE or GONE
      */
@@ -269,6 +313,13 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
      */
     private void animateHide(final View v, boolean animate) {
         animateHiddenState(v, View.INVISIBLE, animate);
+    }
+
+    /**
+     * Remove a view.
+     */
+    private void animateGone(final View v) {
+        animateHiddenState(v, View.GONE, false);
     }
 
     /**
@@ -319,6 +370,21 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (getResources().getBoolean(R.bool.config_showOperatorNameInStatusBar)) {
             ViewStub stub = mStatusBar.findViewById(R.id.operator_name);
             mOperatorNameFrame = stub.inflate();
+        }
+    }
+
+    public void updateSettings(boolean animate) {
+        mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
+                Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
+                UserHandle.USER_CURRENT);
+        setCarrierLabel(animate);
+    }
+
+    private void setCarrierLabel(boolean animate) {
+        if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
+            animateShow(mCustomCarrierLabel, animate);
+        } else {
+            animateGone(mCustomCarrierLabel);
         }
     }
 }
