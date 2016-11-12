@@ -30,5 +30,7 @@
     <string name="omnijaws_detail_header">Clima</string>
     <string name="omnijaws_label_default">Clima</string>
     <string name="omnijaws_current_text">Agora</string>
-	
+
+    <!-- statusbar items tuner -->
+    <string name="statusbar_icons_blacklist">Ícones da barra de status</string>
 </resources>
