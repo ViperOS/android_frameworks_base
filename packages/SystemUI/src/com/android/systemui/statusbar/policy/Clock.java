@@ -323,8 +323,9 @@ public class Clock extends TextView implements DemoMode {
                     formatted.delete(magic1, magic1 + 1);
                 }
             }
-            return formatted;
         }
+        return formatted;
+    }
 
     protected void updateSettings() {
         ContentResolver resolver = mContext.getContentResolver();
