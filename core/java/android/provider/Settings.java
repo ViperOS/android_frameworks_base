@@ -4070,6 +4070,12 @@ public final class Settings {
         public static final String DOZE_PULSE_DURATION_OUT = "doze_pulse_duration_out";
 
         /**
+         * Whether to center or left justify date time group
+         * @hide
+         */
+        public static final String QS_DATE_TIME_CENTER = "qs_date_time_center";
+
+        /**
          * Whether the phone vibrates on call connect
          * @hide
          */
