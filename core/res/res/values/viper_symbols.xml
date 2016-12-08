@@ -44,5 +44,8 @@
     <java-symbol type="bool" name="config_hasDashCharger" />
 
     <java-symbol type="bool" name="config_needsFingerprintAxisInversion" />
+
+    <!-- Doze mode -->
+    <java-symbol type="bool" name="config_doze_enabled_by_default" />
 	
 </resources>
