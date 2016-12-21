@@ -8316,19 +8316,12 @@ public final class ActivityManagerService extends ActivityManagerNative
             } catch (RemoteException ex) {
                 return -1;
             }
-        }
+       }
 
-        // Figure out the value returned when access is allowed
-        final int allowedResult;
+        // If we're extending a persistable grant, then we always need to create
+        // the grant data structure so that take/release APIs work
         if ((modeFlags & Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION) != 0) {
-            // If we're extending a persistable grant, then we need to return
-            // "targetUid" so that we always create a grant data structure to
-            // support take/release APIs
-            allowedResult = targetUid;
-        } else {
-            // Otherwise, we can return "-1" to indicate that no grant data
-            // structures need to be created
-            allowedResult = -1;
+            return targetUid;
         }
 
         if (targetUid >= 0) {
