@@ -33,4 +33,7 @@
 
     <!-- statusbar items tuner -->
     <string name="statusbar_icons_blacklist">Ícones da barra de status</string>
+
+    <!-- Recents Free Ram -->
+    <string name="recents_free_ram">Memória livre: %1$d MB</string>
 </resources>
