@@ -86,4 +86,8 @@
     <!-- data saver icon switch -->
     <string name="status_bar_datasaver">Data saver</string>
 
+    <!-- Language\Locale Tile -->
+    <string name="quick_settings_locale_label">Language</string>
+    <string name="quick_settings_locale_more_locales_toast">Please configure multiple languages to enable toggle functionality</string>
+
 </resources>
