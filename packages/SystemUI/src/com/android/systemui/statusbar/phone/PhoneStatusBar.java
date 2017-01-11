@@ -687,8 +687,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         @Override
         public void onChange(boolean selfChange) {
             boolean wasUsing = mUseNavBar;
+            boolean needsNav = mContext.getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
             mUseNavBar = Settings.System.getIntForUser(
-                    mContext.getContentResolver(), Settings.System.NAVIGATION_BAR_ENABLED, 0,
+                    mContext.getContentResolver(), Settings.System.NAVIGATION_BAR_ENABLED, needsNav ? 1 : 0,
                     UserHandle.USER_CURRENT) != 0;
             Log.d(TAG, "navbar is " + (mUseNavBar ? "enabled" : "disabled"));
             if (wasUsing != mUseNavBar) {
@@ -971,13 +972,19 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 QS_ROWS_LANDSCAPE,
                 QS_COLUMNS,
                 STATUS_BAR_SHOW_TICKER);
+
         try {
-            boolean needsNavBar = mWindowManagerService.needsNavigationBar();
-            if (DEBUG) Log.v(TAG, "needsNavigationBar=" + needsNavBar);
-            if (needsNavBar) {
+            boolean needsNav = mContext.getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+            boolean mUseNavBar = Settings.System.getIntForUser(
+                    mContext.getContentResolver(), Settings.System.NAVIGATION_BAR_ENABLED, needsNav ? 1 : 0,
+                    UserHandle.USER_CURRENT) != 0;
+            SystemProperties.set("qemu.hw.mainkeys", mUseNavBar ? "0" : "1");
+
+            if (DEBUG) Log.v(TAG, "needsNavigationBar=" + mUseNavBar);
+            if (mUseNavBar) {
                 addNavigationBar();
             }
-        } catch (RemoteException ex) {
+        } catch (Exception ex) {
             // no window manager? good luck with that
         }
 

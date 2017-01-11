@@ -2548,6 +2548,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     public void updateSettings() {
         ContentResolver resolver = mContext.getContentResolver();
+        Resources resources = mContext.getResources();
         boolean updateRotation = false;
         int mDeviceHardwareWakeKeys = mContext.getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareWakeKeys);
@@ -2616,8 +2617,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             hasHwKeysEnabled(); 
             updateKeyAssignments();
 
+            boolean needsNav = mContext.getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
             final boolean navBarEnabled = Settings.System.getIntForUser(resolver,
-                    Settings.System.NAVIGATION_BAR_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
+                    Settings.System.NAVIGATION_BAR_ENABLED, needsNav ? 1 : 0,
+                            UserHandle.USER_CURRENT) == 1;
             if (navBarEnabled != mNavBarEnabled) {
                 mNavBarEnabled = navBarEnabled;
                 SystemProperties.set("qemu.hw.mainkeys", mNavBarEnabled ? "0" : "1");

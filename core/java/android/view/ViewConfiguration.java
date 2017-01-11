@@ -796,8 +796,9 @@ public class ViewConfiguration {
      */
     public boolean hasPermanentMenuKey() {
         // Check if navbar is on to set overflow menu button
+        boolean needsNav = mContext.getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
         boolean mHasNavigationBar = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_ENABLED, 0) == 1;
+                    Settings.System.NAVIGATION_BAR_ENABLED, needsNav ? 1 : 0) == 1;
         // Check if hw keys are on to set overflow menu button
         boolean mHasHwKeysEnabled = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.ENABLE_HW_KEYS, 0) == 1;
