@@ -4136,7 +4136,8 @@ public final class Settings {
          * @hide
          */
         public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
-         /**
+
+        /**
          * @hide
          */
          public static final String POWER_MENU_ANIMATIONS = "power_menu_animations";
@@ -4165,6 +4166,23 @@ public final class Settings {
         public static final String OTA_LATEST_VERSION = "ota_latest_version";
         public static final String OTA_MAINTAINER = "ota_maintainer";
         public static final String OTA_UPDATE_INTERVAL = "ota_update_interval";
+
+        /**
+         * @hide
+         */
+        public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
+
+        /**
+         * Status bar weather temperature
+         * 0: Hide the temperature
+         * 1: Display the temperature with scale and image
+         * 2: Display the temperature without scale and with image
+         * 3: Display the temparature with scale and without image
+         * 4: Display the temperature without scale and without image
+         * 5: Display the temperature image
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_WEATHER_TEMP = "status_bar_show_weather_temp";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
