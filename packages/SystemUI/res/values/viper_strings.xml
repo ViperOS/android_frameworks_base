@@ -39,6 +39,7 @@
     <string name="omnijaws_service_error_long">Error loading weather data</string>
     <string name="omnijaws_service_disabled">Service disabled</string>
     <string name="omnijaws_service_error_marker" translatable="false">*</string>
+    <string name="omnijaws_package_not_available">OmniJaws not available</string>
 
     <!-- statusbar items tuner -->
     <string name="statusbar_icons_blacklist">Status bar icons</string>

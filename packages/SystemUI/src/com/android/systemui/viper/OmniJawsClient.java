@@ -156,9 +156,7 @@ public class OmniJawsClient {
         }
 
         public void update() {
-            if (mEnabled) {
-                updateSettings();
-            }
+            updateSettings();
         }
 
         public void unregister() {
@@ -168,7 +166,6 @@ public class OmniJawsClient {
 
     private Context mContext;
     private WeatherInfo mCachedInfo;
-    private boolean mEnabled;
     private Resources mRes;
     private String mPackageName;
     private String mIconPrefix;
@@ -181,7 +178,6 @@ public class OmniJawsClient {
 
     public OmniJawsClient(Context context) {
         mContext = context;
-        mEnabled = isOmniJawsServiceInstalled();
         mObserver = new ArrayList<OmniJawsObserver>();
         mSettingsObserver = new OmniJawsSettingsObserver(mHandler);
         mSettingsObserver.observe();
@@ -199,7 +195,7 @@ public class OmniJawsClient {
     }
 
     public void updateWeather() {
-        if (mEnabled) {
+        if (isOmniJawsServiceInstalled()) {
             Intent updateIntent = new Intent(Intent.ACTION_MAIN)
                     .setClassName(SERVICE_PACKAGE, SERVICE_PACKAGE + ".WeatherService");
             updateIntent.setAction(SERVICE_PACKAGE + ".ACTION_UPDATE");
@@ -208,10 +204,9 @@ public class OmniJawsClient {
     }
 
     public Intent getSettingsIntent() {
-        if (mEnabled) {
-            Intent settings = new Intent(Intent.ACTION_MAIN)
-                    .setClassName("com.android.settings", "com.android.settings.Settings$OmniJawsSettingsActivity");
-            return settings;
+        if (isOmniJawsServiceInstalled()) {
+            return new Intent(Intent.ACTION_MAIN)
+                    .setClassName("com.android.settings", "com.android.settings.Settings$QuickSettingsSettingsActivity");
         }
         return null;
     }
@@ -333,12 +328,12 @@ public class OmniJawsClient {
         }
     }
 
-    private boolean isOmniJawsServiceInstalled() {
+    public boolean isOmniJawsServiceInstalled() {
         return isAvailableApp(SERVICE_PACKAGE);
     }
 
     public boolean isOmniJawsEnabled() {
-        if (!mEnabled) {
+        if (!isOmniJawsServiceInstalled()) {
             return false;
         }
         final Cursor c = mContext.getContentResolver().query(SETTINGS_URI, SETTINGS_PROJECTION,
@@ -355,7 +350,7 @@ public class OmniJawsClient {
     }
 
     public void setOmniJawsEnabled(boolean value) {
-        if (mEnabled) {
+        if (isOmniJawsServiceInstalled()) {
             Intent updateIntent = new Intent(Intent.ACTION_MAIN)
                     .setClassName(SERVICE_PACKAGE, SERVICE_PACKAGE + ".WeatherService");
             updateIntent.setAction(SERVICE_PACKAGE + ".ACTION_ENABLE");
@@ -365,7 +360,7 @@ public class OmniJawsClient {
     }
 
     private void updateUnits() {
-        if (!mEnabled) {
+        if (!isOmniJawsServiceInstalled()) {
             return;
         }
         final Cursor c = mContext.getContentResolver().query(SETTINGS_URI, SETTINGS_PROJECTION,
@@ -392,7 +387,7 @@ public class OmniJawsClient {
     }
 
     private void updateSettings() {
-        if (mEnabled) {
+        if (isOmniJawsServiceInstalled()) {
             final String iconPack = Settings.System.getStringForUser(mContext.getContentResolver(),
                     Settings.System.OMNIJAWS_WEATHER_ICON_PACK, UserHandle.USER_CURRENT);
             if (iconPack == null) {
