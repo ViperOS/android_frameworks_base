@@ -130,6 +130,11 @@ public class SystemSensorManager extends SensorManager {
     protected boolean registerListenerImpl(SensorEventListener listener, Sensor sensor,
             int delayUs, Handler handler, int maxBatchReportLatencyUs, int reservedFlags) {
         android.util.SeempLog.record_sensor_rate(381, sensor, delayUs);
+        if (mSensorListeners.size() >= MAX_LISTENER_COUNT) {
+            throw new IllegalStateException("register failed, " +
+                "the sensor listeners size has exceeded the maximum limit " +
+                MAX_LISTENER_COUNT);
+        }
         if (listener == null || sensor == null) {
             Log.e(TAG, "sensor or listener is null");
             return false;
@@ -202,6 +207,11 @@ public class SystemSensorManager extends SensorManager {
     /** @hide */
     @Override
     protected boolean requestTriggerSensorImpl(TriggerEventListener listener, Sensor sensor) {
+        if (mTriggerListeners.size() >= MAX_LISTENER_COUNT) {
+            throw new IllegalStateException("request failed, " +
+                    "the trigger listeners size has exceeded the maximum limit " +
+                    MAX_LISTENER_COUNT);
+        }
         if (sensor == null) throw new IllegalArgumentException("sensor cannot be null");
 
         if (listener == null) throw new IllegalArgumentException("listener cannot be null");
