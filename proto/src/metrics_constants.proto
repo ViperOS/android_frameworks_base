@@ -2218,6 +2218,9 @@ message MetricsEvent {
     // CATEGORY: QUICK_SETTINGS
     QS_NFC = 497;
 
+    // Venom
+    VENOM = 498;
+	
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
   }
