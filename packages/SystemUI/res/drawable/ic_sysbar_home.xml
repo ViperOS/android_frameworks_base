@@ -17,9 +17,15 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:viewportWidth="88"
     android:viewportHeight="88"
-    android:width="24.0dp"
-    android:height="24.0dp">
-    <path
-        android:pathData="M55 13.95C86.37 25.66 81.13 71.07 49 75.7 22.41 79.54 3.43 52.71 15.79 29c1.96 -3.77 3.9 -6.76 7.25 -9.47 4.7 -3.81 10.09 -5.95 15.96 -7.09 5.54 -0.71 10.71 -0.47 16 1.51z"
-        android:fillColor="#ffffffff" />
+    android:width="24dp"
+    android:height="24dp">
+    <group
+        android:scaleX="0.9666618"
+        android:scaleY="0.96782"
+        android:translateX="16.05415"
+        android:translateY="0.601842">
+        <path
+            android:pathData="M59.943254 44.846313A31.034639 30.997499 0 0 1 28.908615 75.843813 31.034639 30.997499 0 0 1 -2.1260242 44.846313 31.034639 30.997499 0 0 1 28.908615 13.848814 31.034639 30.997499 0 0 1 59.943254 44.846313Z"
+            android:fillColor="#ffffffff" />
+    </group>
 </vector>
