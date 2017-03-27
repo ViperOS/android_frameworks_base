@@ -19,4 +19,7 @@
     <!-- Notifications Battery Really Full -->
     <java-symbol type="integer" name="config_notificationsBatteryReallyFullARGB" />
 
+    <!-- PlatLogo -->
+    <java-symbol type="drawable" name="platlogo_viper" />
+	
 </resources>
