@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2017 The Pure Nexus Project
+     Copyright (C) 2017 ViperOS
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
-
           http://www.apache.org/licenses/LICENSE-2.0
-
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,7 +23,7 @@
         android:translateX="16.05415"
         android:translateY="0.601842">
         <path
-            android:pathData="M59.943254 44.846313A31.034639 30.997499 0 0 1 28.908615 75.843813 31.034639 30.997499 0 0 1 -2.1260242 44.846313 31.034639 30.997499 0 0 1 28.908615 13.848814 31.034639 30.997499 0 0 1 59.943254 44.846313Z"
+            android:pathData="M58.908766 43.813065a31.034639 30.997499 0 0 1 -31.03464 30.997499 31.034639 30.997499 0 0 1 -31.0346389 -30.997499 31.034639 30.997499 0 0 1 31.0346389 -30.9975 31.034639 30.997499 0 0 1 31.03464 30.9975z"
             android:fillColor="#ffffffff" />
     </group>
 </vector>
