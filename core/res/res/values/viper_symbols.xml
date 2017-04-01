@@ -22,4 +22,7 @@
     <!-- PlatLogo -->
     <java-symbol type="drawable" name="platlogo_viper" />
 	
+    <!-- Quick settings tiles columns and rows config -->
+    <java-symbol type="integer" name="config_qs_num_rows_landscape_default"/>
+	
 </resources>
