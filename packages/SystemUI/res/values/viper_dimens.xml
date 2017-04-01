@@ -31,4 +31,8 @@
     <dimen name="opa_return_translation">-1.0dip</dimen>
     <dimen name="opa_rest_to_collapse">7.0dip</dimen>
 
+    <!-- Custom headers -->
+    <dimen name="qs_panel_top_offset_normal">80dp</dimen>
+    <dimen name="qs_panel_top_offset_header">110dp</dimen>
+	
 </resources>
