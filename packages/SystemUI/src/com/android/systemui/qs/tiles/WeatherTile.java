@@ -39,7 +39,7 @@ import android.widget.ListView;
 
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.MetricsProto.MetricsEvent;
-import com.android.internal.util.crdroid.PackageUtils;
+import com.android.internal.util.viper.PackageUtils;
 import com.android.systemui.R;
 import com.android.systemui.viper.DetailedWeatherView;
 import com.android.systemui.viper.OmniJawsClient;

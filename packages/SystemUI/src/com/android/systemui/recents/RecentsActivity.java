@@ -770,8 +770,6 @@ public class RecentsActivity extends Activity implements ViewTreeObserver.OnPreD
         SystemServicesProxy ssp = Recents.getSystemServices();
         ssp.removeTask(event.task.key.id);
 
-        // Update memory details
-        mRecentsView.updateMemoryStatus();
     }
 
     public final void onBusEvent(AllTaskViewsDismissedEvent event) {

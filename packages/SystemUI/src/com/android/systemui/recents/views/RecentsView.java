@@ -33,6 +33,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.AttributeSet;
 import android.view.AppTransitionAnimationSpec;
@@ -134,8 +135,6 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
             "system:" + Settings.System.SHOW_CLEAR_ALL_RECENTS;
     private static final String RECENTS_CLEAR_ALL_LOCATION =
             "system:" + Settings.System.RECENTS_CLEAR_ALL_LOCATION;
-    private static final String SYSTEMUI_RECENTS_MEM_DISPLAY =
-            "system:" + Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY;
 
     public RecentsView(Context context) {
         this(context, null);
@@ -373,14 +372,12 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         mClearRecents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventBus.getDefault().send(new DismissAllTaskViewsEvent());
-                updateMemoryStatus();
             }
         });
         mClearRecents.setVisibility(View.VISIBLE);
         TunerService.get(mContext).addTunable(this,
                 SHOW_CLEAR_ALL_RECENTS,
-                RECENTS_CLEAR_ALL_LOCATION,
-                SYSTEMUI_RECENTS_MEM_DISPLAY);
+                RECENTS_CLEAR_ALL_LOCATION);
         super.onAttachedToWindow();
     }
 
@@ -404,12 +401,6 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
                 mClearRecentsLocation =
                         newValue == null ? 3 : Integer.parseInt(newValue);
                 setClearRecentsLocation();
-                break;
-            case SYSTEMUI_RECENTS_MEM_DISPLAY:
-                mShowMemDisplay =
-                        newValue != null && Integer.parseInt(newValue) == 1;
-                setClearRecentsLocation();
-                showMemDisplay();
             default:
                 break;
         }
@@ -466,16 +457,19 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
                 params.gravity = Gravity.TOP | Gravity.RIGHT;
                 break;
             case 1:
-                params.gravity = Gravity.TOP | Gravity.CENTER;
+                params.gravity = Gravity.TOP | Gravity.LEFT;
                 break;
             case 2:
+                params.gravity = Gravity.TOP | Gravity.CENTER;
+                break;
+            case 3:
             default:
                 params.gravity = Gravity.BOTTOM | Gravity.RIGHT;
                 break;
-            case 3:
+            case 4:
                 params.gravity = Gravity.BOTTOM | Gravity.LEFT;
                 break;
-            case 4:
+            case 5:
                 params.gravity = Gravity.BOTTOM | Gravity.CENTER;
                 break;
         }
