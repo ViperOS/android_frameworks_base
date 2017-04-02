@@ -42,4 +42,7 @@
     <dimen name="floating_action_button_margin_side">54dp</dimen>
     <dimen name="floating_action_button_margin_bottom">54dp</dimen>
 	
+    <!-- carrier label text height -->
+    <dimen name="status_bar_carrier_height">14dp</dimen>
+	
 </resources>
