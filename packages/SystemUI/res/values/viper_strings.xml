@@ -36,5 +36,6 @@
     <string name="omnijaws_detail_header">Weather</string>
     <string name="omnijaws_label_default">Weather</string>
     <string name="omnijaws_current_text">Now</string>
+    <string name="omnijaws_service_error_long">Error loading weather data</string>
 	
 </resources>
