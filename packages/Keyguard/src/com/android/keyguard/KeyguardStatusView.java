@@ -253,7 +253,6 @@ public class KeyguardStatusView extends GridLayout implements
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
-        updateWeatherSettings(false);
         updateSettings(false);
         mWeatherEnabled = mWeatherClient.isOmniJawsEnabled();
         mWeatherClient.addObserver(this);
@@ -599,22 +598,22 @@ public class KeyguardStatusView extends GridLayout implements
         public void onChange(boolean selfChange, Uri uri) {
              if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_WEATHER_NUMBER_OF_NOTIFICATIONS))) {
-                 updateWeatherSettings(false);
+                 queryAndUpdateWeather();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_VISIBLE_NOTIFICATIONS))) {
-                 updateWeatherSettings(false);
+                 queryAndUpdateWeather();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_WEATHER_HIDE_PANEL))) {
-                 updateWeatherSettings(false);
+                 queryAndUpdateWeather();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_SHOW_WEATHER))) {
-                 updateWeatherSettings(false);
+                 queryAndUpdateWeather();
              } else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.OMNIJAWS_WEATHER_ICON_PACK))) {
                  queryAndUpdateWeather();
              }  else if (uri.equals(Settings.System.getUriFor(
                      Settings.System.LOCK_SCREEN_SHOW_WEATHER_LOCATION))) {
-                 updateWeatherSettings(false);
+                 queryAndUpdateWeather();
              }
             update();
         }
@@ -634,7 +633,7 @@ public class KeyguardStatusView extends GridLayout implements
            numberOfNotificationsToHide = Settings.System.getInt(resolver,
                        Settings.System.LOCK_SCREEN_WEATHER_NUMBER_OF_NOTIFICATIONS, 4);
 
-           updateWeatherSettings(false);
-        }
-    }
+           queryAndUpdateWeather();
+         }
+     }
 }
