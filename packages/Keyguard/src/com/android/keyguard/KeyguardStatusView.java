@@ -83,7 +83,6 @@ public class KeyguardStatusView extends GridLayout implements
     private int currentVisibleNotifications;
     private int numberOfNotificationsToHide;
     private boolean showLocation;
-    private SettingsObserver mSettingsObserver;
 
     //On the first boot, keyguard will start to receiver TIME_TICK intent.
     //And onScreenTurnedOff will not get called if power off when keyguard is not started.
