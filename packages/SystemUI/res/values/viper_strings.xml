@@ -38,4 +38,5 @@
     <string name="omnijaws_current_text">Now</string>
     <string name="omnijaws_service_error_long">Error loading weather data</string>
     <string name="omnijaws_service_disabled">Service disabled</string>
+    <string name="omnijaws_service_error_marker" translatable="false">*</string>
 </resources>
