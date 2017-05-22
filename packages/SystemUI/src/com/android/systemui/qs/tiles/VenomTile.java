@@ -61,11 +61,9 @@ public class VenomTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void handleLongClick() {
-        // Collapse the panels, so the user can see the toast.
         mHost.collapsePanels();
-        SysUIToast.makeText(mContext, mContext.getString(
-                R.string.quick_venom_toast),
-                Toast.LENGTH_LONG).show();
+        startvenom();
+        refreshState();
     }
 
     @Override
