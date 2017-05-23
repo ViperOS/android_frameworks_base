@@ -8,6 +8,6 @@
         android:id="@+id/viper_header"
         android:layout_width="match_parent"
         android:layout_height="175dp"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:src="@drawable/viper_logo_header" />
 </LinearLayout>
