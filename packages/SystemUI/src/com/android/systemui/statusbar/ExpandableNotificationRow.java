@@ -89,7 +89,7 @@ public class ExpandableNotificationRow extends ActivatableNotificationView {
     private boolean mSensitive;
     private boolean mSensitiveHiddenInGeneral;
     private boolean mShowingPublicInitialized;
-    protected boolean mHideSensitiveForIntrinsicHeight;
+    private boolean mHideSensitiveForIntrinsicHeight;
 
     /**
      * Is this notification expanded by the system. The expansion state can be overridden by the
@@ -104,10 +104,10 @@ public class ExpandableNotificationRow extends ActivatableNotificationView {
 
     private Animator mTranslateAnim;
     private ArrayList<View> mTranslateableViews;
-    protected NotificationContentView mPublicLayout;
-    protected NotificationContentView mPrivateLayout;
-    protected int mMaxExpandHeight;
-    protected int mHeadsUpHeight;
+    private NotificationContentView mPublicLayout;
+    private NotificationContentView mPrivateLayout;
+    private int mMaxExpandHeight;
+    private int mHeadsUpHeight;
     private View mVetoButton;
     private int mNotificationColor;
     private ExpansionLogger mLogger;
@@ -125,7 +125,7 @@ public class ExpandableNotificationRow extends ActivatableNotificationView {
     private boolean mIsSummaryWithChildren;
     private NotificationChildrenContainer mChildrenContainer;
     private ViewStub mSettingsIconRowStub;
-    protected ViewStub mGutsStub;
+    private ViewStub mGutsStub;
     private boolean mIsSystemChildExpanded;
     private boolean mIsPinned;
     private FalsingManager mFalsingManager;
@@ -1014,11 +1014,10 @@ public class ExpandableNotificationRow extends ActivatableNotificationView {
         return mSettingsIconRow;
     }
 
-    public boolean inflateGuts() {
+    public void inflateGuts() {
         if (mGuts == null) {
             mGutsStub.inflate();
         }
-        return false;
     }
 
     private void updateChildrenVisibility() {
@@ -1289,7 +1288,7 @@ public class ExpandableNotificationRow extends ActivatableNotificationView {
         }
     }
 
-    protected void updateMaxHeights() {
+    private void updateMaxHeights() {
         int intrinsicBefore = getIntrinsicHeight();
         View expandedChild = mPrivateLayout.getExpandedChild();
         if (expandedChild == null) {

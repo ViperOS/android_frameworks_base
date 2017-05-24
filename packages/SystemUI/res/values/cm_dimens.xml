@@ -22,9 +22,6 @@
     <dimen name="phone_width">320dp</dimen>
     <dimen name="phone_height">420dp</dimen>
 
-    <dimen name="queue_row_height">52dp</dimen>
-    <dimen name="queue_top_shadow">3dp</dimen>
-
     <dimen name="weather_text_size">12sp</dimen>
 
     <dimen name="navbar_single_hand_mode_horizontal_threshhold">90dp</dimen>
