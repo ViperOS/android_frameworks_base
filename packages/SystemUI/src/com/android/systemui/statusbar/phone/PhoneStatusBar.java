@@ -45,7 +45,6 @@ import android.app.StatusBarManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentCallbacks2;
 import android.content.ComponentName;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -1623,14 +1622,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         prepareNavigationBarView();
 
         mWindowManager.addView(mNavigationBarView, getNavigationBarLayoutParams());
-    }
-
-    private void removeNavigationBar() {
-        if (DEBUG) Log.d(TAG, "removeNavigationBar: about to remove " + mNavigationBarView);
-        if (mNavigationBarView == null) return;
-
-        mWindowManager.removeView(mNavigationBarView);
-        mNavigationBarView = null;
     }
 
     protected void repositionNavigationBar() {

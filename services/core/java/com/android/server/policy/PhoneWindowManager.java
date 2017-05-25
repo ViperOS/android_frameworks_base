@@ -688,8 +688,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     boolean mForcingShowNavBar;
     int mForcingShowNavBarLayer;
 
-    boolean mDevForceNavbar = false;
-
     // States of keyguard dismiss.
     private static final int DISMISS_KEYGUARD_NONE = 0; // Keyguard not being dismissed.
     private static final int DISMISS_KEYGUARD_START = 1; // Keyguard needs to be dismissed.
@@ -1106,9 +1104,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ACCELEROMETER_ROTATION_ANGLES), false, this,
-                    UserHandle.USER_ALL);
-            resolver.registerContentObserver(CMSettings.System.getUriFor(
-                    CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.System.ENABLE_HW_KEYS), false, this,
@@ -2255,11 +2250,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         if (!hasHwKeysEnabled()) {
              activeHardwareKeys = 0;
         }
-
-        final boolean hasMenu = (activeHardwareKeys & KEY_MASK_MENU) != 0;
-        final boolean hasAssist = (activeHardwareKeys & KEY_MASK_ASSIST) != 0;
-        final boolean hasAppSwitch = (activeHardwareKeys & KEY_MASK_APP_SWITCH) != 0;
-
+        final boolean hasMenu = (mDeviceHardwareKeys & KEY_MASK_MENU) != 0;
+        final boolean hasHome = (mDeviceHardwareKeys & KEY_MASK_HOME) != 0;
+        final boolean hasAssist = (mDeviceHardwareKeys & KEY_MASK_ASSIST) != 0;
+        final boolean hasAppSwitch = (mDeviceHardwareKeys & KEY_MASK_APP_SWITCH) != 0;
         final ContentResolver resolver = mContext.getContentResolver();
         final Resources res = mContext.getResources();
 
@@ -8906,10 +8900,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     // overridden by qemu.hw.mainkeys in the emulator.
     @Override
     public boolean hasNavigationBar() {
-        return mHasNavigationBar || mDevForceNavbar;
-    }
-
-    public boolean needsNavigationBar() {
         return mHasNavigationBar;
     }
 
