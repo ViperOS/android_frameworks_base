@@ -322,8 +322,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             "system:" + Settings.System.SCREEN_BRIGHTNESS_MODE;
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL =
             "cmsystem:" + CMSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL;
-    private static final String NAVBAR_LEFT_IN_LANDSCAPE =
-            "cmsystem:" + CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE;
     private static final String QS_ROWS_PORTRAIT =
             Settings.Secure.QS_ROWS_PORTRAIT;
     private static final String QS_ROWS_LANDSCAPE =
@@ -842,7 +840,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         TunerService.get(mContext).addTunable(this,
                 SCREEN_BRIGHTNESS_MODE,
-                NAVBAR_LEFT_IN_LANDSCAPE,
                 STATUS_BAR_BRIGHTNESS_CONTROL,
                 QS_ROWS_PORTRAIT,
                 QS_ROWS_LANDSCAPE,
@@ -5653,13 +5650,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             case SCREEN_BRIGHTNESS_MODE:
                 mAutomaticBrightness = newValue != null && Integer.parseInt(newValue)
                         == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
-                break;
-            case NAVBAR_LEFT_IN_LANDSCAPE:
-                if (mNavigationBarView != null) {
-                    final boolean navLeftInLandscape = newValue != null &&
-                            Integer.parseInt(newValue) == 1;
-                    mNavigationBarView.setLeftInLandscape(navLeftInLandscape);
-                }
                 break;
             case STATUS_BAR_BRIGHTNESS_CONTROL:
                 mBrightnessControl = newValue != null && Integer.parseInt(newValue) == 1;
