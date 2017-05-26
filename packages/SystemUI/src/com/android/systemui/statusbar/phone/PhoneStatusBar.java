@@ -582,13 +582,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
     };
 
-    private final ContentObserver mShowOperatorNameObserver = new ContentObserver(new Handler()) {
-        @Override
-        public void onChange(boolean selfChange) {
-            showOperatorName();
-        }
-    };
-
     final private ContentObserver mNavBarObserver = new ContentObserver(mHandler) {
         @Override
         public void onChange(boolean selfChange) {
