@@ -5050,34 +5050,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     // we can tell the app that it is covered by it.
                     mSystemBottom = mTmpNavigationFrame.top;
                 }
-            } else if (mNavigationBarPosition == NAV_BAR_LEFT) {
-                // Landscape screen; nav bar goes to the left.
-                int right = overscanLeft + getNavigationBarWidth(displayRotation, uiMode);
-                mTmpNavigationFrame.set(0, 0, right, displayHeight);
-                mStableLeft = mStableFullscreenLeft = mTmpNavigationFrame.right;
-                if (transientNavBarShowing) {
-                    mNavigationBarController.setBarShowingLw(true);
-                } else if (navVisible) {
-                    mNavigationBarController.setBarShowingLw(true);
-                    mDockLeft = mTmpNavigationFrame.right;
-                    mRestrictedScreenLeft = mDockLeft;
-                    mRestrictedScreenWidth = mDockRight - mRestrictedScreenLeft;
-                    mRestrictedOverscanScreenLeft = mRestrictedScreenLeft;
-                    mRestrictedOverscanScreenWidth = mDockRight
-                            - mRestrictedOverscanScreenLeft;
-                } else {
-                    // We currently want to hide the navigation UI - unless we expanded the status
-                    // bar.
-                    mNavigationBarController.setBarShowingLw(statusBarExpandedNotKeyguard);
-                }
-                if (navVisible && !navTranslucent && !navAllowedHidden
-                        && !mNavigationBar.isAnimatingLw()
-                        && !mNavigationBarController.wasRecentlyTranslucent()) {
-                    // If the nav bar is currently requested to be visible,
-                    // and not in the process of animating on or off, then
-                    // we can tell the app that it is covered by it.
-                    mSystemLeft = mTmpNavigationFrame.right;
-                }
             } else if (mNavigationBarPosition == NAV_BAR_RIGHT) {
                 // Landscape screen; nav bar goes to the right.
                 int left = displayWidth - overscanRight
