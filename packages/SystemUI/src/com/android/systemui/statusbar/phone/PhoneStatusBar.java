@@ -405,6 +405,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     // settings
     private QSPanel mQSPanel;
+			
+    // show lte/4g switch
+    private boolean mShow4G;
 
     // top bar
     BaseStatusBarHeader mHeader;
