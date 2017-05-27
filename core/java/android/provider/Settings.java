@@ -3774,6 +3774,12 @@ public final class Settings {
         public static final String OMNIJAWS_WEATHER_ICON_PACK = "omnijaws_weather_icon_pack";
 
         /**
+         * Dyanamic Navbar Switch
+         * @hide
+         */
+        public static final String NAV_BAR_DYNAMIC = "nav_bar_dynamic";
+        
+        /**
          * Network traffic indicator, goes from least to greatest significant bitwise
          * 0 = Display up-stream traffic if set
          * 1 = Display down-stream traffic if set
