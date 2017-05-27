@@ -507,6 +507,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 	    resolver.registerContentObserver(Settings.System.getUriFor(
                   Settings.System.SHOW_FOURG),
                   false, this, UserHandle.USER_ALL);
+        resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW),
+                    false, this, UserHandle.USER_ALL);
             updateSettings();
         }
 		
