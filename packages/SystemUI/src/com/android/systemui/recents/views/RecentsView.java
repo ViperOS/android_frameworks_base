@@ -342,6 +342,7 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
             @Override
             public void onClick(View view) {
                 EventBus.getDefault().send(new ToggleRecentsEvent());
+                updateMemoryStatus();
             }
         });
     }
