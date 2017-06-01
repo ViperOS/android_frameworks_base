@@ -192,7 +192,7 @@ public class Clock extends TextView implements DemoMode {
             }
 
             if (mScreenOn) {
-                updateClock();
+                getHandler().post(() -> updateClock());
             }
         }
     };
