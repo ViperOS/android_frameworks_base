@@ -3960,6 +3960,26 @@ public final class Settings {
         public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
 
         /**
+         * Statusbar ViperOS logo
+         * @hide
+         */
+        public static final String STATUS_BAR_VIPER_LOGO = "status_bar_viper_logo";
+ 
+        /**
+         * Statusbar ViperOS logo color setting
+         * @hide
+         */
+        public static final String STATUS_BAR_VIPER_LOGO_COLOR = "status_bar_viper_logo_color";
+ 
+         /**
+         * Style of Status bar logo
+         * 0 - Left (default)
+         * 1 - Right
+         * @hide
+         */
+        public static final String STATUS_BAR_VIPER_LOGO_STYLE = "status_bar_viper_logo_style";
+        
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *

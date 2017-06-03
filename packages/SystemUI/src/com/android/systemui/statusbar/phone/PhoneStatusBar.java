@@ -434,6 +434,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     boolean mExpandedVisible;
 
+    // ViperOS logo
+    private boolean mViperLogo;
+    private int mViperLogoColor;
+    private ImageView viperLogo;
+    private ImageView viperLogoright;
+    private ImageView viperLogoleft;
+    private int mViperLogoStyle;
+
     private NetworkTraffic mTraffic;
 
     private int mNavigationBarWindowState = WINDOW_STATE_SHOWING;
@@ -505,14 +513,23 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                    Settings.System.STATUS_BAR_SHOW_CARRIER),
                    false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.NAV_BAR_DYNAMIC),
-                  false, this, UserHandle.USER_ALL);
+                   Settings.System.NAV_BAR_DYNAMIC),
+                   false, this, UserHandle.USER_ALL);
 	    resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.SHOW_FOURG),
-                  false, this, UserHandle.USER_ALL);
-        resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW),
-                    false, this, UserHandle.USER_ALL);
+                   Settings.System.SHOW_FOURG),
+                   false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                   Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW),
+                   false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                   Settings.System.STATUS_BAR_VIPER_LOGO),
+                   false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                   Settings.System.STATUS_BAR_VIPER_LOGO_COLOR),
+                   false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                   Settings.System.STATUS_BAR_VIPER_LOGO_STYLE),
+                   false, this, UserHandle.USER_ALL);
             updateSettings();
         }
 		
@@ -543,6 +560,19 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 		
         public void updateSettings() {
             ContentResolver resolver = mContext.getContentResolver();
+
+            mViperLogoStyle = Settings.System.getIntForUser(
+                    resolver, Settings.System.STATUS_BAR_VIPER_LOGO_STYLE, 0,
+                    UserHandle.USER_CURRENT);
+            mViperLogo = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_VIPER_LOGO, 0, mCurrentUserId) == 1;
+            mViperLogoColor = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_VIPER_LOGO_COLOR, 0xFFFFFFFF, mCurrentUserId);
+            viperLogo = (ImageView) mStatusBarView.findViewById(R.id.viper_logo);
+            viperLogoleft = (ImageView) mStatusBarView.findViewById(R.id.left_viper_logo);
+            viperLogoright = (ImageView) mStatusBarView.findViewById(R.id.right_viper_logo);
+            showViperLogo(mViperLogo, mViperLogoColor, mViperLogoStyle);
+
             mShowCarrierLabel = Settings.System.getIntForUser(resolver,
                     Settings.System.STATUS_BAR_SHOW_CARRIER, 1, UserHandle.USER_CURRENT);
             mTraffic = (NetworkTraffic) mStatusBarView.findViewById(R.id.networkTraffic);
@@ -3973,6 +4003,38 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 return deferred;
             }
         }, cancelAction, afterKeyguardGone);
+    }
+
+    public void showViperLogo(boolean show, int color, int style) {
+        if (mStatusBarView == null) return;
+         if (!show) {
+            viperLogo.setVisibility(View.GONE);
+            viperLogoright.setVisibility(View.GONE);
+            viperLogoleft.setVisibility(View.GONE);
+            return;
+        }
+        if (color != 0xFFFFFFFF) {
+            viperLogo.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            viperLogoright.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            viperLogoleft.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        } else {
+            viperLogo.clearColorFilter();
+            viperLogoright.clearColorFilter();
+            viperLogoleft.clearColorFilter();
+        }
+        if (style == 0) {
+            viperLogo.setVisibility(View.VISIBLE);
+            viperLogoright.setVisibility(View.GONE);
+            viperLogoleft.setVisibility(View.GONE);
+        } else if (style == 1) {
+            viperLogo.setVisibility(View.GONE);
+            viperLogoright.setVisibility(View.VISIBLE);
+            viperLogoleft.setVisibility(View.GONE);
+        } else if (style == 2) {
+            viperLogo.setVisibility(View.GONE);
+            viperLogoright.setVisibility(View.GONE);
+            viperLogoleft.setVisibility(View.VISIBLE);
+        }
     }
 
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {

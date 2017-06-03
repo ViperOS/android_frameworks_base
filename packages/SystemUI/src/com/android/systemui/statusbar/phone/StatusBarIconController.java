@@ -86,6 +86,11 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     private TextView mCarrierLabel;
     private NetworkTraffic mNetworkTraffic;
 
+    // ViperOS Logo
+    private ImageView mViperLogo;
+    private ImageView mViperLogoRight;
+    private ImageView mViperLogoLeft;
+
     private int mIconSize;
     private int mIconHPadding;
 
@@ -143,7 +148,9 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         mBatteryMeterView = (BatteryMeterView) statusBar.findViewById(R.id.battery);
         mBatteryMeterViewKeyguard = (BatteryMeterView) keyguardStatusBar.findViewById(R.id.battery);
         scaleBatteryMeterViews(context);
-
+        mViperLogo = (ImageView) statusBar.findViewById(R.id.viper_logo);
+        mViperLogoRight = (ImageView) statusBar.findViewById(R.id.right_viper_logo);
+        mViperLogoLeft = (ImageView) statusBar.findViewById(R.id.left_viper_logo);
         mNetworkTraffic = (NetworkTraffic) statusBar.findViewById(R.id.networkTraffic);
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
         mLightModeIconColorSingleTone = context.getColor(R.color.light_mode_icon_color_single_tone);
@@ -339,11 +346,25 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     public void hideSystemIconArea(boolean animate) {
         animateHide(mSystemIconArea, animate);
         animateHide(mCenterClockLayout, animate);
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_VIPER_LOGO, 0) == 1 &&
+           (Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_VIPER_LOGO_STYLE,  0,
+                UserHandle.USER_CURRENT) == 2)){
+            animateHide(mViperLogoLeft, animate);
+        }
     }
 
     public void showSystemIconArea(boolean animate) {
         animateShow(mSystemIconArea, animate);
         animateShow(mCenterClockLayout, animate);
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_VIPER_LOGO, 0) == 1 &&
+           (Settings.System.getIntForUser(mContext.getContentResolver(),
+		Settings.System.STATUS_BAR_VIPER_LOGO_STYLE,  0,
+	        UserHandle.USER_CURRENT) == 2)){
+            animateShow(mViperLogoLeft, animate);
+        }
     }
 
     public void hideNotificationIconArea(boolean animate) {
@@ -562,7 +583,14 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
                 UserHandle.USER_CURRENT) == mContext.getResources().
                 getColor(R.color.status_bar_clock_color)) {
             mCarrierLabel.setTextColor(getTint(mTintArea, mCarrierLabel, mIconTint));
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_VIPER_LOGO_COLOR, 0xFFFFFFFF,
+                UserHandle.USER_CURRENT) == 0xFFFFFFFF) {
+            mViperLogo.setImageTintList(ColorStateList.valueOf(mIconTint));
+            mViperLogoRight.setImageTintList(ColorStateList.valueOf(mIconTint));
+            mViperLogoLeft.setImageTintList(ColorStateList.valueOf(mIconTint));
         }
+    }
         mNetworkTraffic.setDarkIntensity(mDarkIntensity);
     }
 
