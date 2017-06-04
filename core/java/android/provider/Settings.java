@@ -3986,6 +3986,12 @@ public final class Settings {
         public static final String RECENTS_USE_GRID = "recents_use_grid";
 
         /**
+         * Recents lock
+         * @hide
+         */
+        public static final String LOCKED_RECENT_TASK_LIST = "locked_recent_task_list";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
