@@ -56,13 +56,10 @@ import com.android.systemui.recents.Constants;
 import com.android.systemui.recents.Recents;
 import com.android.systemui.recents.events.EventBus;
 import com.android.systemui.recents.events.activity.LaunchTaskEvent;
-import com.android.systemui.recents.events.ui.LockTaskStateChangedEvent;
 import com.android.systemui.recents.events.ui.ShowApplicationInfoEvent;
 import com.android.systemui.recents.misc.SystemServicesProxy;
 import com.android.systemui.recents.misc.Utilities;
 import com.android.systemui.recents.model.Task;
-
-import com.android.systemui.rr.LockTaskHelper;
 
 import static android.app.ActivityManager.StackId.FREEFORM_WORKSPACE_STACK_ID;
 import static android.app.ActivityManager.StackId.FULLSCREEN_WORKSPACE_STACK_ID;
@@ -160,9 +157,6 @@ public class TaskViewHeader extends FrameLayout
     ImageView mAppInfoView;
     TextView mAppTitleView;
     ProgressBar mFocusTimerIndicator;
- 
-    // Recent Task Lock
-    LockTaskHelper mLockTaskHelper;
 
     // Header drawables
     @ViewDebug.ExportedProperty(category="recents")
@@ -183,6 +177,10 @@ public class TaskViewHeader extends FrameLayout
     Drawable mDarkFullscreenIcon;
     Drawable mLightInfoIcon;
     Drawable mDarkInfoIcon;
+    Drawable mLightLockedDrawable;
+    Drawable mLightUnlockedDrawable;
+    Drawable mDarkLockedDrawable;
+    Drawable mDarkUnlockedDrawable;
     int mTaskBarViewLightTextColor;
     int mTaskBarViewDarkTextColor;
     int mDisabledTaskBarBackgroundColor;
@@ -244,6 +242,10 @@ public class TaskViewHeader extends FrameLayout
         mDarkInfoIcon = context.getDrawable(R.drawable.recents_info_dark);
         mDisabledTaskBarBackgroundColor =
                 context.getColor(R.color.recents_task_bar_disabled_background_color);
+        mLightLockedDrawable = context.getDrawable(R.drawable.recents_locked_light);
+        mLightUnlockedDrawable = context.getDrawable(R.drawable.recents_unlocked_light);
+        mDarkLockedDrawable = context.getDrawable(R.drawable.recents_locked_dark);
+        mDarkUnlockedDrawable = context.getDrawable(R.drawable.recents_unlocked_dark);
 
         // Configure the background and dim
         mBackground = new HighlightColorDrawable();
@@ -252,7 +254,6 @@ public class TaskViewHeader extends FrameLayout
         mOverlayBackground = new HighlightColorDrawable();
         mDimLayerPaint.setColor(Color.argb(255, 0, 0, 0));
         mDimLayerPaint.setAntiAlias(true);
-        mLockTaskHelper = LockTaskHelper.init(context);
         mHandler = new Handler();
         mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
@@ -281,12 +282,6 @@ public class TaskViewHeader extends FrameLayout
         }
 
         onConfigurationChanged();
-    }
-
-    public void updateLockTaskButtonBackground(boolean useLightOnPrimaryColor, boolean isLocked) {
-        int lockResId = useLightOnPrimaryColor ? R.drawable.task_lock_light : R.drawable.task_lock_dark;
-        int openResId = useLightOnPrimaryColor ? R.drawable.task_open_light : R.drawable.task_open_dark;
-        mLockTaskButton.setImageDrawable(getContext().getDrawable((isLocked ? lockResId : openResId)));
     }
 
     /**
@@ -494,6 +489,12 @@ public class TaskViewHeader extends FrameLayout
         mShouldDarkenBackgroundColor = flag;
     }
 
+    private void updateLockTaskDrawable() {
+        mLockTaskButton.setImageDrawable(mTask.useLightOnPrimaryColor ?
+                (Recents.sLockedTasks.contains(mTask) ? mLightLockedDrawable : mLightUnlockedDrawable) :
+                (Recents.sLockedTasks.contains(mTask) ? mDarkLockedDrawable : mDarkUnlockedDrawable));
+    }
+
     /**
      * Binds the bar view to the task.
      */
@@ -518,8 +519,9 @@ public class TaskViewHeader extends FrameLayout
         mDismissButton.setOnClickListener(this);
         mDismissButton.setClickable(false);
         ((RippleDrawable) mDismissButton.getBackground()).setForceSoftware(true);
-        updateLockTaskButtonBackground(t.useLightOnPrimaryColor, mTask.isLockedTask);
+        updateLockTaskDrawable();
         mLockTaskButton.setOnClickListener(this);
+        mLockTaskButton.setClickable(false);
         ((RippleDrawable) mLockTaskButton.getBackground()).setForceSoftware(true);
 
         mPinButton.setImageDrawable(t.useLightOnPrimaryColor ?
@@ -718,11 +720,13 @@ public class TaskViewHeader extends FrameLayout
             EventBus.getDefault().send(new ShowApplicationInfoEvent(mTask));
         } else if (v == mDismissButton) {
             TaskView tv = Utilities.findParent(this, TaskView.class);
-            tv.dismissTask();
+            if (!Recents.sLockedTasks.contains(tv.getTask())) {
+                tv.dismissTask();
 
             // Keep track of deletions by the dismiss button
-            MetricsLogger.histogram(getContext(), "overview_task_dismissed_source",
-                    Constants.Metrics.DismissSourceHeaderButton);
+                MetricsLogger.histogram(getContext(), "overview_task_dismissed_source",
+                        Constants.Metrics.DismissSourceHeaderButton);
+            }
         } else if (v == mPinButton) {
             TaskView tv = Utilities.findParent(this, TaskView.class);
             tv.screenPinning();
@@ -735,14 +739,12 @@ public class TaskViewHeader extends FrameLayout
         } else if (v == mAppIconView) {
             hideAppOverlay(false /* immediate */);
         }  else if (v == mLockTaskButton) {
-            if (mTask.isLockedTask) {
-                mLockTaskHelper.removeTask(mTask.packageName);
+            if (Recents.sLockedTasks.contains(mTask)) {
+               Recents.sLockedTasks.remove(mTask);
             } else {
-                mLockTaskHelper.addTask(mTask.packageName);
+                Recents.sLockedTasks.add(mTask);
             }
-            mTask.isLockedTask = !mTask.isLockedTask;
-            updateLockTaskButtonBackground(mTask.useLightOnPrimaryColor, mTask.isLockedTask);
-            EventBus.getDefault().send(new LockTaskStateChangedEvent(true));
+            updateLockTaskDrawable();
          }
     }
 
