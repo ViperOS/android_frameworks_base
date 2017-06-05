@@ -94,11 +94,6 @@ import android.provider.Settings;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,20 +133,20 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
     private final FlingAnimationUtils mFlingAnimationUtils;
 
     private boolean mShowClearAllRecents;
+    private boolean mShowMemDisplay;
     private View mFloatingButton;
     private View mClearRecents;
     private int mClearRecentsLocation;
-
+    private TextView mMemText;
+    private ProgressBar mMemBar;
+    private ActivityManager mAm;
+	
     private static final String SHOW_CLEAR_ALL_RECENTS =
             "system:" + Settings.System.SHOW_CLEAR_ALL_RECENTS;
     private static final String RECENTS_CLEAR_ALL_LOCATION =
             "system:" + Settings.System.RECENTS_CLEAR_ALL_LOCATION;
-
-    TextView mMemText;
-    ProgressBar mMemBar;
-
-    private ActivityManager mAm;
-    private int mTotalMem;
+    private static final String SYSTEMUI_RECENTS_MEM_DISPLAY =
+            "system:" + Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY;
 
     public RecentsView(Context context) {
         this(context, null);
@@ -398,7 +393,8 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         mClearRecents.setVisibility(View.VISIBLE);
         TunerService.get(mContext).addTunable(this,
                 SHOW_CLEAR_ALL_RECENTS,
-                RECENTS_CLEAR_ALL_LOCATION);
+                RECENTS_CLEAR_ALL_LOCATION,
+                SYSTEMUI_RECENTS_MEM_DISPLAY);
         super.onAttachedToWindow();
 		mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
         mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
@@ -424,6 +420,13 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
                 mClearRecentsLocation =
                         newValue == null ? 3 : Integer.parseInt(newValue);
                 setClearRecentsLocation();
+                break;
+            case SYSTEMUI_RECENTS_MEM_DISPLAY:
+                mShowMemDisplay =
+                        newValue != null && Integer.parseInt(newValue) == 1;
+                setClearRecentsLocation();
+                showMemDisplay();
+                break;
             default:
                 break;
         }
@@ -440,7 +443,7 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
 
         if (mTaskStackView.getVisibility() != GONE) {
             mTaskStackView.measure(widthMeasureSpec, heightMeasureSpec);
-        showMemDisplay();
+        updateMemoryStatus();
         }
 
         // Measure the empty view to the full size of the screen
@@ -501,40 +504,26 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         mFloatingButton.setLayoutParams(params);
     }
 
-    private boolean showMemDisplay() {
-        boolean enableMemDisplay = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY, 0) == 1;
-
-        if (!enableMemDisplay) {
+    private void showMemDisplay() {
+        if (mShowMemDisplay) {
+            mMemText.setVisibility(View.VISIBLE);
+            mMemBar.setVisibility(View.VISIBLE);
+        } else {
             mMemText.setVisibility(View.GONE);
             mMemBar.setVisibility(View.GONE);
-            return false;
         }
-        mMemText.setVisibility(View.VISIBLE);
-        mMemBar.setVisibility(View.VISIBLE);
-
-        updateMemoryStatus();
-        return true;
     }
 
-    private void updateMemoryStatus() {
-        if (mMemText.getVisibility() == View.GONE
-                || mMemBar.getVisibility() == View.GONE) return;
+    public void updateMemoryStatus() {
+        if (!mShowMemDisplay) return;
 
         MemoryInfo memInfo = new MemoryInfo();
         mAm.getMemoryInfo(memInfo);
-            int available = (int)(memInfo.availMem / 1048576L);
-            int max = (int)(getTotalMemory() / 1048576L);
-            mMemText.setText("Free RAM: " + String.valueOf(available) + "MB");
-            mMemBar.setMax(max);
-            mMemBar.setProgress(available);
-    }
-
-    public long getTotalMemory() {
-        MemoryInfo memInfo = new MemoryInfo();
-        mAm.getMemoryInfo(memInfo);
-        long totalMem = memInfo.totalMem;
-        return totalMem;
+        int available = (int)(memInfo.availMem / 1048576L);
+        int max = (int)(memInfo.totalMem / 1048576L);
+        mMemText.setText("Free RAM: " + String.valueOf(available) + "MB");
+        mMemBar.setMax(max);
+        mMemBar.setProgress(available);
     }
 
     /**
