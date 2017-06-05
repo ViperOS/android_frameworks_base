@@ -32,6 +32,7 @@ import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Outline;
+import android.graphics.PorterDuff.Mode;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -140,13 +141,19 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
     private TextView mMemText;
     private ProgressBar mMemBar;
     private ActivityManager mAm;
-	
+    private int mMembarcolor;
+    private int mMemtextcolor;
+
     private static final String SHOW_CLEAR_ALL_RECENTS =
             "system:" + Settings.System.SHOW_CLEAR_ALL_RECENTS;
     private static final String RECENTS_CLEAR_ALL_LOCATION =
             "system:" + Settings.System.RECENTS_CLEAR_ALL_LOCATION;
     private static final String SYSTEMUI_RECENTS_MEM_DISPLAY =
             "system:" + Settings.System.SYSTEMUI_RECENTS_MEM_DISPLAY;
+    private static final String SYSTEMUI_RECENTS_MEM_BARCOLOR =
+            "system:" + Settings.System.SYSTEMUI_RECENTS_MEM_BARCOLOR;
+    private static final String SYSTEMUI_RECENTS_MEM_TEXTCOLOR =
+            "system:" + Settings.System.SYSTEMUI_RECENTS_MEM_TEXTCOLOR;
 
     public RecentsView(Context context) {
         this(context, null);
@@ -383,21 +390,24 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
     protected void onAttachedToWindow() {
         EventBus.getDefault().register(this, RecentsActivity.EVENT_BUS_PRIORITY + 1);
         EventBus.getDefault().register(mTouchHandler, RecentsActivity.EVENT_BUS_PRIORITY + 2);
+        mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
+        mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
         mClearRecents = (ImageButton) ((View)getParent()).findViewById(R.id.clear_recents);
         mFloatingButton = ((View)getParent()).findViewById(R.id.floating_action_button);
         mClearRecents.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 EventBus.getDefault().send(new DismissAllTaskViewsEvent());
+                updateMemoryStatus();
             }
         });
         mClearRecents.setVisibility(View.VISIBLE);
         TunerService.get(mContext).addTunable(this,
                 SHOW_CLEAR_ALL_RECENTS,
                 RECENTS_CLEAR_ALL_LOCATION,
-                SYSTEMUI_RECENTS_MEM_DISPLAY);
+                SYSTEMUI_RECENTS_MEM_DISPLAY,
+                SYSTEMUI_RECENTS_MEM_BARCOLOR,
+                SYSTEMUI_RECENTS_MEM_TEXTCOLOR);
         super.onAttachedToWindow();
-		mMemText = (TextView) ((View)getParent()).findViewById(R.id.recents_memory_text);
-        mMemBar = (ProgressBar) ((View)getParent()).findViewById(R.id.recents_memory_bar);
     }
 
     @Override
@@ -425,6 +435,16 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
                 mShowMemDisplay =
                         newValue != null && Integer.parseInt(newValue) == 1;
                 setClearRecentsLocation();
+                showMemDisplay();
+                break;
+            case SYSTEMUI_RECENTS_MEM_BARCOLOR:
+                mMembarcolor =
+                        newValue != null ? Integer.parseInt(newValue) : 0x00ffffff;
+                showMemDisplay();
+                break;
+            case SYSTEMUI_RECENTS_MEM_TEXTCOLOR:
+                mMemtextcolor =
+                        newValue != null ? Integer.parseInt(newValue) : 0x00ffffff;
                 showMemDisplay();
                 break;
             default:
@@ -505,12 +525,18 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
     }
 
     private void showMemDisplay() {
+        mMemBar.getProgressDrawable().setColorFilter(mMembarcolor == 0x00ffffff
+                ? mContext.getResources().getColor(R.color.system_accent_color)
+                : mMembarcolor, Mode.MULTIPLY);
+        mMemText.setTextColor(mMemtextcolor == 0x00ffffff
+                ? mContext.getResources().getColor(R.color.recents_membar_text_color)
+                : mMemtextcolor);
         if (mShowMemDisplay) {
-            mMemText.setVisibility(View.VISIBLE);
             mMemBar.setVisibility(View.VISIBLE);
+            mMemText.setVisibility(View.VISIBLE);
         } else {
-            mMemText.setVisibility(View.GONE);
             mMemBar.setVisibility(View.GONE);
+            mMemText.setVisibility(View.GONE);
         }
     }
 

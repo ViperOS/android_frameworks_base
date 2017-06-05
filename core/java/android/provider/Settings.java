@@ -4004,6 +4004,18 @@ public final class Settings {
         public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
 
         /**
+         * Recents MemBar Color
+         * @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_BARCOLOR = "systemui_recents_mem_barcolor";
+
+        /**
+         * Recents MemBar Text Color
+         * @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_TEXTCOLOR = "systemui_recents_mem_textcolor";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
