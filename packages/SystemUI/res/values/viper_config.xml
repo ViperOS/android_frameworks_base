@@ -23,5 +23,7 @@
     <integer name="recents_animate_fab_enter_delay">275</integer>
     <!-- The min animation duration for animating the fab out. -->
     <integer name="recents_animate_fab_exit_duration">125</integer>
+    <!-- Allow Opa (Pixel navbar) layout -->
+    <bool name="config_allowOpaLayout">true</bool>
 
 </resources>
