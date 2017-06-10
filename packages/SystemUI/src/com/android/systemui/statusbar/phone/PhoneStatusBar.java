@@ -526,6 +526,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                    Settings.System.STATUS_BAR_CUSTOM_HEADER_SHADOW),
                    false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                   Settings.System.STATUS_BAR_CUSTOM_HEADER),
+                   false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                    Settings.System.STATUS_BAR_VIPER_LOGO),
                    false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -1194,6 +1197,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     // the old one will be removed in the same step
                     mStatusBarHeaderMachine.addObserver((QuickStatusBarHeader) mHeader);
                     mStatusBarHeaderMachine.updateEnablement();
+
+                    // Update all other settings
+                    if (mHeader != null) {
+                    	mHeader.updateSettings();
+                    }
 
                     initSignalCluster(mHeader);
                     mHeader.setActivityStarter(PhoneStatusBar.this);
