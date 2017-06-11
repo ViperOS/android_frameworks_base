@@ -23,7 +23,6 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources.Theme;
@@ -52,7 +51,6 @@ import android.util.DisplayMetrics;
 import android.util.EventLog;
 import android.util.Slog;
 import android.view.WindowManager;
-import android.content.BroadcastReceiver;
 
 import com.android.internal.R;
 import com.android.internal.app.NightDisplayController;
@@ -130,38 +128,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public final class SystemServer {
-
-    StatusBarManagerService statusBar = null;
-
-    private static final String INTENT_RESTART_SYSTEMUI = "restart_systemui";
-
-    private BroadcastReceiver mSecureReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (context == null || intent == null || statusBar == null){
-                return;
-            }
-
-            boolean isFromSystem = false;
-            String packageName = context.getPackageName();
-            if (packageName == null && android.os.Process.SYSTEM_UID == context.getApplicationInfo().uid) {
-                packageName = "android";
-            }
-            if (packageName == null) {
-                isFromSystem = false;
-            }
-            if (packageName.equals("com.android.systemui") || packageName.equals("com.android.keyguard") || packageName.equals("com.android.settings") || packageName.equals("android") || context.getApplicationInfo().uid == android.os.Process.SYSTEM_UID) {
-                isFromSystem = true;
-            }
-
-            String action = intent.getAction();
-
-            if (isFromSystem && INTENT_RESTART_SYSTEMUI.equals(action)) {
-                statusBar.restartUI();
-            }
-        }
-    };
-
     private static final String TAG = "SystemServer";
 
     private static final String ENCRYPTING_STATE = "trigger_restart_min_framework";
@@ -771,6 +737,7 @@ public final class SystemServer {
             Slog.e("System", "************ Failure starting core service", e);
         }
 
+        StatusBarManagerService statusBar = null;
         INotificationManager notification = null;
         LocationManagerService location = null;
         CountryDetectorService countryDetector = null;
@@ -866,9 +833,6 @@ public final class SystemServer {
                 try {
                     statusBar = new StatusBarManagerService(context, wm);
                     ServiceManager.addService(Context.STATUS_BAR_SERVICE, statusBar);
-                    IntentFilter filter = new IntentFilter();
-                    filter.addAction(INTENT_RESTART_SYSTEMUI);
-                    context.registerReceiver(mSecureReceiver, filter);
                 } catch (Throwable e) {
                     reportWtf("starting StatusBarManagerService", e);
                 }
