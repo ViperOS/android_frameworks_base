@@ -285,14 +285,14 @@ public class BluetoothTile extends QSTile<QSTile.BooleanState>  {
                         item.icon = R.drawable.ic_qs_bluetooth_connected;
                         item.line2 = mContext.getString(R.string.quick_settings_connected);
                         item.canDisconnect = true;
-                        mBluetoothItems.add(connectedDevices, item);
+                        items.add(connectedDevices, item);
                         connectedDevices++;
                     } else if (state == BluetoothProfile.STATE_CONNECTING) {
                         item.icon = R.drawable.ic_qs_bluetooth_connecting;
                         item.line2 = mContext.getString(R.string.quick_settings_connecting);
-                        mBluetoothItems.add(connectedDevices, item);
+                        items.add(connectedDevices, item);
                     } else {
-                        mBluetoothItems.add(item);
+                        items.add(item);
                     };
                 }
             }
