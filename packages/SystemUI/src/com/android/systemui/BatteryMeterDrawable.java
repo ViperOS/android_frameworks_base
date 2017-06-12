@@ -508,7 +508,9 @@ public class BatteryMeterDrawable extends Drawable implements
         final Drawable levelDrawable = mBatteryDrawable.findDrawableByLayerId(R.id.battery_fill);
         mLevelDrawable = new StopMotionVectorDrawable(levelDrawable);
         mBoltDrawable = mBatteryDrawable.findDrawableByLayerId(R.id.battery_charge_indicator);
-        mBoltDrawable.setTint(getBoltColor());
+        if (mBoltDrawable != null) {
+            mBoltDrawable.setTint(getBoltColor());
+        }
     }
 
     private boolean isThemeApplied() {
