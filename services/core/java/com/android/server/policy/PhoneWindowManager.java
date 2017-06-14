@@ -2435,7 +2435,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         // Override prop based on our internal config. carlosavignano@aospa.co
         // TODO> Create a setting helper to centralize navigation bar settings.
         mNavBarEnabled = Settings.System.getIntForUser(resolver,
-                Settings.System.NAVIGATION_BAR_ENABLED, 0, UserHandle.USER_CURRENT) == 1;
+                Settings.System.NAVIGATION_BAR_ENABLED, mHasNavigationBar ? 1 : 0, UserHandle.USER_CURRENT) == 1;
         SystemProperties.set("qemu.hw.mainkeys", mNavBarEnabled ? "0" : "1");
 
         // Allow a system property to override this. Used by the emulator.
