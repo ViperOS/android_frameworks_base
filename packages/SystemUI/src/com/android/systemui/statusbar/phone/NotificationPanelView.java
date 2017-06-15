@@ -209,6 +209,8 @@ public class NotificationPanelView extends PanelView implements
     private boolean mLastAnnouncementWasQuickSettings;
     private boolean mQsTouchAboveFalsingThreshold;
     private int mQsFalsingThreshold;
+    private SettingsObserver mSettingsObserver;
+	private Handler mHandler = new Handler();
 
     private float mKeyguardStatusBarAnimateAlpha = 1f;
     private int mOldLayoutDirection;
@@ -256,6 +258,7 @@ public class NotificationPanelView extends PanelView implements
         mFalsingManager = FalsingManager.getInstance(context);
         mLockPatternUtils = new LockPatternUtils(mContext);
 
+        mSettingsObserver = new SettingsObserver(mHandler);
         mDoubleTapGesture = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
@@ -415,6 +418,7 @@ public class NotificationPanelView extends PanelView implements
                 LOCK_SCREEN_WEATHER_ENABLED,
                 DOUBLE_TAP_SLEEP_ANYWHERE,
                 LOCK_ENABLE_QS);
+        mSettingsObserver.observe();
     }
 
     @Override
@@ -422,6 +426,7 @@ public class NotificationPanelView extends PanelView implements
         super.onDetachedFromWindow();
         TunerService.get(mContext).removeTunable(this);
         mWeatherController.removeCallback(this);
+        mSettingsObserver.unobserve();
     }
 
     private void startQsSizeChangeAnimation(int oldHeight, final int newHeight) {

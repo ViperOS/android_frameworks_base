@@ -107,6 +107,8 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
 
     private boolean mDoubleTapToSleepEnabled;
     private GestureDetector mDoubleTapGesture;
+    private Handler mHandler = new Handler();
+    private SettingsObserver mSettingsObserver;
 
     public StatusBarWindowView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -116,6 +118,7 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
         mFalsingManager = FalsingManager.getInstance(context);
         mStatusBarHeaderHeight = context
                 .getResources().getDimensionPixelSize(R.dimen.status_bar_header_height);
+        mSettingsObserver = new SettingsObserver(mHandler);
     }
 
     @Override
@@ -208,6 +211,8 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
     protected void onAttachedToWindow () {
         super.onAttachedToWindow();
 
+        mSettingsObserver.observe();
+
         TunerService.get(mContext).addTunable(this, DOUBLE_TAP_SLEEP_GESTURE);
         mDoubleTapGesture = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
             @Override
@@ -250,6 +255,7 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         TunerService.get(mContext).removeTunable(this);
+        mSettingsObserver.unobserve();
     }
 
     @Override
