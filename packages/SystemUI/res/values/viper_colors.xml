@@ -29,5 +29,16 @@
     <color name="system_accent_color">@*android:color/accent_material_dark</color>
     <color name="system_primary_color">#FFFFFFFF</color>
     <color name="system_secondary_color">#000000</color>
+
+    <!-- Battery colors -->
+    <color name="battery_charge_level_low_level">@*android:color/battery_saver_mode_color</color>
+    <color name="battery_charge_level_on_light_statusbar">@color/dark_mode_icon_color_dual_tone_fill</color>
+    <color name="battery_charge_level_on_normal_statusbar">@color/light_mode_icon_color_dual_tone_fill</color>
+    <color name="batterymeter_bolt_color">@android:color/white</color>
+    <color name="batterymeter_charge_color">@color/battery_charge_level_on_normal_statusbar</color>
+    <color name="batterymeter_frame_color">@color/light_mode_icon_color_dual_tone_background</color>
+    <color name="batterymeter_frame_color_darkintensity">@color/dark_mode_icon_color_dual_tone_background</color>
+    <color name="qs_batterymeter_frame_color">@color/batterymeter_frame_color</color>
+    <color name="status_bar_battery_level_text_color">@android:color/white</color>
 	
 </resources>
