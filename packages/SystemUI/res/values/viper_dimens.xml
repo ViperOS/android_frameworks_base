@@ -50,9 +50,6 @@
   <!-- carrier label text height -->
   <dimen name="status_bar_carrier_height">14sp</dimen>
 
-  <!-- Recents lock icon margin -->
-  <dimen name="recents_lock_margin_end">44dp</dimen>
-
   <!-- Floating action button -->
   <dimen name="floating_action_button_translation_z">12dp</dimen>
 
