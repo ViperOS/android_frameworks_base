@@ -259,7 +259,6 @@ public class MobileSignalController extends SignalController<
         callback.setMobileDataIndicators(statusIcon, qsIcon, typeIcon, qsTypeIcon,
                 activityIn, activityOut, dataContentDescription, description, icons.mIsWide,
                 mSubscriptionInfo.getSubscriptionId(), mCurrentState.roaming, isMobileIms());
-                mSubscriptionInfo.getSubscriptionId(), isMobileIms());
     }
 
     private boolean isMobileIms() {

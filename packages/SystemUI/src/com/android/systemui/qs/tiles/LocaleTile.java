@@ -109,7 +109,7 @@ public class LocaleTile extends QSTile<QSTile.State> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.QUICK_SETTINGS;
+        return MetricsEvent.VENOM;
     }
 
     @Override

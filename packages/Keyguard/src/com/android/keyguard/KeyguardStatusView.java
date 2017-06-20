@@ -76,6 +76,7 @@ public class KeyguardStatusView extends GridLayout implements
     private OmniJawsClient.WeatherInfo mWeatherData;
     private boolean mWeatherEnabled;
 
+    private SettingsObserver mSettingsObserver;
     private boolean mShowWeather;
     private int mIconNameValue = -1;
 
@@ -177,6 +178,7 @@ public class KeyguardStatusView extends GridLayout implements
         // Disable elegant text height because our fancy colon makes the ymin value huge for no
         // reason.
         mClockView.setElegantTextHeight(false);
+        mSettingsObserver = new SettingsObserver(new Handler());
     }
 
     @Override

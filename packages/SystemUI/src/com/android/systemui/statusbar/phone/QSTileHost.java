@@ -458,7 +458,6 @@ public class QSTileHost implements QSTile.Host, Tunable {
         else if (tileSpec.equals("music")) return new MusicTile(this);
         else if (tileSpec.equals("reboot")) return new RebootTile(this);
         else if (tileSpec.equals("screenshot")) return new ScreenshotTile(this);
-        else if (tileSpec.equals("sync")) return new SyncTile(this);
         else if (tileSpec.equals("expanded_desktop")) return new ExpandedDesktopTile(this);
         else if (tileSpec.equals("locale")) return new LocaleTile(this);
         else if (tileSpec.equals("sound")) return new SoundTile(this);
