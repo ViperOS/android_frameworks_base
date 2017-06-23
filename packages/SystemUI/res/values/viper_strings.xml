@@ -105,4 +105,7 @@
     <!-- Omni Style default header -->
     <string name="omni_style_default_header">Default</string>
 
+    <string name="accessibility_data_sim">Current Data Sim</string>
+    <string name="data_switch_started">Switching data SIM, this may take up to a minute...</string>
+
 </resources>
