@@ -166,7 +166,7 @@ public class KeyguardIndicationController {
     private void updateIndication() {
         if (mVisible) {
            mShowBatteryInfo = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.LOCKSCREEN_BATTERY_INFO, 1, UserHandle.USER_CURRENT) == 1;
+                Settings.System.LOCKSCREEN_BATTERY_INFO, 0, UserHandle.USER_CURRENT) == 1;
 
             // Walk down a precedence-ordered list of what should indication
             // should be shown based on user or device state
