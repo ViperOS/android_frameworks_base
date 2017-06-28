@@ -18,5 +18,5 @@
 */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="weather_info_not_available">Informações sobre o tempo não estão disponíveis</string>
+  <string name="weather_info_not_available">Informácie o počasí nie sú k dispozícii</string>
 </resources>
