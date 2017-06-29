@@ -16,34 +16,27 @@
 
 package com.android.systemui.statusbar.phone;
 
+import android.animation.ArgbEvaluator;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.Typeface;
-import android.graphics.PorterDuff.Mode;
 import android.media.MediaMetadata;
 import android.os.Handler;
-import android.os.UserHandle;
-import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
 import android.text.TextPaint;
-import android.view.animation.Animation;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.View;
 import android.widget.ImageSwitcher;
-import android.widget.ImageView;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import com.android.internal.statusbar.StatusBarIcon;
-import com.android.internal.util.viper.FontHelper;
-import com.android.internal.util.viper.TickerColorHelper;
 import com.android.internal.util.NotificationColorUtil;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.StatusBarIconView;
@@ -57,17 +50,15 @@ public abstract class Ticker {
     private Handler mHandler = new Handler();
     private ArrayList<Segment> mSegments = new ArrayList();
     private TextPaint mPaint;
-    private View mTickerView;
     private ImageSwitcher mIconSwitcher;
     private TextSwitcher mTextSwitcher;
     private float mIconScale;
-    private int mTickerTextColor;
-    private int mTickerFontSize = 14;
-    private Typeface mFontStyle;
+    private int mIconTint =  0xffffffff;
+    private int mTextColor = 0xffffffff;
+    private int mDarkModeFillColor;
+    private int mLightModeFillColor;
 
-    // The ticker color as requested by the statusbar
-    private int mDefaultColor = 0xffffffff;
-
+    private NotificationColorUtil mNotificationColorUtil;
 
     public static boolean isGraphicOrEmoji(char c) {
         int gc = Character.getType(c);
@@ -171,13 +162,12 @@ public abstract class Ticker {
         }
     };
 
-    public Ticker(Context context, View sb) {
+    public Ticker(Context context, View tickerLayout) {
         mContext = context;
         final Resources res = context.getResources();
         final int outerBounds = res.getDimensionPixelSize(R.dimen.status_bar_icon_size);
         final int imageBounds = res.getDimensionPixelSize(R.dimen.status_bar_icon_drawing_size);
         mIconScale = (float)imageBounds / (float)outerBounds;
-
 
         AlphaAnimation animationIn = new AlphaAnimation(0.0f, 1.0f);
         Interpolator interpolatorIn = AnimationUtils.loadInterpolator(context,
@@ -191,22 +181,24 @@ public abstract class Ticker {
         animationIn.setInterpolator(interpolatorOut);
         animationOut.setDuration(350);
 
-        mIconSwitcher = (ImageSwitcher) sb.findViewById(R.id.tickerIcon);
+        mIconSwitcher = (ImageSwitcher) tickerLayout.findViewById(R.id.tickerIcon);
         mIconSwitcher.setInAnimation(animationIn);
         mIconSwitcher.setOutAnimation(animationOut);
         mIconSwitcher.setScaleX(mIconScale);
         mIconSwitcher.setScaleY(mIconScale);
 
-        mTextSwitcher = (TextSwitcher) sb.findViewById(R.id.tickerText);
+        mTextSwitcher = (TextSwitcher) tickerLayout.findViewById(R.id.tickerText);
         mTextSwitcher.setInAnimation(animationIn);
         mTextSwitcher.setOutAnimation(animationOut);
 
+        mDarkModeFillColor = context.getColor(R.color.dark_mode_icon_color_dual_tone_fill);
+        mLightModeFillColor = context.getColor(R.color.light_mode_icon_color_dual_tone_fill);
+
         // Copy the paint style of one of the TextSwitchers children to use later for measuring
-        TextView text = (TextView)mTextSwitcher.getChildAt(0);
+        TextView text = (TextView) mTextSwitcher.getChildAt(0);
         mPaint = text.getPaint();
-        updateTextColor();
-        updateTickerSize();
-        updateTickerFontStyle();
+
+        mNotificationColorUtil = NotificationColorUtil.getInstance(mContext);
     }
 
 
@@ -234,7 +226,7 @@ public abstract class Ticker {
                     && n.getNotification().icon == seg.notification.getNotification().icon
                     && n.getNotification().iconLevel == seg.notification.getNotification().iconLevel
                     && charSequencesEqual(seg.notification.getNotification().tickerText,
-                        n.getNotification().tickerText)) {
+                    n.getNotification().tickerText)) {
                 return;
             }
         }
@@ -244,7 +236,6 @@ public abstract class Ticker {
                         n.getNotification().tickerText));
         final CharSequence text = n.getNotification().tickerText;
         final Segment newSegment = new Segment(n, icon, text);
-        final ColorStateList tickerIconColor = TickerColorHelper.getTickerIconColorList(mContext, mDefaultColor);
 
         // If there's already a notification schedule for this package and id, remove it.
         for (int i=0; i<mSegments.size(); i++) {
@@ -263,17 +254,12 @@ public abstract class Ticker {
 
             mIconSwitcher.setAnimateFirstView(false);
             mIconSwitcher.reset();
-            mIconSwitcher.setColoredImageDrawable(seg.icon, tickerIconColor);
+            setAppIconColor(seg.icon);
 
             mTextSwitcher.setAnimateFirstView(false);
             mTextSwitcher.reset();
             mTextSwitcher.setText(seg.getText());
-            updateTickerSize();
-            updateTextColor();
-            updateTickerFontStyle();
-            setTextSwitcherColor();
-            mTextSwitcher.setTextSize(mTickerFontSize);
-            mTextSwitcher.setTypeface(mFontStyle);
+            mTextSwitcher.setTextColor(mTextColor);
 
             tickerStarting();
             scheduleAdvance();
@@ -314,11 +300,7 @@ public abstract class Ticker {
             Segment seg = mSegments.get(0);
             CharSequence text = seg.getText();
             mTextSwitcher.setCurrentText(text);
-            updateTickerSize();
-            updateTextColor();
-            setTextSwitcherColor();
-            mTextSwitcher.setTextSize(mTickerFontSize);
-            mTextSwitcher.setTypeface(mFontStyle);
+            mTextSwitcher.setTextColor(mTextColor);
         }
     }
 
@@ -327,13 +309,11 @@ public abstract class Ticker {
             while (mSegments.size() > 0) {
                 Segment seg = mSegments.get(0);
 
-                final ColorStateList tickerIconColor =
-                        TickerColorHelper.getTickerIconColorList(mContext, mDefaultColor);
                 if (seg.first) {
                     // this makes the icon slide in for the first one for a given
                     // notification even if there are two notifications with the
                     // same icon in a row
-                    mIconSwitcher.setColoredImageDrawable(seg.icon, tickerIconColor);
+                    setAppIconColor(seg.icon);
                 }
                 CharSequence text = seg.advance();
                 if (text == null) {
@@ -341,11 +321,7 @@ public abstract class Ticker {
                     continue;
                 }
                 mTextSwitcher.setText(text);
-                updateTickerSize();
-                updateTextColor();
-                setTextSwitcherColor();
-                mTextSwitcher.setTextSize(mTickerFontSize);
-                mTextSwitcher.setTypeface(mFontStyle);
+                mTextSwitcher.setTextColor(mTextColor);
 
                 scheduleAdvance();
                 break;
@@ -364,128 +340,24 @@ public abstract class Ticker {
     public abstract void tickerDone();
     public abstract void tickerHalting();
 
-    private void updateTickerFontStyle() {
-        final int mTickerFontStyle = Settings.System.getInt(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_TICKER_FONT_STYLE, FontHelper.FONT_NORMAL);
-
-        getFontStyle(mTickerFontStyle);
+    private int getColorForDarkIntensity(float darkIntensity, int lightColor, int darkColor) {
+        return (int) ArgbEvaluator.getInstance().evaluate(darkIntensity, lightColor, darkColor);
     }
 
-    public void getFontStyle(int font) {
-        switch (font) {
-            case FontHelper.FONT_NORMAL:
-            default:
-                mFontStyle = FontHelper.NORMAL;
-                break;
-            case FontHelper.FONT_ITALIC:
-                mFontStyle = FontHelper.ITALIC;
-                break;
-            case FontHelper.FONT_BOLD:
-                mFontStyle = FontHelper.BOLD;
-                break;
-            case FontHelper.FONT_BOLD_ITALIC:
-                mFontStyle = FontHelper.BOLD_ITALIC;
-                break;
-            case FontHelper.FONT_LIGHT:
-                mFontStyle = FontHelper.LIGHT;
-                break;
-            case FontHelper.FONT_LIGHT_ITALIC:
-                mFontStyle = FontHelper.LIGHT_ITALIC;
-                break;
-            case FontHelper.FONT_THIN:
-                mFontStyle = FontHelper.THIN;
-                break;
-            case FontHelper.FONT_THIN_ITALIC:
-                mFontStyle = FontHelper.THIN_ITALIC;
-                break;
-            case FontHelper.FONT_CONDENSED:
-                mFontStyle = FontHelper.CONDENSED;
-                break;
-            case FontHelper.FONT_CONDENSED_ITALIC:
-                mFontStyle = FontHelper.CONDENSED_ITALIC;
-                break;
-            case FontHelper.FONT_CONDENSED_LIGHT:
-                mFontStyle = FontHelper.CONDENSED_LIGHT;
-                break;
-            case FontHelper.FONT_CONDENSED_LIGHT_ITALIC:
-                mFontStyle = FontHelper.CONDENSED_LIGHT_ITALIC;
-                break;
-            case FontHelper.FONT_CONDENSED_BOLD:
-                mFontStyle = FontHelper.CONDENSED_BOLD;
-                break;
-            case FontHelper.FONT_CONDENSED_BOLD_ITALIC:
-                mFontStyle = FontHelper.CONDENSED_BOLD_ITALIC;
-                break;
-            case FontHelper.FONT_MEDIUM:
-                mFontStyle = FontHelper.MEDIUM;
-                break;
-            case FontHelper.FONT_MEDIUM_ITALIC:
-                mFontStyle = FontHelper.MEDIUM_ITALIC;
-                break;
-            case FontHelper.FONT_BLACK:
-                mFontStyle = FontHelper.BLACK;
-                break;
-            case FontHelper.FONT_BLACK_ITALIC:
-                mFontStyle = FontHelper.BLACK_ITALIC;
-                break;
-            case FontHelper.FONT_DANCINGSCRIPT:
-                mFontStyle = FontHelper.DANCINGSCRIPT;
-                break;
-            case FontHelper.FONT_DANCINGSCRIPT_BOLD:
-                mFontStyle = FontHelper.DANCINGSCRIPT_BOLD;
-                break;
-            case FontHelper.FONT_COMINGSOON:
-                mFontStyle = FontHelper.COMINGSOON;
-                break;
-            case FontHelper.FONT_NOTOSERIF:
-                mFontStyle = FontHelper.NOTOSERIF;
-                break;
-            case FontHelper.FONT_NOTOSERIF_ITALIC:
-                mFontStyle = FontHelper.NOTOSERIF_ITALIC;
-                break;
-            case FontHelper.FONT_NOTOSERIF_BOLD:
-                mFontStyle = FontHelper.NOTOSERIF_BOLD;
-                break;
-            case FontHelper.FONT_NOTOSERIF_BOLD_ITALIC:
-                mFontStyle = FontHelper.NOTOSERIF_BOLD_ITALIC;
-                break;
+    public void setDarkIntensity(float darkIntensity) {
+        mTextColor = getColorForDarkIntensity(
+                darkIntensity, mLightModeFillColor, mDarkModeFillColor);
+        mIconTint = mTextColor;
+        if (mSegments.size() > 0) {
+            Segment seg = mSegments.get(0);
+            mTextSwitcher.setTextColor(mTextColor);
+            mIconSwitcher.reset();
+            setAppIconColor(seg.icon);
         }
     }
 
-    private void updateTickerSize() {
-        mTickerFontSize = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.STATUS_BAR_TICKER_FONT_SIZE, 14,
-                UserHandle.USER_CURRENT);
-
-    }
-
-    public void updateTextColor() {
-        ContentResolver resolver = mContext.getContentResolver();
-
-        mTickerTextColor = Settings.System.getInt(resolver,
-                Settings.System.STATUS_BAR_TICKER_TEXT_COLOR,
-                0xffffffff);
-    }
-
-    public void setDefaultColor(int color) {
-        mDefaultColor = color;
-
-        // Update text color
-        setTextSwitcherColor();
-        // Update currently displayed icon
-        ImageView currentIcon = (ImageView) mIconSwitcher.getCurrentView();
-        if (currentIcon != null) {
-            final ColorStateList tickerIconColor =
-                    TickerColorHelper.getTickerIconColorList(mContext, mDefaultColor);
-            currentIcon.setImageTintList(tickerIconColor);
-        }
-    }
-
-    private void setTextSwitcherColor() {
-        if (mTickerTextColor == 0xffffffff) {
-            mTextSwitcher.setTextColor(mDefaultColor);
-        } else {
-            mTextSwitcher.setTextColor(mTickerTextColor);
-        }
+    public void setAppIconColor(Drawable icon) {
+        boolean isGrayscale = mNotificationColorUtil.isGrayscaleIcon(icon);
+        mIconSwitcher.setImageDrawableTint(icon, mIconTint, isGrayscale);
     }
 }

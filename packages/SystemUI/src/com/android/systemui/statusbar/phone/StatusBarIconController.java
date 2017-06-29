@@ -47,6 +47,7 @@ import com.android.systemui.Interpolators;
 import com.android.systemui.R;
 import com.android.systemui.SystemUIFactory;
 import com.android.systemui.statusbar.NotificationData;
+import com.android.systemui.statusbar.phone.TickerView;
 import com.android.systemui.statusbar.SignalClusterView;
 import com.android.systemui.statusbar.StatusBarIconView;
 import com.android.systemui.statusbar.policy.NetworkTraffic;
@@ -85,6 +86,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
     private View mCenterClockLayout;
     private TextView mCarrierLabel;
     private NetworkTraffic mNetworkTraffic;
+    private TickerView mNotificationTicker;
 
     // ViperOS Logo
     private ImageView mViperLogo;
@@ -152,6 +154,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         mViperLogoRight = (ImageView) statusBar.findViewById(R.id.right_viper_logo);
         mViperLogoLeft = (ImageView) statusBar.findViewById(R.id.left_viper_logo);
         mNetworkTraffic = (NetworkTraffic) statusBar.findViewById(R.id.networkTraffic);
+        mNotificationTicker = (TickerView) statusBar.findViewById(R.id.tickerText);
         mDarkModeIconColorSingleTone = context.getColor(R.color.dark_mode_icon_color_single_tone);
         mLightModeIconColorSingleTone = context.getColor(R.color.light_mode_icon_color_single_tone);
         mHandler = new Handler();
@@ -597,6 +600,7 @@ public class StatusBarIconController extends StatusBarIconList implements Tunabl
         }
     }
         mNetworkTraffic.setDarkIntensity(mDarkIntensity);
+        if (mNotificationTicker != null) mNotificationTicker.setDarkIntensity(mDarkIntensity);
     }
 
     public void appTransitionPending() {
