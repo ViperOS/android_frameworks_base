@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Csengés</string>
   <string name="quick_settings_sound_vibrate">Rezgés</string>
   <string name="quick_settings_sound_dnd">Ne zavarj</string>
+  <!-- HW Keys Tile -->
 </resources>

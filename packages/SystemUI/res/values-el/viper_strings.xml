@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Κουδούνισμα</string>
   <string name="quick_settings_sound_vibrate">Δόνηση</string>
   <string name="quick_settings_sound_dnd">Μην ενοχλείτε</string>
+  <!-- HW Keys Tile -->
 </resources>

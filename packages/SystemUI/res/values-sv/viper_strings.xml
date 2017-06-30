@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Ring</string>
   <string name="quick_settings_sound_vibrate">Vibrera</string>
   <string name="quick_settings_sound_dnd">Stör ej</string>
+  <!-- HW Keys Tile -->
 </resources>

@@ -53,4 +53,5 @@
   <string name="quick_settings_sound_ring">צלצול</string>
   <string name="quick_settings_sound_vibrate">רטט</string>
   <string name="quick_settings_sound_dnd">נא לא להפריע</string>
+  <!-- HW Keys Tile -->
 </resources>

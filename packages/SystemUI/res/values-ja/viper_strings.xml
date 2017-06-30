@@ -65,4 +65,5 @@
   <string name="quick_settings_sound_ring">着信</string>
   <string name="quick_settings_sound_vibrate">マナーモード</string>
   <string name="quick_settings_sound_dnd">通知不要アプリ</string>
+  <!-- HW Keys Tile -->
 </resources>

@@ -44,4 +44,5 @@
   <string name="quick_settings_sound_ring">Ring</string>
   <string name="quick_settings_sound_vibrate">Vibrere</string>
   <string name="quick_settings_sound_dnd">Forstyr ikke</string>
+  <!-- HW Keys Tile -->
 </resources>

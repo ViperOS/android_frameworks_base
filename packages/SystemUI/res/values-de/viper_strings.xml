@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Klingeln</string>
   <string name="quick_settings_sound_vibrate">Vibrieren</string>
   <string name="quick_settings_sound_dnd">Nicht stören</string>
+  <!-- HW Keys Tile -->
 </resources>

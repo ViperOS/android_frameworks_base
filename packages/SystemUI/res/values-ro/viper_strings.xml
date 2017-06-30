@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Sonerie</string>
   <string name="quick_settings_sound_vibrate">Vibrare</string>
   <string name="quick_settings_sound_dnd">Nu deranja</string>
+  <!-- HW Keys Tile -->
 </resources>

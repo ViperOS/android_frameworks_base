@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">响铃</string>
   <string name="quick_settings_sound_vibrate">震动</string>
   <string name="quick_settings_sound_dnd">请勿打扰</string>
+  <!-- HW Keys Tile -->
 </resources>

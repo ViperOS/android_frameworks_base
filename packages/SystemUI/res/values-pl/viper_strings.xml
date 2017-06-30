@@ -75,4 +75,5 @@
   <string name="quick_settings_sound_ring">Dzwonek</string>
   <string name="quick_settings_sound_vibrate">Wibracje</string>
   <string name="quick_settings_sound_dnd">Nie przeszkadzać</string>
+  <!-- HW Keys Tile -->
 </resources>

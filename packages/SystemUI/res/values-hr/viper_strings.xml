@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Zvono</string>
   <string name="quick_settings_sound_vibrate">Vibracija</string>
   <string name="quick_settings_sound_dnd">Ne ometaj</string>
+  <!-- HW Keys Tile -->
 </resources>

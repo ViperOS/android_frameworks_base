@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">벨소리</string>
   <string name="quick_settings_sound_vibrate">진동</string>
   <string name="quick_settings_sound_dnd">방해 금지</string>
+  <!-- HW Keys Tile -->
 </resources>

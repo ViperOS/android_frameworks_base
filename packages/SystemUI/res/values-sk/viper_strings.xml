@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Zvonenie</string>
   <string name="quick_settings_sound_vibrate">Vibrácie</string>
   <string name="quick_settings_sound_dnd">Nevyrušovať</string>
+  <!-- HW Keys Tile -->
 </resources>

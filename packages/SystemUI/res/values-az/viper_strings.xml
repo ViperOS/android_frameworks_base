@@ -70,4 +70,5 @@
   <string name="quick_settings_sound_ring">Zəng səsi</string>
   <string name="quick_settings_sound_vibrate">Vibrasiya</string>
   <string name="quick_settings_sound_dnd">Narahat etməyin</string>
+  <!-- HW Keys Tile -->
 </resources>

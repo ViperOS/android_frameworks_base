@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Chuông</string>
   <string name="quick_settings_sound_vibrate">Rung</string>
   <string name="quick_settings_sound_dnd">Không làm phiền</string>
+  <!-- HW Keys Tile -->
 </resources>

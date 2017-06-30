@@ -69,4 +69,5 @@
   <string name="quick_settings_sound_ring">Звоно</string>
   <string name="quick_settings_sound_vibrate">Вибрирање</string>
   <string name="quick_settings_sound_dnd">Не узнемиравај</string>
+  <!-- HW Keys Tile -->
 </resources>

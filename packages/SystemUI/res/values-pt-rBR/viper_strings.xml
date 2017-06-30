@@ -75,4 +75,8 @@
   <string name="quick_settings_sound_ring">Tocar</string>
   <string name="quick_settings_sound_vibrate">Vibrar</string>
   <string name="quick_settings_sound_dnd">Não pertube</string>
+  <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Teclas físicas ativadas</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Teclas físicas desativadas</string>
+  <string name="quick_settings_hwkeys_label">Teclas físicas</string>
 </resources>
