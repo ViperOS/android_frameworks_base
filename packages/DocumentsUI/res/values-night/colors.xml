@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="material_grey_50">@*android:color/background_material_dark</color>
+    <color name="material_grey_300">@*android:color/accent_material_light</color>
+    <color name="item_doc_grid_background">@*android:color/background_material_dark</color>
+
+    <color name="drawer_background_color">@*android:color/holo_button_normal</color>
+    <color name="font_color_doc_grid">#ffffff</color>
+
+    <color name="primary_dark">@*android:color/material_grey_850</color>
+    <color name="primary">@*android:color/material_grey_800</color>
+    <color name="accent">@*android:color/accent_material_light</color>
+    <color name="accent_dark">@*android:color/accent_material_light</color>
+    <color name="action_mode">@*android:color/accent_material_light</color>
+    <color name="status_bar_color">@*android:color/material_grey_850</color>
+
+
+    <color name="material_grey_400">#ffbdbdbd</color>
+    <color name="material_teal_700">@*android:color/accent_material_light</color>
+
+    <color name="window_background">@*android:color/background_material_dark</color>
+    <color name="drawer_background">@*android:color/holo_button_normal</color>
+    <color name="directory_background">@*android:color/background_material_dark</color>
+    <color name="menu_search_background">@android:color/transparent</color>
+
+    <color name="band_select_background">#88000000</color>
+    <color name="band_select_border">#44000000</color>
+    <color name="item_doc_background_disabled">@*android:color/background_material_dark</color>
+    <color name="root_activated_color">@*android:color/accent_material_light</color>
+    <color name="item_doc_background">@*android:color/background_floating_material_dark</color>
+    <color name="item_doc_background_selected">@*android:color/material_grey_850</color>
+</resources>

@@ -786,6 +786,17 @@
              0 - MODE_NIGHT_AUTO
              1 - MODE_NIGHT_NO
              2 - MODE_NIGHT_YES
+             3 - MODE_NIGHT_YES_PINK
+             4 - MODE_NIGHT_YES_AMBAR
+             5 - MODE_NIGHT_YES_RED
+             6 - MODE_NIGHT_YES_GREEN
+             7 - MODE_NIGHT_YES_AQUA
+             8 - MODE_NIGHT_YES_WHITE
+             9 - MODE_NIGHT_NO_WHITEPINK
+             10 - MODE_NIGHT_NO_WHITEAMBAR
+             11 - MODE_NIGHT_NO_WHITERED
+             12 - MODE_NIGHT_NO_WHITEGREEN
+             13 - MODE_NIGHT_NO_WHITEAQUA
     -->
     <integer name="config_defaultNightMode">1</integer>
 

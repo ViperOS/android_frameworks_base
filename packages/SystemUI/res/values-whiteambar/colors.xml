@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2017 The Android Open Source Project
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+	http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<resources>
+
+    <color name="system_accent_color">@*android:color/accent_material_light</color>
+
+    <color name="accent_material_dark">@*android:color/accent_material_light</color>
+    <color name="data_usage_graph_warning">@*android:color/accent_material_dark</color>
+    <color name="data_usage_primary">@*android:color/accent_material_dark</color>
+    <color name="system_warning_color">@*android:color/accent_material_dark</color>
+    <color name="tm_floating_action_button_bg_color">@*android:color/accent_material_dark</color>
+
+    <!-- Sceenshot Crop and Share -->
+    <color name="crop_handle">@*android:color/accent_material_light</color>
+    <color name="crop_frame">@*android:color/accent_material_light</color>
+    <color name="ga_gesture_color">@*android:color/accent_material_light</color>
+    <color name="ga_fab_bg_color">@*android:color/accent_material_light</color>
+
+	<!-- Lockscreen bottom shorcut phone background color -->
+    <color name="lockscreen_bottom_shorcut_phone_background">@*android:color/accent_material_light</color>	
+
+    <!-- Fonts used in the MediaQueue -->
+    <color name="switch_accent_color">@*android:color/accent_material_light</color>
+	
+    <color name="notification_ripple_untinted_color">@*android:color/accent_material_light</color>
+    <color name="notification_ripple_color_low_priority">@*android:color/accent_material_light</color>
+    <color name="ksh_system_group_color">@*android:color/accent_material_light</color>
+    <color name="material_deep_teal_200">@*android:color/accent_material_light</color>
+    <color name="material_deep_teal_500">@*android:color/accent_material_light</color>
+
+    <!-- Shadow color for the furthest pixels around the fake shadow for recents. -->
+    <color name="screen_pinning_request_bg">@*android:color/accent_material_light</color><!-- deep teal 500 -->
+    <color name="segmented_button_selected">@*android:color/accent_material_light</color>
+    <color name="navbar_tuner_text_color">@*android:color/accent_material_light</color>
+
+    <!-- Floating action button -->
+    <color name="fab_color">@*android:color/accent_material_light</color>
+    <color name="ripple_material_light">@*android:color/accent_material_light</color>
+    <color name="accent_material_light">@*android:color/accent_material_light</color>
+    <color name="accent_material_dark">@*android:color/accent_material_light</color>
+    <color name="highlighted_text_material_dark">@*android:color/accent_material_light</color>
+    <color name="highlighted_text_material_light">@*android:color/accent_material_light</color>
+
+</resources>

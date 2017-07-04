@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2014 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <style name="systemui_theme" parent="@android:style/Theme.Material" />
+
+<!--    <style name="DualToneLightTheme">
+        <item name="backgroundColor">@color/light_mode_icon_color_dual_tone_background</item>
+        <item name="fillColor">@color/light_mode_icon_color_dual_tone_fill</item>
+        <item name="singleToneColor">@color/light_mode_icon_color_single_tone</item>
+    </style>
+    <style name="DualToneDarkTheme">
+        <item name="backgroundColor">@color/dark_mode_icon_color_dual_tone_background</item>
+        <item name="fillColor">@color/dark_mode_icon_color_dual_tone_fill</item>
+        <item name="singleToneColor">@color/dark_mode_icon_color_single_tone</item>
+    </style>-->
+
+    <style name="Theme.SystemUI.Dialog" parent="@android:style/Theme.Material.Dialog" />
+	
+    <style name="TextAppearance.Material.Notification.Parenthetical" parent="@android:style/TextAppearance.Material.Notification">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#b3ffffff</item>
+    </style>
+    <style name="TextAppearance.NotificationGuts" parent="@android:style/TextAppearance">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">roboto-regular</item>
+    </style>
+    <style name="TextAppearance.NotificationGuts.Header" parent="@style/TextAppearance.NotificationGuts">
+        <item name="android:textSize">12.0sp</item>
+        <item name="android:alpha">1.0</item>
+    </style>
+    <style name="TextAppearance.NotificationGuts.Secondary" parent="@style/TextAppearance.NotificationGuts">
+        <item name="android:alpha">1.0</item>
+    </style>
+    <style name="TextAppearance.NotificationGuts.Primary" parent="@style/TextAppearance.NotificationGuts">
+        <item name="android:textSize">14.0sp</item>
+        <item name="android:alpha">1.0</item>
+    </style>
+
+    <style name="RecentBaseStyle" parent="@*android:style/Theme.Material">
+        <item name="android:popupMenuStyle">@*android:style/Widget.Material.ListPopupWindow</item>
+    </style>
+    <style name="RecentsStyle" parent="@*android:style/Theme.Material.Wallpaper.NoTitleBar" />
+    <style name="Platform.V25.AppCompat.Light" parent="@*android:style/Theme.Material.NoActionBar" />
+
+    <style name="Theme.SystemUI.Dialog.Alert" parent="@android:style/Theme.Material.Dialog.Alert" />
+    <style name="Theme.AlertDialogHost" parent="@android:style/Theme.Material">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:alertDialogTheme">@style/Theme.SystemUI.Dialog.Alert</item>
+    </style>
+
+    <style name="Widget.TransportControl.SeekBar" parent="@android:style/Widget.Material.SeekBar" />
+
+
+    <style name="PasswordTheme" parent="@android:style/Theme.Material">
+        <item name="android:colorControlNormal">#80ffffff</item>
+        <item name="android:colorControlActivated">#80ffffff</item>
+    </style>
+
+    <style name="TextAppearance.NotificationGuts.Radio" parent="@style/TextAppearance.NotificationGuts">
+        <item name="android:alpha">1.0</item>
+    </style>
+    <style name="TextAppearance.NotificationGuts.Button" parent="@style/TextAppearance.NotificationGuts">
+        <item name="android:textSize">13.0sp</item>
+        <item name="android:textColor">#b3ffffff</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">roboto-regular</item>
+    </style>
+    <style name="TextAppearance.SwitchBar" parent="@android:style/TextAppearance.Material.Title">
+        <item name="android:textColor">#ffffffff</item>
+    </style>
+</resources>

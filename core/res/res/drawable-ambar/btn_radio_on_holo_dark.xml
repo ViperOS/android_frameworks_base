@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:name="btn_radio_to_off_mtrl" android:tint="@*android:color/control_checkable_material" android:height="28.0dip" android:width="28.0dip" android:viewportWidth="768" android:viewportHeight="768"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:name="btn_radio_to_off_mtrl_0"
+        android:translateX="16"
+        android:translateY="16" >
+        <group android:name="ring_outer">
+            <path 
+			android:name="ring_outer_path" 
+android:pathData="M384,589.119 C496.755,589.119,589.119,496.755,589.119,384 S496.755,178.881,384,178.881 S178.881,271.245,178.881,384 S271.245,589.119,384,589.119 Z M384,128.499 C525.545,128.499,639.501,242.454,639.501,384 S525.546,639.501,384,639.501 S128.499,525.546,128.499,384 S242.454,128.499,384,128.499 Z"
+            android:strokeWidth="1.4" 
+			android:strokeColor="#000000" />
+        </group>
+        <group android:name="dot_group" >
+            <path android:name="dot_path"
+			android:fillColor="#000000" 
+			android:pathData="M191.499,384 C191.499,278.181,278.181,191.499,384,191.499 S576.501,278.181,576.501,384 S489.819,576.501,384,576.501 S191.499,489.819,191.499,384 Z" />
+        </group>
+    </group>
+</vector>

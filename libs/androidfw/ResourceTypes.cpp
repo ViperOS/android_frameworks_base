@@ -2972,6 +2972,39 @@ String8 ResTable_config::toString() const {
             case ResTable_config::UI_MODE_NIGHT_YES:
                 res.append("night");
                 break;
+            case ResTable_config::UI_MODE_NIGHT_YES_PINK:
+                res.append("pink");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_YES_AMBAR:
+                res.append("ambar");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_YES_RED:
+                res.append("nightred");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_YES_GREEN:
+                res.append("green");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_YES_AQUA:
+                res.append("aqua");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_YES_WHITE:
+                res.append("white");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITEPINK:
+                res.append("whitepink");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITEAMBAR:
+                res.append("whiteambar");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITERED:
+                res.append("whitered");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITEGREEN:
+                res.append("whitegreen");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITEAQUA:
+                res.append("whiteaqua");
+                break;
             default:
                 res.appendFormat("uiModeNight=%d",
                         dtohs(uiMode&MASK_UI_MODE_NIGHT));
