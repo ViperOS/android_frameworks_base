@@ -229,6 +229,7 @@ public final class PowerManagerService extends SystemService
 
     private boolean mButtonPressed = false;
     private boolean mButtonLightOnKeypressOnly;
+    private boolean mButtonLightOnKeypressOnlyold;
 
     private final Object mLock = new Object();
 
@@ -754,6 +755,10 @@ public final class PowerManagerService extends SystemService
             resolver.registerContentObserver(CMSettings.System.getUriFor(
                     CMSettings.System.PROXIMITY_ON_WAKE),
                     false, mSettingsObserver, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.BUTTON_LIGHT_SCREEN),
+                    false, mSettingsObserver, UserHandle.USER_ALL);
+
 
             // Go.
             readConfigurationLocked();
@@ -831,7 +836,7 @@ public final class PowerManagerService extends SystemService
             mProximityWakeLock = ((PowerManager) mContext.getSystemService(Context.POWER_SERVICE))
                     .newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "ProximityWakeLock");
         }
-        mButtonLightOnKeypressOnly = resources.getBoolean(
+        mButtonLightOnKeypressOnlyold = resources.getBoolean(
                 com.android.internal.R.bool.config_buttonLightOnKeypressOnly);
     }
 
@@ -863,6 +868,9 @@ public final class PowerManagerService extends SystemService
         mWakeUpWhenPluggedOrUnpluggedSetting = CMSettings.Global.getInt(resolver,
                 CMSettings.Global.WAKE_WHEN_PLUGGED_OR_UNPLUGGED,
                 (mWakeUpWhenPluggedOrUnpluggedConfig ? 1 : 0));
+        mButtonLightOnKeypressOnly = Settings.System.getIntForUser(resolver,
+                    Settings.System.BUTTON_LIGHT_SCREEN, 0,
+                    UserHandle.USER_CURRENT) == 1;
 
         if (mSupportsDoubleTapWakeConfig) {
             boolean doubleTapWakeEnabled = Settings.Secure.getIntForUser(resolver,

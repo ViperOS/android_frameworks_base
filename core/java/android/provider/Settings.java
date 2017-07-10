@@ -4189,6 +4189,12 @@ public final class Settings {
         public static final String SCREENSHOT_SOUND = "screenshot_sound";
 
         /**
+         * Whether to light hw keys when screen pressed
+         * @hide
+         */
+        public static final String BUTTON_LIGHT_SCREEN = "button_light_screen";
+
+        /**
          * Whether to show or hide the Settings Shortcut
          * @hide
          */
