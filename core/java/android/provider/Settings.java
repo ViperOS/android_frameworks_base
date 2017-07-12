@@ -7075,6 +7075,13 @@ public final class Settings {
                 "managed_profile_contact_remote_search";
 
         /**
+         * Indicates whether 3 finger screenshot is enabled.
+         *
+         * @hide
+         */
+        public static final String THREE_FINGER_SCREENSHOT_ENABLED = "three_finger_screenshot_enabled";
+
+        /**
          * Whether or not the automatic storage manager is enabled and should run on the device.
          *
          * @hide
