@@ -4172,17 +4172,6 @@ public final class Settings {
         public static final String TOAST_ICON = "toast_icon";
 
         /**
-         * Immersive recents options
-         *
-         * 0 = Default AOSP look
-         * 1 = Fullscreen
-         * 2 = Statusbar only
-         * 3 = Navbar only
-         * @hide
-         */
-        public static final String IMMERSIVE_RECENTS = "immersive_recents";
-
-        /**
          * Enable/Disable screenshot sound
          * @hide
          */
