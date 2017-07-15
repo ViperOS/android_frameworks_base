@@ -26,7 +26,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.android.internal.R;
-import cyanogenmod.providers.CMSettings;
+import android.provider.Settings;
 
 /**
  *  Helper to manage showing/hiding a image to notify them that they are entering
@@ -45,10 +45,10 @@ public class LockTaskNotify {
     }
 
     private boolean hasNavigationBar() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_showNavigationBar)
-                || CMSettings.Global.getIntForUser(mContext.getContentResolver(),
-                        CMSettings.Global.DEV_FORCE_SHOW_NAVBAR, 0, UserHandle.USER_CURRENT) == 1;
+        boolean needsNav = mContext.getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar);
+        boolean mHasNavigationBar = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.NAVIGATION_BAR_ENABLED, needsNav ? 1 : 0) == 1;
+        return needsNav || mHasNavigationBar;
     }
 
     public void showToast(int lockTaskModeState) {
