@@ -525,7 +525,7 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         mFloatingButton.setLayoutParams(params);
     }
 
-    private void showMemDisplay() {
+    private boolean showMemDisplay() {
         mMemBar.getProgressDrawable().setColorFilter(mMembarcolor == 0x00ffffff
                 ? mContext.getResources().getColor(R.color.system_accent_color)
                 : mMembarcolor, Mode.MULTIPLY);
@@ -535,9 +535,11 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         if (mShowMemDisplay) {
             mMemBar.setVisibility(View.VISIBLE);
             mMemText.setVisibility(View.VISIBLE);
+            return true;
         } else {
             mMemBar.setVisibility(View.GONE);
             mMemText.setVisibility(View.GONE);
+            return false;
         }
     }
 
@@ -693,7 +695,7 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         }
 
         // Temporarily hide the floating action button without changing visibility
-        if (mFloatingButton != null && showClearAllRecents) {
+        if (mFloatingButton != null && mShowClearAllRecents) {
             endFABanimation();
         }
     }
@@ -804,7 +806,7 @@ public class RecentsView extends FrameLayout implements TunerService.Tunable {
         }
 
         // Show the floating action button without changing visibility
-        if (mFloatingButton != null && showClearAllRecents) {
+        if (mFloatingButton != null && mShowClearAllRecents) {
             startFABanimation();
         }
     }
