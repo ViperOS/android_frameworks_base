@@ -20,20 +20,6 @@
 
 	<color name="accent_material_light">#ffbf00</color><!-- accent-->
 
-    <!-- Navbar button and multi sim colors -->
-    <color name="Teal_700">#80CBC4</color><!-- teal 200 -->
-    <color name="Teal_800">@*android:color/accent_material_light</color><!-- pb -accent - home -->
-    <color name="Blue_700">#697EAA</color><!-- Pastel blue -->
-    <color name="Blue_800">#81D4FA</color><!-- Blue 200 -->
-    <color name="Indigo_700">#C5CAE9</color><!-- indigo 100 -->
-    <color name="Indigo_800">#81D4FA</color><!-- light blue 200 -->
-    <color name="Purple_700">#81C784</color><!-- green 200 -->
-    <color name="Purple_800">#ffa700</color><!-- yellow 200 - recents -->
-    <color name="Pink_700">#5e97f6</color><!-- google blue - back -->
-    <color name="Pink_800">#80DEEA</color><!-- cyan 200 -->
-    <color name="Red_700">#F48FB1</color><!-- pink 200 -->
-    <color name="Red_800">#EF9A9A</color><!-- red 200 -->
-
     <color name="group_button_dialog_pressed_holo_dark">@*android:color/accent_material_light</color>
     <color name="group_button_dialog_focused_holo_dark">@*android:color/accent_material_light</color>
     <color name="immersive_cling_button_text_color">@*android:color/accent_material_light</color>
@@ -84,5 +70,15 @@
 
     <!-- Shutdown/reboot dialog -->
     <color name="shutdown_progress_tint">@*android:color/accent_material_light</color>
+    
+    <!-- User icon -->
+    <color name="user_icon_1">#ffbf00</color><!-- cyan 500 -->
+    <color name="user_icon_2">#ffbf00</color><!-- indigo 500 -->
+    <color name="user_icon_3">#ffbf00</color><!-- blue 500 -->
+    <color name="user_icon_4">#ffbf00</color><!-- pink 500 -->
+    <color name="user_icon_5">#ffbf00</color><!-- green 500 -->
+    <color name="user_icon_6">#ffbf00</color><!-- light green 500 -->
+    <color name="user_icon_7">#ffbf00</color><!-- orange 500 -->
+    <color name="user_icon_8">#ffbf00</color><!-- deep orange 500 -->
 
 </resources>
