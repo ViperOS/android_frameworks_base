@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <nine-patch android:src="@*android:drawable/minitab_lt_unselected_press" android:tint="@*android:color/accent_material_light" />
-    </item>
-</selector>

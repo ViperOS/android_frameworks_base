@@ -24,6 +24,10 @@ LOCAL_RESOURCE_DIR += \
   frameworks/support/design/res \
   frameworks/support/v7/recyclerview/res
 
+# Viper Color Engine
+$(warning *** Including Viper Color Engine ***)
+LOCAL_RESOURCE_DIR += vendor/viper/colorengine/$(LOCAL_PATH)/res
+
 # Again, required to pull in appcompat resources.  See abovementioned demo code.
 LOCAL_AAPT_FLAGS := \
   --auto-add-overlay \

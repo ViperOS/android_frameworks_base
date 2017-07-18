@@ -23,7 +23,7 @@ LOCAL_CERTIFICATE := platform
 # Tell aapt to create "extending (non-application)" resource IDs,
 # since these resources will be used by many apps.
 LOCAL_AAPT_FLAGS := -x
-LOCAL_AAPT_FLAGS += --private-symbols com.android.internal
+LOCAL_AAPT_FLAGS += --auto-add-overlay --private-symbols com.android.internal
 
 LOCAL_MODULE_TAGS := optional
 
@@ -38,6 +38,12 @@ LOCAL_EXPORT_PACKAGE_RESOURCES := true
 framework_GENERATED_SOURCE_DIR := $(call intermediates-dir-for,JAVA_LIBRARIES,framework,,COMMON)/src
 framework_RenderScript_STAMP_FILE := $(framework_GENERATED_SOURCE_DIR)/RenderScript.stamp
 #LOCAL_RESOURCE_DIR := $(framework_GENERATED_SOURCE_DIR)/renderscript/res $(LOCAL_PATH)/res
+
+LOCAL_RESOURCE_DIR := $(LOCAL_PATH)/res
+
+# Viper Color Engine
+$(warning *** Including Viper Color Engine ***)
+LOCAL_RESOURCE_DIR += vendor/viper/colorengine/$(LOCAL_PATH)/res
 
 include $(BUILD_PACKAGE)
 
