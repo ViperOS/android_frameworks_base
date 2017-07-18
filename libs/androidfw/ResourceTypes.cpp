@@ -2973,22 +2973,22 @@ String8 ResTable_config::toString() const {
                 res.append("night");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_PINK:
-                res.append("pink");
+                res.append("nightpink");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_AMBAR:
-                res.append("ambar");
+                res.append("nightambar");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_RED:
                 res.append("nightred");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_GREEN:
-                res.append("green");
+                res.append("nightgreen");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_AQUA:
-                res.append("aqua");
+                res.append("nightaqua");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_WHITE:
-                res.append("white");
+                res.append("nightwhite");
                 break;
             case ResTable_config::UI_MODE_NIGHT_NO_WHITEPINK:
                 res.append("whitepink");

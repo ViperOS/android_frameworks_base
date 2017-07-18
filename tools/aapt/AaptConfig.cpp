@@ -493,12 +493,12 @@ bool parseUiModeNight(const char* name, ResTable_config* out) {
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES;
         return true;
-    } else if (strcmp(name, "pink") == 0) {
+    } else if (strcmp(name, "nightpink") == 0) {
         if (out) out->uiMode =
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES_PINK;
         return true;
-    } else if (strcmp(name, "ambar") == 0) {
+    } else if (strcmp(name, "nightambar") == 0) {
         if (out) out->uiMode =
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES_AMBAR;
@@ -508,17 +508,17 @@ bool parseUiModeNight(const char* name, ResTable_config* out) {
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES_RED;
         return true;
-    } else if (strcmp(name, "green") == 0) {
+    } else if (strcmp(name, "nightgreen") == 0) {
         if (out) out->uiMode =
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES_GREEN;
         return true;
-    } else if (strcmp(name, "aqua") == 0) {
+    } else if (strcmp(name, "nightaqua") == 0) {
         if (out) out->uiMode =
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES_AQUA;
         return true;
-    } else if (strcmp(name, "white") == 0) {
+    } else if (strcmp(name, "nightwhite") == 0) {
         if (out) out->uiMode =
                 (out->uiMode&~ResTable_config::MASK_UI_MODE_NIGHT)
                 | ResTable_config::UI_MODE_NIGHT_YES_WHITE;

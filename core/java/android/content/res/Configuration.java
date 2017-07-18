@@ -900,12 +900,12 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case UI_MODE_NIGHT_UNDEFINED: sb.append(" ?night"); break;
             case UI_MODE_NIGHT_NO: /* not-night is not interesting to print */ break;
             case UI_MODE_NIGHT_YES: sb.append(" night"); break;
-            case UI_MODE_NIGHT_YES_PINK: sb.append(" pink"); break;
-            case UI_MODE_NIGHT_YES_AMBAR: sb.append(" ambar"); break;
+            case UI_MODE_NIGHT_YES_PINK: sb.append(" nightpink"); break;
+            case UI_MODE_NIGHT_YES_AMBAR: sb.append(" nightambar"); break;
             case UI_MODE_NIGHT_YES_RED: sb.append(" nightred"); break;
-            case UI_MODE_NIGHT_YES_GREEN: sb.append(" green"); break;
-            case UI_MODE_NIGHT_YES_AQUA: sb.append(" aqua"); break;
-            case UI_MODE_NIGHT_YES_WHITE: sb.append(" white"); break;
+            case UI_MODE_NIGHT_YES_GREEN: sb.append(" nightgreen"); break;
+            case UI_MODE_NIGHT_YES_AQUA: sb.append(" nightaqua"); break;
+            case UI_MODE_NIGHT_YES_WHITE: sb.append(" nightwhite"); break;
             case UI_MODE_NIGHT_NO_WHITEPINK: sb.append(" whitepink"); break;
             case UI_MODE_NIGHT_NO_WHITEAMBAR: sb.append(" whiteambar"); break;
             case UI_MODE_NIGHT_NO_WHITERED: sb.append(" whitered"); break;
@@ -1757,22 +1757,22 @@ public final class Configuration implements Parcelable, Comparable<Configuration
                 parts.add("night");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_PINK:
-                parts.add("pink");
+                parts.add("nightpink");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_AMBAR:
-                parts.add("ambar");
+                parts.add("nightambar");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_RED:
                 parts.add("nightred");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_GREEN:
-                parts.add("green");
+                parts.add("nightgreen");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_AQUA:
-                parts.add("aqua");
+                parts.add("nightaqua");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_WHITE:
-                parts.add("white");
+                parts.add("nightwhite");
                 break;
             case Configuration.UI_MODE_NIGHT_NO_WHITEPINK:
                 parts.add("whitepink");
