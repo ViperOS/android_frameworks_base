@@ -506,6 +506,14 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".DaylightHeaderDefault"
+                  android:label="@string/omni_style_default_header" >
+            <intent-filter>
+                <action android:name="org.omnirom.DaylightHeaderPack" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".settings.NotificationBrightnessDialog"
             android:label="@string/quick_settings_brightness_dialog_title"

@@ -102,4 +102,7 @@
     <string name="accessibility_quick_settings_hwkeys_off">HW keys off</string>
     <string name="quick_settings_hwkeys_label">HW keys</string>
 
+    <!-- Omni Style default header -->
+    <string name="omni_style_default_header">Default</string>
+
 </resources>
