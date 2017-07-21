@@ -84,6 +84,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
     private BrightnessMirrorController mBrightnessMirrorController;
     protected Vibrator mVibrator;
 
+    private boolean mIsBrightnessOnFooter;
+
     public QSPanel(Context context) {
         this(context, null);
     }
@@ -94,25 +96,42 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
 
         setOrientation(VERTICAL);
 
+        mIsBrightnessOnFooter = true;
+
+        mFooter = new QSFooter(this, context);
+
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
+
         mBrightnessView = LayoutInflater.from(context).inflate(
                 R.layout.quick_settings_brightness_dialog, this, false);
-        addView(mBrightnessView);
 
         mBrightnessIcon = (ImageView) mBrightnessView.findViewById(R.id.brightness_icon);
 
-        setupTileLayout();
-
-        mFooter = new QSFooter(this, context);
-        addView(mFooter.getView());
-
-        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-        updateResources();
-
         mBrightnessController = new BrightnessController(getContext(),
                 mBrightnessIcon,
-                (ToggleSlider) findViewById(R.id.brightness_slider));
+                (ToggleSlider) mBrightnessView.findViewById(R.id.brightness_slider));
 
-        mAutoBrightnessView = (ImageView) findViewById(R.id.brightness_icon);
+        mAutoBrightnessView = (ImageView) mBrightnessView.findViewById(R.id.brightness_icon);
+
+        setupViews();
+    }
+
+    private void setupViews(){
+    //mBrightnessView.setPadding(0, top, 0, bottom);
+        if(mIsBrightnessOnFooter){
+            setupTileLayout();
+            addView(mFooter.getView());
+            mBrightnessView.setPadding(mBrightnessView.getPaddingLeft(), 
+                                        mBrightnessView.getPaddingTop(), 
+                                        mBrightnessView.getPaddingRight(), 
+                                        mContext.getResources().getDimensionPixelSize(R.dimen.qs_brightness_footer_padding));
+            addView(mBrightnessView);
+        }else{
+            addView(mBrightnessView);
+            setupTileLayout();
+            addView(mFooter.getView());
+        }
+        updateResources();
     }
 
     protected void setupTileLayout() {
@@ -157,12 +176,15 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
 
     @Override
     public void onTuningChanged(String key, String newValue) {
-        if (QS_SHOW_BRIGHTNESS.equals(key)) {
-            mBrightnessView.setVisibility(newValue == null || Integer.parseInt(newValue) != 0
-                    ? VISIBLE : GONE);
-        } else if (QS_SHOW_BRIGHTNESS_ICON.equals(key) && mIsAutomaticBrightnessAvailable) {
-            mAutoBrightnessView.setVisibility(newValue == null || Integer.parseInt(newValue) != 0
-                    ? VISIBLE : GONE);
+        try {
+            if (QS_SHOW_BRIGHTNESS.equals(key)) {
+                mBrightnessView.setVisibility(newValue == null || Integer.parseInt(newValue) != 0
+                        ? VISIBLE : GONE);
+            } else if (QS_SHOW_BRIGHTNESS_ICON.equals(key) && mIsAutomaticBrightnessAvailable) {
+                mAutoBrightnessView.setVisibility(newValue == null || Integer.parseInt(newValue) != 0
+                        ? VISIBLE : GONE);
+            }
+        } catch (Exception e){
         }
         updateResources();
     }
