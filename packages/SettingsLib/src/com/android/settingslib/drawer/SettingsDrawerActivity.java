@@ -62,6 +62,7 @@ public class SettingsDrawerActivity extends Activity {
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
 
     public static final String EXTRA_SHOW_MENU = "show_drawer_menu";
+    public static final String EXTRA_SHOW_BACK = "show_back_icon";
 
     private static List<DashboardCategory> sDashboardCategories;
     private static HashMap<Pair<String, String>, Tile> sTileCache;
@@ -78,6 +79,7 @@ public class SettingsDrawerActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private boolean mOpenTileFromLeftDrawer;
     private boolean mShowingMenu;
+    private boolean mShowingBackIcon;
     private UserManager mUserManager;
 
     @Override
@@ -132,6 +134,9 @@ public class SettingsDrawerActivity extends Activity {
                 && mDrawerAdapter.getCount() != 0) {
             openDrawer();
             return true;
+        }else if(mShowingBackIcon){
+            finish();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -156,6 +161,11 @@ public class SettingsDrawerActivity extends Activity {
                 if (intent.getBooleanExtra(EXTRA_SHOW_MENU, false)) {
                     // Intent explicitly set to show menu.
                     showMenuIcon();
+                }
+            } else if (intent.hasExtra(EXTRA_SHOW_BACK)) {
+                if (intent.getBooleanExtra(EXTRA_SHOW_BACK, false)) {
+                    // Intent explicitly set to show back.
+                    showBackIcon();
                 }
             } else if (isTopLevelTile(intent)) {
                 showMenuIcon();
@@ -271,7 +281,14 @@ public class SettingsDrawerActivity extends Activity {
         mShowingMenu = true;
         if(getActionBar() != null){
             getActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-			getActionBar().setHomeActionContentDescription(R.string.content_description_menu_button);
+            getActionBar().setHomeActionContentDescription(R.string.content_description_menu_button);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void showBackIcon() {
+        mShowingBackIcon = true;
+        if(getActionBar() != null){
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
