@@ -7200,6 +7200,18 @@ public final class Settings {
         public static final String LOCK_ENABLE_QS = "lockscreen_enable_qs";
 
         /**
+         * Whether to SystemUI and Settings app restart is required
+         * @hide
+         */
+        public static final String VIPER_COLORENGINE_IS_APPLY_REQUIRED = "viper_colorengine_is_apply_required";
+
+        /**
+         * Whether to theme accent color is allowed on stock launcher
+         * @hide
+         */
+        public static final String VIPER_COLORENGINE_LAUNCHER_ALLOW_ACCENT = "viper_colorengine_launcher_allow_accent";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
