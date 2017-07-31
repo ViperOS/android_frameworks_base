@@ -2975,36 +2975,41 @@ String8 ResTable_config::toString() const {
             case ResTable_config::UI_MODE_NIGHT_YES_PINK:
                 res.append("nightpink");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_YES_AMBAR:
-                res.append("nightambar");
+            case ResTable_config::UI_MODE_NIGHT_YES_AMBER:
+                res.append("nightamber");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_RED:
                 res.append("nightred");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_YES_GREEN:
-                res.append("nightgreen");
+            case ResTable_config::UI_MODE_NIGHT_YES_TEAL:
+                res.append("nightteal");
                 break;
             case ResTable_config::UI_MODE_NIGHT_YES_AQUA:
                 res.append("nightaqua");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_YES_WHITE:
-                res.append("nightwhite");
-                break;
             case ResTable_config::UI_MODE_NIGHT_NO_WHITEPINK:
                 res.append("whitepink");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_NO_WHITEAMBAR:
-                res.append("whiteambar");
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITEAMBER:
+                res.append("whiteamber");
                 break;
             case ResTable_config::UI_MODE_NIGHT_NO_WHITERED:
                 res.append("whitered");
                 break;
-            case ResTable_config::UI_MODE_NIGHT_NO_WHITEGREEN:
-                res.append("whitegreen");
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITETEAL:
+                res.append("whiteteal");
                 break;
             case ResTable_config::UI_MODE_NIGHT_NO_WHITEAQUA:
                 res.append("whiteaqua");
                 break;
+
+            case ResTable_config::UI_MODE_NIGHT_YES_PURPLE:
+                res.append("nightpurple");
+                break;
+            case ResTable_config::UI_MODE_NIGHT_NO_WHITEPURPLE:
+                res.append("whitepurple");
+                break;
+
             default:
                 res.appendFormat("uiModeNight=%d",
                         dtohs(uiMode&MASK_UI_MODE_NIGHT));

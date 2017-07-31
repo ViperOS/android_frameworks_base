@@ -100,10 +100,10 @@ public class UiModeManager {
 
     /** @hide */
     @IntDef({MODE_NIGHT_AUTO, MODE_NIGHT_NO, MODE_NIGHT_YES, MODE_NIGHT_YES_PINK,
-            MODE_NIGHT_YES_AMBAR, MODE_NIGHT_YES_RED, MODE_NIGHT_YES_GREEN,
-            MODE_NIGHT_YES_AQUA, MODE_NIGHT_YES_WHITE, MODE_NIGHT_NO_WHITEPINK,
-            MODE_NIGHT_NO_WHITEAMBAR, MODE_NIGHT_NO_WHITERED, MODE_NIGHT_NO_WHITEGREEN,
-            MODE_NIGHT_NO_WHITEAQUA})
+            MODE_NIGHT_YES_AMBER, MODE_NIGHT_YES_RED, MODE_NIGHT_YES_TEAL,
+            MODE_NIGHT_YES_AQUA, MODE_NIGHT_NO_WHITEPINK,
+            MODE_NIGHT_NO_WHITEAMBER, MODE_NIGHT_NO_WHITERED, MODE_NIGHT_NO_WHITETEAL,
+            MODE_NIGHT_NO_WHITEAQUA, MODE_NIGHT_YES_PURPLE, MODE_NIGHT_NO_WHITEPURPLE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface NightMode {}
 
@@ -133,9 +133,9 @@ public class UiModeManager {
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
-     * never run in day mode (Ambar theme).
+     * never run in day mode (amber theme).
      */
-    public static final int MODE_NIGHT_YES_AMBAR = Configuration.UI_MODE_NIGHT_YES_AMBAR >> 4;
+    public static final int MODE_NIGHT_YES_AMBER = Configuration.UI_MODE_NIGHT_YES_AMBER >> 4;
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
@@ -145,21 +145,15 @@ public class UiModeManager {
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
-     * always run in night mode (Green theme).
+     * always run in night mode (Teal theme).
      */
-    public static final int MODE_NIGHT_YES_GREEN = Configuration.UI_MODE_NIGHT_YES_GREEN >> 4;
+    public static final int MODE_NIGHT_YES_TEAL = Configuration.UI_MODE_NIGHT_YES_TEAL >> 4;
 	
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
      * always run in night mode (Aqua theme).
      */
     public static final int MODE_NIGHT_YES_AQUA = Configuration.UI_MODE_NIGHT_YES_AQUA >> 4;
-	
-    /**
-     * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
-     * always run in night mode (White theme).
-     */
-    public static final int MODE_NIGHT_YES_WHITE = Configuration.UI_MODE_NIGHT_YES_WHITE >> 4;
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
@@ -169,9 +163,9 @@ public class UiModeManager {
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
-     * always run in night mode (WhiteAmbar theme).
+     * always run in night mode (Whiteamber theme).
      */
-    public static final int MODE_NIGHT_NO_WHITEAMBAR = Configuration.UI_MODE_NIGHT_NO_WHITEAMBAR >> 4;
+    public static final int MODE_NIGHT_NO_WHITEAMBER = Configuration.UI_MODE_NIGHT_NO_WHITEAMBER >> 4;
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
@@ -181,15 +175,28 @@ public class UiModeManager {
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
-     * always run in night mode (WhiteGreen theme).
+     * always run in night mode (WhiteTeal theme).
      */
-    public static final int MODE_NIGHT_NO_WHITEGREEN = Configuration.UI_MODE_NIGHT_NO_WHITEGREEN >> 4;
+    public static final int MODE_NIGHT_NO_WHITETEAL = Configuration.UI_MODE_NIGHT_NO_WHITETEAL >> 4;
 
     /**
      * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
      * always run in night mode (WhiteAqua theme).
      */
     public static final int MODE_NIGHT_NO_WHITEAQUA = Configuration.UI_MODE_NIGHT_NO_WHITEAQUA >> 4;
+
+
+    /**
+     * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
+     * always run in night mode (Purple theme).
+     */
+    public static final int MODE_NIGHT_YES_PURPLE = Configuration.UI_MODE_NIGHT_YES_PURPLE >> 4;
+
+    /**
+     * Constant for {@link #setNightMode(int)} and {@link #getNightMode()}:
+     * always run in night mode (WhitePurple theme).
+     */
+    public static final int MODE_NIGHT_NO_WHITEPURPLE = Configuration.UI_MODE_NIGHT_NO_WHITEPURPLE >> 4;
 
     private IUiModeManager mService;
 
@@ -288,26 +295,28 @@ public class UiModeManager {
      *       {@code night} mode</li>
      *   <li><em>{@link #MODE_NIGHT_YES_PINK}</em> sets the device into
      *       {@code pink } mode</li>
-     *   <li><em>{@link #MODE_NIGHT_YES_AMBAR}</em> sets the device into
-     *       {@code ambar } mode</li>
+     *   <li><em>{@link #MODE_NIGHT_YES_AMBER}</em> sets the device into
+     *       {@code amber } mode</li>
      *   <li><em>{@link #MODE_NIGHT_YES_RED}</em> sets the device into
      *       {@code red } mode</li>
-     *   <li><em>{@link #MODE_NIGHT_YES_GREEN}</em> sets the device into
-     *       {@code green } mode</li>
+     *   <li><em>{@link #MODE_NIGHT_YES_TEAL}</em> sets the device into
+     *       {@code teal } mode</li>
      *   <li><em>{@link #MODE_NIGHT_YES_AQUA}</em> sets the device into
      *       {@code aqua } mode</li>
-     *   <li><em>{@link #MODE_NIGHT_YES_WHITE}</em> sets the device into
-     *       {@code white } mode</li>
      *   <li><em>{@link #MODE_NIGHT_NO_WHITEPINK}</em> sets the device into
      *       {@code whitepink } mode</li>
-     *   <li><em>{@link #MODE_NIGHT_NO_WHITEAMBAR}</em> sets the device into
-     *       {@code whiteambar } mode</li>
+     *   <li><em>{@link #MODE_NIGHT_NO_WHITEAMBER}</em> sets the device into
+     *       {@code whiteamber } mode</li>
      *   <li><em>{@link #MODE_NIGHT_NO_WHITERED}</em> sets the device into
      *       {@code whitered } mode</li>
-     *   <li><em>{@link #MODE_NIGHT_NO_WHITEGREEN}</em> sets the device into
-     *       {@code whitegreen } mode</li>
+     *   <li><em>{@link #MODE_NIGHT_NO_WHITETEAL}</em> sets the device into
+     *       {@code whiteteal } mode</li>
      *   <li><em>{@link #MODE_NIGHT_NO_WHITEAQUA}</em> sets the device into
      *       {@code whiteaqua } mode</li>
+     *   <li><em>{@link #MODE_NIGHT_YES_PURPLE}</em> sets the device into
+     *       {@code purple } mode</li>
+     *   <li><em>{@link #MODE_NIGHT_NO_WHITEPURPLE}</em> sets the device into
+     *       {@code whitepurple } mode</li>
      *   <li><em>{@link #MODE_NIGHT_AUTO}</em> automatically switches between
      *       {@code night} and {@code notnight} based on the device's current
      *       location and certain other sensors</li>
@@ -339,16 +348,17 @@ public class UiModeManager {
      *   <li>{@link #MODE_NIGHT_NO}</li>
      *   <li>{@link #MODE_NIGHT_YES}</li>
      *   <li>{@link #MODE_NIGHT_YES_PINK}</li>
-     *   <li>{@link #MODE_NIGHT_YES_AMBAR}</li>
+     *   <li>{@link #MODE_NIGHT_YES_AMBER}</li>
      *   <li>{@link #MODE_NIGHT_YES_RED}</li>
-     *   <li>{@link #MODE_NIGHT_YES_GREEN}</li>
+     *   <li>{@link #MODE_NIGHT_YES_TEAL}</li>
      *   <li>{@link #MODE_NIGHT_YES_AQUA}</li>
-     *   <li>{@link #MODE_NIGHT_YES_WHITE}</li>
      *   <li>{@link #MODE_NIGHT_NO_WHITEPINK}</li>
-     *   <li>{@link #MODE_NIGHT_NO_WHITEAMBAR}</li>
+     *   <li>{@link #MODE_NIGHT_NO_WHITEAMBER}</li>
      *   <li>{@link #MODE_NIGHT_NO_WHITERED}</li>
-     *   <li>{@link #MODE_NIGHT_NO_WHITEGREEN}</li>
+     *   <li>{@link #MODE_NIGHT_NO_WHITETEAL}</li>
      *   <li>{@link #MODE_NIGHT_NO_WHITEAQUA}</li>
+     *   <li>{@link #MODE_NIGHT_YES_PURPLE}</li>
+     *   <li>{@link #MODE_NIGHT_NO_WHITEPURPLE}</li>
      *   <li>{@link #MODE_NIGHT_AUTO}</li>
      *   <li>{@code -1} on error</li>
      * </ul>

@@ -572,35 +572,42 @@ public final class Configuration implements Parcelable, Comparable<Configuration
      * value that corresponds to the NightQualifier "pink". */
     public static final int UI_MODE_NIGHT_YES_PINK = 0x30;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
-     * value that corresponds to the NightQualifier "ambar". */
-    public static final int UI_MODE_NIGHT_YES_AMBAR = 0x40;
+     * value that corresponds to the NightQualifier "amber". */
+    public static final int UI_MODE_NIGHT_YES_AMBER = 0x40;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "red". */
     public static final int UI_MODE_NIGHT_YES_RED = 0x50;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
-     * value that corresponds to the NightQualifier "green". */
-    public static final int UI_MODE_NIGHT_YES_GREEN = 0x60;
+     * value that corresponds to the NightQualifier "teal". */
+    public static final int UI_MODE_NIGHT_YES_TEAL = 0x60;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "aqua". */
     public static final int UI_MODE_NIGHT_YES_AQUA = 0x70;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
-     * value that corresponds to the NightQualifier "white". */
-    public static final int UI_MODE_NIGHT_YES_WHITE = 0x80;
-    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "whitepink". */
-    public static final int UI_MODE_NIGHT_NO_WHITEPINK = 0x90;
+    public static final int UI_MODE_NIGHT_NO_WHITEPINK = 0x80;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
-     * value that corresponds to the NightQualifier "whiteambar". */
-    public static final int UI_MODE_NIGHT_NO_WHITEAMBAR = 0xa0;
+     * value that corresponds to the NightQualifier "whiteamber". */
+    public static final int UI_MODE_NIGHT_NO_WHITEAMBER = 0x90;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "whitered". */
-    public static final int UI_MODE_NIGHT_NO_WHITERED = 0xb0;
+    public static final int UI_MODE_NIGHT_NO_WHITERED = 0xa0;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
-     * value that corresponds to the NightQualifier "whitegreen". */
-    public static final int UI_MODE_NIGHT_NO_WHITEGREEN = 0xc0;
+     * value that corresponds to the NightQualifier "whiteteal". */
+    public static final int UI_MODE_NIGHT_NO_WHITETEAL = 0xb0;
     /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
      * value that corresponds to the NightQualifier "whiteaqua". */
-    public static final int UI_MODE_NIGHT_NO_WHITEAQUA = 0xd0;
+    public static final int UI_MODE_NIGHT_NO_WHITEAQUA = 0xc0;
+
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "purple". */
+    public static final int UI_MODE_NIGHT_YES_PURPLE = 0xd0; // 208
+
+
+    /** Constant for {@link #uiMode}: a {@link #UI_MODE_NIGHT_MASK}
+     * value that corresponds to the NightQualifier "whitepurple". */
+    public static final int UI_MODE_NIGHT_NO_WHITEPURPLE = 0xe0; // 224
 
     /**
      * Bit mask of the ui mode.  Currently there are two fields:
@@ -613,10 +620,11 @@ public final class Configuration implements Parcelable, Comparable<Configuration
      * <p>The {@link #UI_MODE_NIGHT_MASK} defines whether the screen
      * is in a special mode. They may be one of {@link #UI_MODE_NIGHT_UNDEFINED},
      * {@link #UI_MODE_NIGHT_NO}, {@link #UI_MODE_NIGHT_YES}, {@link #UI_MODE_NIGHT_YES_PINK},
-     * {@link #UI_MODE_NIGHT_YES_AMBAR}, {@link #UI_MODE_NIGHT_YES_RED}, {@link #UI_MODE_NIGHT_YES_GREEN},
-     * {@link #UI_MODE_NIGHT_YES_AQUA}, {@link #UI_MODE_NIGHT_YES_WHITE}, {@link #UI_MODE_NIGHT_NO_WHITEPINK},
-     * {@link #UI_MODE_NIGHT_NO_WHITEAMBAR}, {@link #UI_MODE_NIGHT_NO_WHITERED} or {@link #UI_MODE_NIGHT_NO_WHITEGREEN},
+     * {@link #UI_MODE_NIGHT_YES_AMBER}, {@link #UI_MODE_NIGHT_YES_RED}, {@link #UI_MODE_NIGHT_YES_TEAL},
+     * {@link #UI_MODE_NIGHT_YES_AQUA}, {@link #UI_MODE_NIGHT_NO_WHITEPINK},
+     * {@link #UI_MODE_NIGHT_NO_WHITEAMBER}, {@link #UI_MODE_NIGHT_NO_WHITERED} or {@link #UI_MODE_NIGHT_NO_WHITETEAL},
      * {@link #UI_MODE_NIGHT_NO_WHITEAQUA}.
+     * {@link #UI_MODE_NIGHT_YES_PURPLE}, {@link #UI_MODE_NIGHT_NO_WHITEPURPLE}.
      */
     public int uiMode;
 
@@ -901,16 +909,19 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case UI_MODE_NIGHT_NO: /* not-night is not interesting to print */ break;
             case UI_MODE_NIGHT_YES: sb.append(" night"); break;
             case UI_MODE_NIGHT_YES_PINK: sb.append(" nightpink"); break;
-            case UI_MODE_NIGHT_YES_AMBAR: sb.append(" nightambar"); break;
+            case UI_MODE_NIGHT_YES_AMBER: sb.append(" nightamber"); break;
             case UI_MODE_NIGHT_YES_RED: sb.append(" nightred"); break;
-            case UI_MODE_NIGHT_YES_GREEN: sb.append(" nightgreen"); break;
+            case UI_MODE_NIGHT_YES_TEAL: sb.append(" nightteal"); break;
             case UI_MODE_NIGHT_YES_AQUA: sb.append(" nightaqua"); break;
-            case UI_MODE_NIGHT_YES_WHITE: sb.append(" nightwhite"); break;
             case UI_MODE_NIGHT_NO_WHITEPINK: sb.append(" whitepink"); break;
-            case UI_MODE_NIGHT_NO_WHITEAMBAR: sb.append(" whiteambar"); break;
+            case UI_MODE_NIGHT_NO_WHITEAMBER: sb.append(" whiteamber"); break;
             case UI_MODE_NIGHT_NO_WHITERED: sb.append(" whitered"); break;
-            case UI_MODE_NIGHT_NO_WHITEGREEN: sb.append(" whitegreen"); break;
+            case UI_MODE_NIGHT_NO_WHITETEAL: sb.append(" whiteteal"); break;
             case UI_MODE_NIGHT_NO_WHITEAQUA: sb.append(" whiteaqua"); break;
+
+            case UI_MODE_NIGHT_YES_PURPLE: sb.append(" nightpurple"); break;
+            case UI_MODE_NIGHT_NO_WHITEPURPLE: sb.append(" whitepurple"); break;
+
             default: sb.append(" night="); sb.append(uiMode&UI_MODE_NIGHT_MASK); break;
         }
         switch (touchscreen) {
@@ -1759,32 +1770,29 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case Configuration.UI_MODE_NIGHT_YES_PINK:
                 parts.add("nightpink");
                 break;
-            case Configuration.UI_MODE_NIGHT_YES_AMBAR:
-                parts.add("nightambar");
+            case Configuration.UI_MODE_NIGHT_YES_AMBER:
+                parts.add("nightamber");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_RED:
                 parts.add("nightred");
                 break;
-            case Configuration.UI_MODE_NIGHT_YES_GREEN:
-                parts.add("nightgreen");
+            case Configuration.UI_MODE_NIGHT_YES_TEAL:
+                parts.add("nightteal");
                 break;
             case Configuration.UI_MODE_NIGHT_YES_AQUA:
                 parts.add("nightaqua");
                 break;
-            case Configuration.UI_MODE_NIGHT_YES_WHITE:
-                parts.add("nightwhite");
-                break;
             case Configuration.UI_MODE_NIGHT_NO_WHITEPINK:
                 parts.add("whitepink");
                 break;
-            case Configuration.UI_MODE_NIGHT_NO_WHITEAMBAR:
-                parts.add("whiteambar");
+            case Configuration.UI_MODE_NIGHT_NO_WHITEAMBER:
+                parts.add("whiteamber");
                 break;
             case Configuration.UI_MODE_NIGHT_NO_WHITERED:
                 parts.add("whitered");
                 break;
-            case Configuration.UI_MODE_NIGHT_NO_WHITEGREEN:
-                parts.add("whitegreen");
+            case Configuration.UI_MODE_NIGHT_NO_WHITETEAL:
+                parts.add("whiteteal");
                 break;
             case Configuration.UI_MODE_NIGHT_NO_WHITEAQUA:
                 parts.add("whiteaqua");
@@ -1792,6 +1800,14 @@ public final class Configuration implements Parcelable, Comparable<Configuration
             case Configuration.UI_MODE_NIGHT_NO:
                 parts.add("notnight");
                 break;
+
+            case Configuration.UI_MODE_NIGHT_YES_PURPLE:
+                parts.add("nightpurple");
+                break;
+            case Configuration.UI_MODE_NIGHT_NO_WHITEPURPLE:
+                parts.add("whitepurple");
+                break;
+
             default:
                 break;
         }

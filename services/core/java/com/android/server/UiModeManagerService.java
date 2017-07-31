@@ -276,16 +276,20 @@ final class UiModeManagerService extends SystemService {
                 case UiModeManager.MODE_NIGHT_NO:
                 case UiModeManager.MODE_NIGHT_YES:
                 case UiModeManager.MODE_NIGHT_YES_PINK:
-                case UiModeManager.MODE_NIGHT_YES_AMBAR:
+                case UiModeManager.MODE_NIGHT_YES_AMBER:
                 case UiModeManager.MODE_NIGHT_YES_RED:
-                case UiModeManager.MODE_NIGHT_YES_GREEN:
+                case UiModeManager.MODE_NIGHT_YES_TEAL:
                 case UiModeManager.MODE_NIGHT_YES_AQUA:
-                case UiModeManager.MODE_NIGHT_YES_WHITE:
                 case UiModeManager.MODE_NIGHT_NO_WHITEPINK:
-                case UiModeManager.MODE_NIGHT_NO_WHITEAMBAR:
+                case UiModeManager.MODE_NIGHT_NO_WHITEAMBER:
                 case UiModeManager.MODE_NIGHT_NO_WHITERED:
-                case UiModeManager.MODE_NIGHT_NO_WHITEGREEN:
+                case UiModeManager.MODE_NIGHT_NO_WHITETEAL:
                 case UiModeManager.MODE_NIGHT_NO_WHITEAQUA:
+
+
+                case UiModeManager.MODE_NIGHT_YES_PURPLE:
+                case UiModeManager.MODE_NIGHT_NO_WHITEPURPLE:
+
                 case UiModeManager.MODE_NIGHT_AUTO:
                     break;
                 default:
