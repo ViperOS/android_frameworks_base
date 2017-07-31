@@ -233,6 +233,7 @@ import java.util.List;
 import java.util.Map;
 
 import cyanogenmod.providers.CMSettings;
+import com.viper.colorengine.utils.ColorEngineUtils;
 
 import static android.service.notification.NotificationListenerService.Ranking.importanceToLevel;
 
@@ -1018,6 +1019,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         mScreenPinningRequest = new ScreenPinningRequest(mContext);
         mFalsingManager = FalsingManager.getInstance(mContext);
+        ColorEngineUtils.onSystemUIStarted(mContext);
     }
 
     protected void createIconController() {
