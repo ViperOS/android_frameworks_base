@@ -524,6 +524,9 @@
 
     <protected-broadcast android:name="projekt.substratum.APP_CRASHED" />
 
+    <!-- Restart SystemUI -->
+    <protected-broadcast android:name="restart_systemui" />
+
     <protected-broadcast
             android:name="com.android.server.policy.PhoneWindowManager.ACTION_TORCH_OFF" />
 
