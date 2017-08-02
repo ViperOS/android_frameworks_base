@@ -76,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Vibra</string>
   <string name="quick_settings_sound_dnd">Non disturbare</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Tasti fisici attivati</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Tasti fisici disattivati</string>
+  <string name="quick_settings_hwkeys_label">Tasti fisici</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Predefinito</string>
 </resources>

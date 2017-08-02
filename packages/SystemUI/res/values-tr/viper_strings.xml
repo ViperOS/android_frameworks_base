@@ -76,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Titreşim</string>
   <string name="quick_settings_sound_dnd">Rahatsız etme</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Donanım tuşları açık</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Donanım tuşları kapalı</string>
+  <string name="quick_settings_hwkeys_label">Donanım tuşları</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Varsayılan</string>
 </resources>

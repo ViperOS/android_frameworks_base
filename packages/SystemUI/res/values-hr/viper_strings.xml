@@ -20,6 +20,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
+  <string name="quick_venom_label">Venom</string>
+  <string name="quick_venom_toast">LOL, stvarno ste mislili da će Vas dugi pritisak nekamo odvesti!!!</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
@@ -32,6 +34,7 @@
   <string name="omnijaws_service_disabled">Usluga je onemogućena</string>
   <string name="omnijaws_package_not_available">OmniJaws nije dostupan</string>
   <!-- statusbar items tuner -->
+  <string name="statusbar_icons_blacklist">Ikone statusne trake</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
   <string name="keyguard_indication_dash_charging_time">Dash punjenje (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> do napunjenosti)</string>
   <string name="keyguard_plugged_in_dash_charging">Dash punjenje</string>
@@ -47,6 +50,7 @@
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Snimka zaslona</string>
   <!-- Brightness QS Tile -->
+  <string name="quick_settings_brightness">Svjetlina</string>
   <!-- Reboot/Recovery QS Tile -->
   <string name="quick_settings_reboot_label">Ponovno pokreni</string>
   <string name="quick_settings_reboot_recovery_label">Oporavak</string>
@@ -57,6 +61,8 @@
   <string name="quick_settings_expanded_desktop_label">Proširena radna površina</string>
   <string name="quick_settings_expanded_desktop">Prošireno</string>
   <string name="quick_settings_expanded_desktop_off">Normalno</string>
+  <string name="quick_settings_expanded_navigation_off">Sakrij navigacijsku traku</string>
+  <string name="quick_settings_expanded_statusbar_off">Sakrij statusnu traku</string>
   <!-- vpn icon switch -->
   <string name="status_bar_vpn">VPN</string>
   <!-- data saver icon switch -->
@@ -70,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Vibracija</string>
   <string name="quick_settings_sound_dnd">Ne ometaj</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Hardverske tipke uključene</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Hardverske tipke isključene</string>
+  <string name="quick_settings_hwkeys_label">Hardverske tipke</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Zadano</string>
 </resources>

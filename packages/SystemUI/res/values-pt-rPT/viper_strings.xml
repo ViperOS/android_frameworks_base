@@ -76,4 +76,6 @@
   <string name="quick_settings_sound_vibrate">Vibração</string>
   <string name="quick_settings_sound_dnd">Não incomodar</string>
   <!-- HW Keys Tile -->
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Predefinição</string>
 </resources>

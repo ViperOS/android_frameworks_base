@@ -34,7 +34,7 @@
   <string name="omnijaws_service_disabled">Servicio desactivado</string>
   <string name="omnijaws_package_not_available">OmniJaws no disponible</string>
   <!-- statusbar items tuner -->
-  <string name="statusbar_icons_blacklist">Iconos de la barra de estado</string>
+  <string name="statusbar_icons_blacklist">Íconos de la barra de estado</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
   <string name="keyguard_indication_dash_charging_time">Carga rápida (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> hasta completar)</string>
   <string name="keyguard_plugged_in_dash_charging">Carga Rápida</string>
@@ -76,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Vibrar</string>
   <string name="quick_settings_sound_dnd">No molestar</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Teclas HW encendidas</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Teclas HW apagadas</string>
+  <string name="quick_settings_hwkeys_label">Teclas de Hardware</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Por defecto</string>
 </resources>

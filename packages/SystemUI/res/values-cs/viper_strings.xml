@@ -20,7 +20,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
-  <string name="quick_venom_toast">LOL, opravdu sis myslel, že toto dlouhé kliknutí tě někam dostanete!!!</string>
+  <string name="quick_venom_label">Venom</string>
+  <string name="quick_venom_toast">LOL, opravdu jste si mysleli, že toto dlouhé kliknutí vás někam dostane!!!</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
@@ -33,7 +34,7 @@
   <string name="omnijaws_service_disabled">Služba je vypnuta</string>
   <string name="omnijaws_package_not_available">OmniJaws není k dispozici</string>
   <!-- statusbar items tuner -->
-  <string name="statusbar_icons_blacklist">Ikony na stavovém řádku</string>
+  <string name="statusbar_icons_blacklist">Ikony stavové lišty</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
   <string name="keyguard_indication_dash_charging_time">Rychlé nabíjení (plně nabito za <xliff:g id="CHARGING_TIME_LEFT">%s</xliff:g>)</string>
   <string name="keyguard_plugged_in_dash_charging">Rychlé nabíjení</string>
@@ -44,7 +45,7 @@
   <string name="delete_screenshot_toast">Snímek obrazovky byl smazán</string>
   <!-- Music QS Tile -->
   <string name="quick_settings_music_label">Hudba</string>
-  <string name="quick_settings_music_play">Play</string>
+  <string name="quick_settings_music_play">Přehrát</string>
   <string name="quick_settings_music_pause">Pozastavit</string>
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Snímek obrazovky</string>
@@ -61,7 +62,7 @@
   <string name="quick_settings_expanded_desktop">Rozšířená</string>
   <string name="quick_settings_expanded_desktop_off">Normální</string>
   <string name="quick_settings_expanded_navigation_off">Skrýt navigační panel</string>
-  <string name="quick_settings_expanded_statusbar_off">Skrýt stavový řádek</string>
+  <string name="quick_settings_expanded_statusbar_off">Skrýt stavovou lištu</string>
   <!-- vpn icon switch -->
   <string name="status_bar_vpn">Síť VPN</string>
   <!-- data saver icon switch -->
@@ -75,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Vibrace</string>
   <string name="quick_settings_sound_dnd">Nerušit</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Hardvarová tlačítka zapnuta</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Hardvarová tlačítka vypnuta</string>
+  <string name="quick_settings_hwkeys_label">Hardvarová tlačítka</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Výchozí</string>
 </resources>

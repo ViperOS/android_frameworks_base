@@ -40,7 +40,7 @@
   <string name="keyguard_plugged_in_dash_charging">Carregamento Rápido</string>
   <string name="recents_free_ram">RAM Livre: %1$d MB</string>
   <!-- volte icon switch -->
-  <string name="status_bar_volte">VOLTE</string>
+  <string name="status_bar_volte">VoLTE</string>
   <!-- Screenshot Delete Toast -->
   <string name="delete_screenshot_toast">A captura de tela foi apagada</string>
   <!-- Music QS Tile -->
@@ -79,4 +79,6 @@
   <string name="accessibility_quick_settings_hwkeys_on">Teclas físicas ativadas</string>
   <string name="accessibility_quick_settings_hwkeys_off">Teclas físicas desativadas</string>
   <string name="quick_settings_hwkeys_label">Teclas físicas</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Padrão</string>
 </resources>

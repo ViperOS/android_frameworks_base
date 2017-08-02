@@ -20,6 +20,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
+  <string name="quick_venom_label">Venom</string>
+  <string name="quick_venom_toast">LOL, dachtest du wirklich, dass dich ein langer Klick irgendwo hin bringt!!!</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
@@ -32,6 +34,7 @@
   <string name="omnijaws_service_disabled">Dienst deaktiviert</string>
   <string name="omnijaws_package_not_available">OmniJaws nicht verfügbar</string>
   <!-- statusbar items tuner -->
+  <string name="statusbar_icons_blacklist">Statusleisten-Symbole</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
   <string name="keyguard_indication_dash_charging_time">Wird schnell aufgeladen (voll in <xliff:g id="verbleibende_Aufladezeit" beispiel="4 Stunden und 2 Minuten">%s</xliff:g>)</string>
   <string name="keyguard_plugged_in_dash_charging">Dash Charging</string>
@@ -47,6 +50,7 @@
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Screenshot</string>
   <!-- Brightness QS Tile -->
+  <string name="quick_settings_brightness">Helligkeit</string>
   <!-- Reboot/Recovery QS Tile -->
   <string name="quick_settings_reboot_label">Neustarten</string>
   <string name="quick_settings_reboot_recovery_label">Recovery</string>
@@ -57,6 +61,8 @@
   <string name="quick_settings_expanded_desktop_label">Erweiterter Desktop</string>
   <string name="quick_settings_expanded_desktop">Erweitert</string>
   <string name="quick_settings_expanded_desktop_off">Normal</string>
+  <string name="quick_settings_expanded_navigation_off">Navigationsleiste ausblenden</string>
+  <string name="quick_settings_expanded_statusbar_off">Statusleiste ausblenden</string>
   <!-- vpn icon switch -->
   <string name="status_bar_vpn">VPN</string>
   <!-- data saver icon switch -->
@@ -70,4 +76,8 @@
   <string name="quick_settings_sound_vibrate">Vibrieren</string>
   <string name="quick_settings_sound_dnd">Nicht stören</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">HW Tasten an</string>
+  <string name="accessibility_quick_settings_hwkeys_off">HW Tasten aus</string>
+  <string name="quick_settings_hwkeys_label">HW Tasten</string>
+  <!-- Omni Style default header -->
 </resources>

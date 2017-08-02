@@ -76,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Getar</string>
   <string name="quick_settings_sound_dnd">Jangan ganggu</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Tombol fisik aktif</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Tombol fisik mati</string>
+  <string name="quick_settings_hwkeys_label">Tombol fisik</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Bawaan</string>
 </resources>

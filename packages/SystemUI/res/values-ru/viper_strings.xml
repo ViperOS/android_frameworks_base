@@ -20,6 +20,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
+  <string name="quick_venom_label">Venom</string>
+  <string name="quick_venom_toast">Лол, Вы правда думали, что долгое нажатие к чему-то приведёт?!</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
@@ -32,6 +34,7 @@
   <string name="omnijaws_service_disabled">Служба отключена</string>
   <string name="omnijaws_package_not_available">OmniJaws недоступен</string>
   <!-- statusbar items tuner -->
+  <string name="statusbar_icons_blacklist">Значки в строке состояния</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
   <string name="keyguard_indication_dash_charging_time">Быстрая зарядка (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> до полной)</string>
   <string name="keyguard_plugged_in_dash_charging">Быстрая зарядка</string>
@@ -47,6 +50,7 @@
   <!-- Screenshot QS tile -->
   <string name="quick_settings_screenshot_label">Скриншот</string>
   <!-- Brightness QS Tile -->
+  <string name="quick_settings_brightness">Яркость</string>
   <!-- Reboot/Recovery QS Tile -->
   <string name="quick_settings_reboot_label">Перезагрузка</string>
   <string name="quick_settings_reboot_recovery_label">Режим восстановления</string>
@@ -57,6 +61,8 @@
   <string name="quick_settings_expanded_desktop_label">Расширенный рабочий стол</string>
   <string name="quick_settings_expanded_desktop">Расширенный</string>
   <string name="quick_settings_expanded_desktop_off">Нормальный</string>
+  <string name="quick_settings_expanded_navigation_off">Скрыть панель навигации</string>
+  <string name="quick_settings_expanded_statusbar_off">Скрыть строку состояния</string>
   <!-- vpn icon switch -->
   <string name="status_bar_vpn">VPN</string>
   <!-- data saver icon switch -->
@@ -70,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Вибрация</string>
   <string name="quick_settings_sound_dnd">Не беспокоить</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Аппаратные кнопки включены</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Аппаратные кнопки выключены</string>
+  <string name="quick_settings_hwkeys_label">Аппаратные кнопки</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">По умолчанию</string>
 </resources>

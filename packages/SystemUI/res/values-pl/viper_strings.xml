@@ -21,7 +21,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
   <string name="quick_venom_label">Venom</string>
-  <string name="quick_venom_toast">LOL, ty naprawdę myślałeś że długie kliknięcie przeniesie Cię gdzieś!!!</string>
+  <string name="quick_venom_toast">LOL, ty naprawdę myślałeś, że długie kliknięcie przeniesie Cię gdzieś!!!</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
@@ -34,9 +34,9 @@
   <string name="omnijaws_service_disabled">Usługa wyłączona</string>
   <string name="omnijaws_package_not_available">OmniJaws nie jest dostępny</string>
   <!-- statusbar items tuner -->
-  <string name="statusbar_icons_blacklist">Ikony paska stanu</string>
+  <string name="statusbar_icons_blacklist">Ikony paska statusu</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
-  <string name="keyguard_indication_dash_charging_time">Dash Charging (<xliff:g id="charging_time_left" example="4 hours and 2 minutes">%s</xliff:g> do końca)</string>
+  <string name="keyguard_indication_dash_charging_time">Dash Charging (<xliff:g id="charging_time_left" example="4 godziny i 2 minuty">%s</xliff:g> do końca)</string>
   <string name="keyguard_plugged_in_dash_charging">Dash Charging</string>
   <string name="recents_free_ram">Wolna pamięć RAM: %1$d MB</string>
   <!-- volte icon switch -->
@@ -62,7 +62,7 @@
   <string name="quick_settings_expanded_desktop">Rozszerzony</string>
   <string name="quick_settings_expanded_desktop_off">Normalny</string>
   <string name="quick_settings_expanded_navigation_off">Ukryj pasek nawigacji</string>
-  <string name="quick_settings_expanded_statusbar_off">Ukryj pasek stanu</string>
+  <string name="quick_settings_expanded_statusbar_off">Ukryj pasek statusu</string>
   <!-- vpn icon switch -->
   <string name="status_bar_vpn">VPN</string>
   <!-- data saver icon switch -->
@@ -76,4 +76,9 @@
   <string name="quick_settings_sound_vibrate">Wibracje</string>
   <string name="quick_settings_sound_dnd">Nie przeszkadzać</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">Przyciski fizyczne włączone</string>
+  <string name="accessibility_quick_settings_hwkeys_off">Przyciski fizyczne wyłączone</string>
+  <string name="quick_settings_hwkeys_label">Przyciski fizyczne</string>
+  <!-- Omni Style default header -->
+  <string name="omni_style_default_header">Domyślne</string>
 </resources>
