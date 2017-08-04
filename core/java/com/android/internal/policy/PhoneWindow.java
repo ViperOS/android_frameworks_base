@@ -103,6 +103,8 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import com.android.internal.util.viper.ViperUtils;
+
 /**
  * Android-specific Window.
  * <p>
@@ -2411,7 +2413,7 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
         if (!mForcedNavigationBarColor) {
         boolean isDyanamic = Settings.System.getInt(getContext().getContentResolver(),
             		Settings.System.NAV_BAR_DYNAMIC, 0) == 1;
-            if (!isDyanamic) {
+            if (ViperUtils.isLauncherShown(getContext()) || !isDyanamic) {
             mNavigationBarColor = a.getColor(R.styleable.Window_navigationBarColor, 0xFF000000);
             } else {
             mNavigationBarColor = a.getColor(R.styleable.Window_navigationBarColordyanamic, 0xFF000000);

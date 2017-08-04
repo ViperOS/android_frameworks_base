@@ -107,6 +107,8 @@ import static android.view.WindowManager.LayoutParams.TYPE_BASE_APPLICATION;
 import static android.view.WindowManager.LayoutParams.TYPE_DRAWN_APPLICATION;
 import static com.android.internal.policy.PhoneWindow.FEATURE_OPTIONS_PANEL;
 
+import com.android.internal.util.viper.ViperUtils;
+
 /** @hide */
 public class DecorView extends FrameLayout implements RootViewSurfaceTaker, WindowCallbacks {
     private static final String TAG = "DecorView";
@@ -1291,7 +1293,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
 
                         if (mStatusGuard == null) {
                             mStatusGuard = new View(mContext);
-                            if (!isDyanamic) {
+                            if (ViperUtils.isLauncherShown(mContext) || !isDyanamic) {
                             mStatusGuard.setBackgroundColor(mContext.getColor(
                                     R.color.input_method_navigation_guard));
                             } else {
@@ -1360,7 +1362,7 @@ public class DecorView extends FrameLayout implements RootViewSurfaceTaker, Wind
             // position the navigation guard view, creating it if necessary
             if (mNavigationGuard == null) {
                 mNavigationGuard = new View(mContext);
-                if (!isDyanamic) {
+                if (ViperUtils.isLauncherShown(mContext) || !isDyanamic) {
                             mNavigationGuard.setBackgroundColor(mContext.getColor(
                                     R.color.input_method_navigation_guard));
                             } else {
