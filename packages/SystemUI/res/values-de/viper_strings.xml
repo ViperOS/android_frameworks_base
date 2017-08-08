@@ -34,7 +34,7 @@
   <string name="omnijaws_service_disabled">Dienst deaktiviert</string>
   <string name="omnijaws_package_not_available">OmniJaws nicht verfügbar</string>
   <!-- statusbar items tuner -->
-  <string name="statusbar_icons_blacklist">Statusleisten-Symbole</string>
+  <string name="statusbar_icons_blacklist">Statusleisten Symbole</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
   <string name="keyguard_indication_dash_charging_time">Wird schnell aufgeladen (voll in <xliff:g id="verbleibende_Aufladezeit" beispiel="4 Stunden und 2 Minuten">%s</xliff:g>)</string>
   <string name="keyguard_plugged_in_dash_charging">Dash Charging</string>

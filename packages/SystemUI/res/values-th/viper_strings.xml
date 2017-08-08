@@ -21,6 +21,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
   <string name="quick_venom_label">Venom</string>
+  <string name="quick_venom_toast">ฮ่าๆๆ คุณคิดจริงๆหรอว่าการกดค้างจะทำให้คุณไปที่ไหนสักที่</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
@@ -54,6 +55,8 @@
   <string name="quick_settings_reboot_label">เริ่มระบบใหม่</string>
   <string name="quick_settings_reboot_recovery_label">กู้คืน</string>
   <!-- Heads up snooze toast -->
+  <string name="heads_up_snooze_message_one_minute">ซ่อนการแจ้งเตือนหลังจาก <xliff:g id="string">%s</xliff:g> การแอบงีบ1นาที</string>
+  <string name="heads_up_snooze_message">ซ่อนการแจ้งเตือนหลังจาก <xliff:g id="string">%s</xliff:g> การแอบงีบ <xliff:g id="number">%d</xliff:g> นาที</string>
   <!-- Expanded desktop tile -->
   <string name="quick_settings_expanded_desktop_label">เต็มจอ</string>
   <string name="quick_settings_expanded_desktop">ขยายเต็มจอ</string>
@@ -73,5 +76,9 @@
   <string name="quick_settings_sound_vibrate">สั่น</string>
   <string name="quick_settings_sound_dnd">ห้าม​รบกวน</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">เปิด ปุ่ม HW</string>
+  <string name="accessibility_quick_settings_hwkeys_off">ปิด ปุ่ม HW</string>
+  <string name="quick_settings_hwkeys_label">ปุ่ม HW</string>
   <!-- Omni Style default header -->
+  <string name="omni_style_default_header">ค่าเริ่มต้น</string>
 </resources>

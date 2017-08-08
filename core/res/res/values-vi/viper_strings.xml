@@ -20,4 +20,7 @@
   <string name="permlab_fakePackageSignature">Giả mạo chữ ký trọn gói</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_fakePackageSignature">Cho phép các ứng dụng để giả vờ là một ứng dụng khác nhau Malicious ứng dụng có thể sử dụng để truy cập vào dữ liệu ứng dụng riêng. Cấp phép này cẩn thận chỉ!</string>
+  <!-- Pocket Lock -->
+  <!-- Defines the sysfs attribute path used by pocket bridge
+        to communicate pocket state to the pocket judge kernel driver. -->
 </resources>

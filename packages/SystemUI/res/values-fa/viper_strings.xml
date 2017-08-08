@@ -20,23 +20,65 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Venom Tile -->
+  <string name="quick_venom_label">Venom</string>
+  <string name="quick_venom_toast">خنده داره، شما واقعا فکر کردید که کلیک طولانی شما را جایی می برد!!!</string>
   <!-- Path data for big circle battery -->
   <!-- Path data for Solid battery -->
   <!-- OmniJaws -->
+  <string name="omnijaws_service_error">خطا</string>
+  <string name="omnijaws_service_unkown">بدون اطلاعات آب و هوا</string>
+  <string name="omnijaws_detail_header">آب و هوا</string>
+  <string name="omnijaws_label_default">آب و هوا</string>
+  <string name="omnijaws_current_text">اکنون</string>
+  <string name="omnijaws_service_error_long">خطا در بارگیری اطلاعات آب و هوا</string>
+  <string name="omnijaws_service_disabled">سرویس غیرفعال شده است</string>
+  <string name="omnijaws_package_not_available">OmniJaws در دسترس نیست</string>
   <!-- statusbar items tuner -->
+  <string name="statusbar_icons_blacklist">آیکون نوار وضعیت</string>
   <!-- Indication on the keyguard that is shown when the device is charging with a dash charger. Should match keyguard_plugged_in_dash_charging [CHAR LIMIT=40]-->
+  <string name="keyguard_indication_dash_charging_time">در حال شارژ dash (<xliff:g id="charging_time_left" مثال="۴ ساعت و ۲ دقیقه">%s</xliff:g> تا کامل)</string>
+  <string name="keyguard_plugged_in_dash_charging">در حال شارژ dash</string>
+  <string name="recents_free_ram">رم آزاد: %1$d MB</string>
   <!-- volte icon switch -->
+  <string name="status_bar_volte">VoLTE</string>
   <!-- Screenshot Delete Toast -->
+  <string name="delete_screenshot_toast">تصویر صفحه حذف شد</string>
   <!-- Music QS Tile -->
+  <string name="quick_settings_music_label">موسیقی</string>
+  <string name="quick_settings_music_play">پخش</string>
+  <string name="quick_settings_music_pause">مکث</string>
   <!-- Screenshot QS tile -->
+  <string name="quick_settings_screenshot_label">تصویر صفحه</string>
   <!-- Brightness QS Tile -->
+  <string name="quick_settings_brightness">روشنایی</string>
   <!-- Reboot/Recovery QS Tile -->
+  <string name="quick_settings_reboot_label">راه اندازی مجدد</string>
+  <string name="quick_settings_reboot_recovery_label">ریکاوری</string>
   <!-- Heads up snooze toast -->
+  <string name="heads_up_snooze_message_one_minute">اطلاعیه کوچک از <xliff:g id="string">%s</xliff:g> برای ۱ دقیقه به تعویق می افتد.</string>
+  <string name="heads_up_snooze_message">اطلاعیه کوچک از <xliff:g id="string">%s</xliff:g> به تعویق می افتد برای <xliff:g id="number">%d</xliff:g> دقیقه.</string>
   <!-- Expanded desktop tile -->
+  <string name="quick_settings_expanded_desktop_label">گسترش میز‌کار</string>
+  <string name="quick_settings_expanded_desktop">گسترش یافته</string>
+  <string name="quick_settings_expanded_desktop_off">معمولی</string>
+  <string name="quick_settings_expanded_navigation_off">پنهان کردن نوار ناوبری</string>
+  <string name="quick_settings_expanded_statusbar_off">پنهان کردن نوار وضعیت</string>
   <!-- vpn icon switch -->
+  <string name="status_bar_vpn">VPN</string>
   <!-- data saver icon switch -->
+  <string name="status_bar_datasaver">صرفه جویی در داده ها</string>
   <!-- Language\Locale Tile -->
+  <string name="quick_settings_locale_label">زبان</string>
+  <string name="quick_settings_locale_more_locales_toast">لطفا چندین زبان را برای فعال کردن قابلیت تغییر وضعیت پیکربندی کنید</string>
   <!-- Sound Tile -->
+  <string name="quick_settings_sound_label">صدا</string>
+  <string name="quick_settings_sound_ring">زنگ</string>
+  <string name="quick_settings_sound_vibrate">لرزش</string>
+  <string name="quick_settings_sound_dnd">مزاحم نشوید</string>
   <!-- HW Keys Tile -->
+  <string name="accessibility_quick_settings_hwkeys_on">روشن کردن کلید‌های سخت افزاری</string>
+  <string name="accessibility_quick_settings_hwkeys_off">خاموش کردن کلید‌های سخت افزاری</string>
+  <string name="quick_settings_hwkeys_label">کلید‌های سخت افزاری</string>
   <!-- Omni Style default header -->
+  <string name="omni_style_default_header">پیش فرض</string>
 </resources>

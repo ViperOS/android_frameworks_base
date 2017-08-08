@@ -17,5 +17,10 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permlab_fakePackageSignature">امضای بسته جعلی است</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permdesc_fakePackageSignature">به برنامه اجازه می دهد تا تظاهر به یک برنامه دیگر کند. برنامه های مضر ممکن است از این برای دسترسی به داده های برنامه های خصوصی استفاده کنند. این اجازه را تنها با احتیاط اعطا کنید!</string>
+  <!-- Pocket Lock -->
+  <!-- Defines the sysfs attribute path used by pocket bridge
+        to communicate pocket state to the pocket judge kernel driver. -->
 </resources>
