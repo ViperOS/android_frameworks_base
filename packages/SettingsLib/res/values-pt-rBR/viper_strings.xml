@@ -19,5 +19,5 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Text when wrong password entered for psk networks -->
-  <string name="wifi_auth_password_wrong">Falha na autenticação</string>
+  <string name="wifi_auth_password_wrong">Falha ao conectar</string>
 </resources>
