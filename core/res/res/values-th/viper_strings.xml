@@ -20,7 +20,4 @@
   <string name="permlab_fakePackageSignature">ได้ตรวจพบลายเซ็นปลอมในแพคเกจ</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_fakePackageSignature">อนุญาติให้แอปแกล้งทำเป็นแอพอื่นที่แตกต่างจากของเดิม แอปพลิเคชันที่เป็นอันตรายอาจสามารถใช้ข้อมูลนี้เพื่อเข้าถึงข้อมูลแอปพลิเคชันส่วนตัว ให้สิทธินี้ด้วยความระมัดระวัง</string>
-  <!-- Pocket Lock -->
-  <!-- Defines the sysfs attribute path used by pocket bridge
-        to communicate pocket state to the pocket judge kernel driver. -->
 </resources>

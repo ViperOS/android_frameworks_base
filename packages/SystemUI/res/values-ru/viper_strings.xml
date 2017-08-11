@@ -81,4 +81,6 @@
   <string name="quick_settings_hwkeys_label">Аппаратные кнопки</string>
   <!-- Omni Style default header -->
   <string name="omni_style_default_header">По умолчанию</string>
+  <string name="accessibility_data_sim">Текущая SIM-карта</string>
+  <string name="data_switch_started">Смена SIM-карты… Подождите минуту.</string>
 </resources>

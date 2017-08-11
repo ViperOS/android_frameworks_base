@@ -81,4 +81,6 @@
   <string name="quick_settings_hwkeys_label">Tasti fisici</string>
   <!-- Omni Style default header -->
   <string name="omni_style_default_header">Predefinito</string>
+  <string name="accessibility_data_sim">Dati correnti Sim</string>
+  <string name="data_switch_started">Passaggio dati SIM, questo può richiedere fino a un minuto...</string>
 </resources>

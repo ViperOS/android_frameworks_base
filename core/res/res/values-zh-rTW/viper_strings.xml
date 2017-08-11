@@ -20,7 +20,4 @@
   <string name="permlab_fakePackageSignature">模擬套件簽名</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_fakePackageSignature">讓此應用程式假裝成別的應用程式。惡意應用程式將可能竊取您的私人資訊，請小心的給予權限。</string>
-  <!-- Pocket Lock -->
-  <!-- Defines the sysfs attribute path used by pocket bridge
-        to communicate pocket state to the pocket judge kernel driver. -->
 </resources>

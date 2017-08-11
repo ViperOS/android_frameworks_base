@@ -81,4 +81,6 @@
   <string name="quick_settings_hwkeys_label">Teclas de Hardware</string>
   <!-- Omni Style default header -->
   <string name="omni_style_default_header">Por defecto</string>
+  <string name="accessibility_data_sim">SIM de datos actual</string>
+  <string name="data_switch_started">Cambiando SIM de datos, esto puede llevar un minuto...</string>
 </resources>

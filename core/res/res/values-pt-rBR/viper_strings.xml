@@ -20,8 +20,4 @@
   <string name="permlab_fakePackageSignature">Falsificação de assinatura</string>
   <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_fakePackageSignature">Permite que o aplicativo pretenda ser um aplicativo diferente. Os aplicativos maliciosos podem ser capazes de usar isso para acessar dados de aplicativos particulares. Conceda esta permissão apenas com cautela!</string>
-  <!-- Pocket Lock -->
-  <string name="pocket_lock_message_long_press">Pressione e segure o botão power para interagir</string>
-  <!-- Defines the sysfs attribute path used by pocket bridge
-        to communicate pocket state to the pocket judge kernel driver. -->
 </resources>
