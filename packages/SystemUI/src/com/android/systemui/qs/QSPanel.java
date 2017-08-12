@@ -120,12 +120,12 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
     //mBrightnessView.setPadding(0, top, 0, bottom);
         if(mIsBrightnessOnFooter){
             setupTileLayout();
-            addView(mFooter.getView());
             mBrightnessView.setPadding(mBrightnessView.getPaddingLeft(), 
                                         mBrightnessView.getPaddingTop(), 
                                         mBrightnessView.getPaddingRight(), 
                                         mContext.getResources().getDimensionPixelSize(R.dimen.qs_brightness_footer_padding));
             addView(mBrightnessView);
+            addView(mFooter.getView());
         }else{
             addView(mBrightnessView);
             setupTileLayout();
