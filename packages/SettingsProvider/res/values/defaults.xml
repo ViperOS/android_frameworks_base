@@ -219,4 +219,6 @@
     <bool name="def_vibrate_when_ringing">false</bool>
 
     <integer name="def_ota_disable_automatic_update">1</integer>
+
+    <integer name="def_enable_dev_settings">1</integer>
 </resources>
