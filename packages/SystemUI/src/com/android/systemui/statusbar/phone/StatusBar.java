@@ -6046,8 +6046,11 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             if (forcedVisibility && mNavigationBarView == null) {
                 createNavigationBar();
             } else if (mNavigationBarView != null) {
+                FragmentHostManager fm = FragmentHostManager.get(mNavigationBarView);
                 mWindowManager.removeViewImmediate(mNavigationBarView);
                 mNavigationBarView = null;
+                fm.getFragmentManager().beginTransaction().remove(mNavigationBar).commit();
+                mNavigationBar = null;
             }
         }
     }
