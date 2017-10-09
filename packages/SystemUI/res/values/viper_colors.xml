@@ -50,4 +50,7 @@
     <color name="qs_tiles_label_color">@*android:color/text_color_primary</color>
     <color name="qs_tiles_underline_color">@*android:color/foreground_material_light</color>
 
+    <!-- Theming accent color membar recent app -->
+    <color name="accent_membar_color">@*android:color/accent_device_default_light</color>
+
 </resources>
