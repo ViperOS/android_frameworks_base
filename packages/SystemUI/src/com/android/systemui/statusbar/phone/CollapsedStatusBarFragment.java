@@ -81,6 +81,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private ImageView mVPLogoRight;
     private int mShowLogo;
 
+    // Statusbar Weather Image
+    private View mWeatherImageView;
+    private View mWeatherTextView;
+    private int mShowWeather;
+
     // Ticker
     private int mTickerEnabled;
     private TickerObserver mTickerObserver;
@@ -144,6 +149,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             getContext().getContentResolver().registerContentObserver(
                     Settings.System.getUriFor(Settings.System.STATUS_BAR_SHOW_TICKER), false, this,
                     UserHandle.USER_ALL);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -179,6 +187,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mVPLogoRight = (ImageView) mStatusBar.findViewById(R.id.status_bar_logo_right);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mVPLogo);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mVPLogoRight);
+        mWeatherTextView = mStatusBar.findViewById(R.id.weather_temp);
+        mWeatherImageView = mStatusBar.findViewById(R.id.weather_image);
         updateSettings(false);
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
@@ -398,7 +408,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mShowLogo = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_LOGO, 0,
                 UserHandle.USER_CURRENT);
-
+        mShowWeather = Settings.System.getIntForUser(
+                getContext().getContentResolver(), Settings.System.STATUS_BAR_SHOW_WEATHER_TEMP, 0,
+                UserHandle.USER_CURRENT);
        } catch (Exception e) {
        }
         setCarrierLabel(animate);
