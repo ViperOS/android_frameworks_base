@@ -35,7 +35,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
     private final PhoneStatusBarView mView;
     private final float mIconAlphaWhenOpaque;
 
-    private View mLeftSide, mStatusIcons, mSignalCluster, mBattery, mNetworkTraffic, mBatteryContainer, mLogoIcon, mLogoIconRight;
+    private View mLeftSide, mStatusIcons, mSignalCluster, mBattery, mNetworkTraffic, mBatteryContainer, mLogoIcon, mLogoIconRight, mWeatherTextView, mWeatherImageView;
     private View mClock, mClockCenter, mClockLeft;
     private Animator mCurrentAnimation;
 
@@ -58,6 +58,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         mBatteryContainer = mView.findViewById(R.id.battery_container);
         mLogoIcon = mView.findViewById(R.id.status_bar_logo);
         mLogoIconRight = mView.findViewById(R.id.status_bar_logo_right);
+        mWeatherTextView = mView.findViewById(R.id.weather_temp);
+        mWeatherImageView = mView.findViewById(R.id.weather_image);
         applyModeBackground(-1, getMode(), false /*animate*/);
         applyMode(getMode(), false /*animate*/);
     }
@@ -102,6 +104,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             animCollection.add(animateTransitionTo(mSignalCluster, newAlpha));
             animCollection.add(animateTransitionTo(mLogoIcon, newAlpha));
             animCollection.add(animateTransitionTo(mLogoIconRight, newAlpha));
+            animCollection.add(animateTransitionTo(mWeatherTextView, newAlphaBC));
+            animCollection.add(animateTransitionTo(mWeatherImageView, newAlphaBC));
             if (mBattery != null) {
                 animCollection.add(animateTransitionTo(mBattery, newAlphaBC));
             }
@@ -123,6 +127,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mSignalCluster.setAlpha(newAlpha);
             mLogoIcon.setAlpha(newAlpha);
             mLogoIconRight.setAlpha(newAlpha);
+            mWeatherTextView.setAlpha(newAlphaBC);
+            mWeatherImageView.setAlpha(newAlphaBC);
             if (mBattery != null) {
                 mBattery.setAlpha(newAlphaBC);
             }
