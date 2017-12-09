@@ -397,7 +397,7 @@ public final class ShutdownThread extends Thread {
         try {
             StatusBarManagerInternal service = LocalServices.getService(
                     StatusBarManagerInternal.class);
-            if (service.showShutdownUi(mReboot, mReason)) {
+            if (service.showShutdownUi(mReboot, mReason, mRebootCustom)) {
                 // Sysui will handle shutdown UI.
                 Log.d(TAG, "SysUI handling shutdown UI");
                 return true;
