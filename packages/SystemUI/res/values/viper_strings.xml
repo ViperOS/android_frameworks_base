@@ -83,4 +83,7 @@
     <!-- Ambient Display Pixel-Like string -->
     <string name="ambientmusic_songinfo">%s by %s</string>
 
+    <!-- Icon VPN -->
+    <string name="status_bar_vpn">VPN</string>
+
 </resources>
