@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageView;
+import android.widget.ImageSwitcher;
 import android.widget.LinearLayout;
 
 import com.android.systemui.Dependency;
@@ -41,6 +42,8 @@ import com.android.systemui.SysUiServiceProvider;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.SignalClusterView;
 import com.android.systemui.statusbar.phone.StatusBarIconController.DarkIconManager;
+import com.android.systemui.statusbar.policy.Clock;
+import com.android.systemui.statusbar.phone.TickerView;
 import com.android.systemui.statusbar.policy.DarkIconDispatcher;
 import com.android.systemui.statusbar.policy.EncryptionHelper;
 import com.android.systemui.statusbar.policy.KeyguardMonitor;
@@ -76,6 +79,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private ImageView mVPLogoRight;
     private int mShowLogo;
 
+    // Ticker
+    private int mTickerEnabled;
+    private TickerObserver mTickerObserver;
+    private ContentResolver mContentResolver;
+    private View mTickerViewFromStub;
+
     private final Handler mHandler = new Handler();
 
     private class ViperSettingsObserver extends ContentObserver {
@@ -109,10 +118,39 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContentResolver = getContext().getContentResolver();
         mKeyguardMonitor = Dependency.get(KeyguardMonitor.class);
         mNetworkController = Dependency.get(NetworkController.class);
         mStatusBarComponent = SysUiServiceProvider.getComponent(getContext(), StatusBar.class);
         mViperSettingsObserver.observe();
+        mTickerObserver = new TickerObserver(new Handler());
+    }
+
+    class TickerObserver extends ContentObserver {
+
+        TickerObserver(Handler handler) {
+            super(handler);
+        }
+
+        protected void unobserve() {
+            super.unobserve();
+            getContext().getContentResolver().unregisterContentObserver(this);
+        }
+
+        protected void observe() {
+            super.observe();
+            getContext().getContentResolver().registerContentObserver(
+                    Settings.System.getUriFor(Settings.System.STATUS_BAR_SHOW_TICKER), false, this,
+                    UserHandle.USER_ALL);
+        }
+
+        @Override
+        protected void update() {
+            mTickerEnabled = Settings.System.getIntForUser(mContentResolver,
+                    Settings.System.STATUS_BAR_SHOW_TICKER, 0,
+                    UserHandle.USER_CURRENT);
+            initTickerView();
+        }
     }
 
     @Override
@@ -143,6 +181,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
+        mTickerObserver.observe();
+        mTickerObserver.update();
     }
 
     @Override
@@ -173,6 +213,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mNetworkController.hasEmergencyCryptKeeperText()) {
             mNetworkController.removeCallback(mSignalCallback);
         }
+        mTickerObserver.unobserve();
     }
 
     public void initNotificationIconArea(NotificationIconAreaController
@@ -384,6 +425,21 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             animateShow(mCustomCarrierLabel, animate);
         } else {
             animateHide(mCustomCarrierLabel, animate, false);
+        }
+    }
+
+    private void initTickerView() {
+        if (mTickerEnabled != 0) {
+            View tickerStub = mStatusBar.findViewById(R.id.ticker_stub);
+            if (mTickerViewFromStub == null && tickerStub != null) {
+                mTickerViewFromStub = ((ViewStub) tickerStub).inflate();
+            }
+            TickerView tickerView = (TickerView) mStatusBar.findViewById(R.id.tickerText);
+            ImageSwitcher tickerIcon = (ImageSwitcher) mStatusBar.findViewById(R.id.tickerIcon);
+            mStatusBarComponent.createTicker(
+                    mTickerEnabled, getContext(), mStatusBar, tickerView, tickerIcon, mTickerViewFromStub);
+        } else {
+            mStatusBarComponent.disableTicker();
         }
     }
 }
