@@ -69,4 +69,7 @@
   <java-symbol type="drawable" name="weather_thunderstorms" />
   <java-symbol type="drawable" name="weather_windy" />
 
+  <!-- Whether auto face unlock is enabled by default -->
+  <java-symbol type="bool" name="config_autoFaceUnlockEnabledByDefault" />
+
 </resources>
