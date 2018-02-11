@@ -4219,6 +4219,9 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateNotificationShade();
         clearCurrentMediaNotification();
         setLockscreenUser(newUserId);
+        if (mStatusBarView != null) {
+            mStatusBarView.getBatteryViewManager().update();
+        }
     }
 
     protected void setLockscreenUser(int newUserId) {

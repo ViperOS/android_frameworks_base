@@ -14,9 +14,15 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
 	<!-- QS Brightness control padding -->
     <dimen name="qs_brightness_footer_padding">12dp</dimen>
     <dimen name="qs_footer_padding_top">0dp</dimen>
     <dimen name="qs_page_indicator_margin_bottom">12dp</dimen>
     <dimen name="qs_paged_tile_layout_padding_bottom">4dp</dimen>
+
+	<!-- Battery Styles -->
+    <dimen name="omni_battery_level_text_size_small">12sp</dimen>
+    <dimen name="omni_battery_level_text_size">14sp</dimen>
+
 </resources>

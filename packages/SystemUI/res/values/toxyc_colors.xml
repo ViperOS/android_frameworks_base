@@ -30,4 +30,7 @@
     <color name="icon_color_home_dark">#99000000</color>
     <color name="icon_color_overview_dark">#99000000</color>
 
+	<!-- Battery Styles -->
+    <color name="omni_logo_color">@android:color/white</color>
+
 </resources>
