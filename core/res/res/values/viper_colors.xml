@@ -26,4 +26,7 @@
     <color name="about_civ_border_color">#40FFFFFF</color>
     <color name="venom_icon">@android:color/white</color>
 
+    <!-- Resolver -->
+    <color name="resolver_list_bg">@android:color/white</color>
+
 </resources>
