@@ -31,4 +31,8 @@
     <string name="global_action_dnaa">Não mostrar novamente</string>
     <string name="global_action_settings">Configurações</string>
 
+    <!-- Indication on the keyguard that is shown when the device is charging with a turbo power charger. Should match keyguard_plugged_in_turbo_power_charging [CHAR LIMIT=40]-->
+    <string name="keyguard_indication_turbo_power_time">Carregamento turbo (<xliff:g id="charging_time_left">%s</xliff:g> para completar)</string>
+    <string name="keyguard_plugged_in_turbo_power_charging">Carregamento turbo</string>
+
 </resources>
