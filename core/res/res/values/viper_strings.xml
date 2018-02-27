@@ -14,15 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-  <!-- PlatLogo -->
-  <java-symbol type="drawable" name="platlogo_viper" />
-
-  <!-- Forcefully tint notification icon text -->
-  <java-symbol type="bool" name="config_useDarkBgNotificationIconTextTinting" />
-
-  <!-- System fonts -->
-  <java-symbol type="array" name="config_fontPackages" />
+    <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_accessFontManager">access font manager</string>
+    <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_accessFontManager">Allows an application to access the font manager.</string>
 
 </resources>
