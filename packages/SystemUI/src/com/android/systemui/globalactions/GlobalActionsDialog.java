@@ -594,7 +594,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener, DialogIn
         }
 
         private void doShowAlert() {
-            AlertDialog.Builder b = new  AlertDialog.Builder(mContext, ActionsDialog.getDialogTheme(mContext));
+            AlertDialog.Builder b = new  AlertDialog.Builder(mContext);
             View content = LayoutInflater.from(mContext).inflate(
                     com.android.systemui.R.layout.global_action_dismissable_dialog, null);
             final CheckBox dontShowAgain = (CheckBox) content.findViewById(com.android.systemui.R.id.global_action_skip);
