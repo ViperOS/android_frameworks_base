@@ -72,4 +72,9 @@
   <!-- Whether auto face unlock is enabled by default -->
   <java-symbol type="bool" name="config_autoFaceUnlockEnabledByDefault" />
 
+  <!-- Forcefully tint notification icon text -->
+  <java-symbol type="bool" name="config_useDarkBgNotificationIconTextTinting" />
+  <java-symbol type="bool" name="config_useDarkBgNotificationTinting_override" />
+  <java-symbol type="bool" name="config_notificationTinting_override" />
+
 </resources>
