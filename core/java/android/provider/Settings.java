@@ -4026,6 +4026,13 @@ public final class Settings {
                 "statusbar_battery_force_percent";
 
         /**
+         *
+         * @hide
+         */
+        public static final String STATUSBAR_BATTERY_LOW_COLOR_ENABLE =
+                "statusbar_battery_low_color_enable";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4198,6 +4205,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_CHARGING_COLOR);
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_CHARGING_COLOR_ENABLE);
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_DOTTED_LINE);
+            PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_LOW_COLOR_ENABLE);
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_FORCE_PERCENT);
         }
 
