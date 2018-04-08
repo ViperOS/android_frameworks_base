@@ -104,6 +104,7 @@ public class Clock extends TextView implements DemoMode, Tunable, CommandQueue.C
         } finally {
             a.recycle();
         }
+        setIncludeFontPadding(false);
     }
 
     @Override
