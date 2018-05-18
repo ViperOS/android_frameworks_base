@@ -3965,12 +3965,24 @@ public final class Settings {
           */
          public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
-                /**
+        /**
+         * Select which lockscreen date style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_DATE_SELECTION = "lockscreen_date_selection";
+         /**
+         * Select which lockscreen clock style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_CLOCK_SELECTION = "lockscreen_clock_selection";
+
+         /**
          * Int value of the battery style 0 is default
          *
          * @hide
          */
         public static final String STATUSBAR_BATTERY_STYLE = "statusbar_battery_style";
+
 
         /**
          * int value if the battery percent should be shown never/always/expanded
