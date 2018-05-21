@@ -60,6 +60,8 @@ public class KeyguardClockPositionAlgorithm {
     private int mBurnInPreventionOffsetX;
     private int mBurnInPreventionOffsetY;
 
+    //private boolean mIsBigClock;
+
     /**
      * The number (fractional) of notifications the "more" card counts when calculating how many
      * notifications are currently visible for the y positioning of the clock.
@@ -169,11 +171,15 @@ public class KeyguardClockPositionAlgorithm {
     private int getClockY() {
         // Dark: Align the bottom edge of the clock at one third:
         // clockBottomEdge = result - mKeyguardStatusHeight / 2 + mClockBottom
-        float clockYDark = (0.33f * mHeight + (float) mKeyguardStatusHeight / 2 - mClockBottom)
+        float clockYDark = (/*(mIsBigClock ? 0.35f : */0.33f/*)*/ * mHeight + (float) mKeyguardStatusHeight / 2 - mClockBottom)
                 + burnInPreventionOffsetY();
         float clockYRegular = getClockYFraction() * mHeight;
         return (int) interpolate(clockYRegular, clockYDark, mDarkAmount);
     }
+
+    /*public void setClockSelection(int style) {
+        mIsBigClock = style == 2;
+    }*/
 
     private float burnInPreventionOffsetY() {
         return zigzag(System.currentTimeMillis() / MILLIS_PER_MINUTES,
