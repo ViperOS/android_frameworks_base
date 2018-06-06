@@ -74,6 +74,25 @@
             android:tint="?android:attr/colorForeground"/>
 
         <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
+            android:id="@+id/venom_settings_button_container"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <com.android.keyguard.AlphaOptimizedImageButton
+                android:id="@+id/venom_settings_button"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ripple_drawable"
+                android:contentDescription="@string/accessibility_quick_settings_settings"
+                android:src="@drawable/ic_venom_settings_16dp"
+                android:tint="?android:attr/colorForeground"/>
+
+        </com.android.systemui.statusbar.AlphaOptimizedFrameLayout>
+
+        <com.android.systemui.statusbar.AlphaOptimizedFrameLayout
             android:id="@+id/settings_button_container"
             android:layout_width="48dp"
             android:layout_height="48dp"

@@ -22,6 +22,7 @@ import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -75,7 +76,9 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     private ActivityStarter mActivityStarter;
     private NextAlarmController mNextAlarmController;
     private UserInfoController mUserInfoController;
+    private ImageView mVENSettingsButton;
     private SettingsButton mSettingsButton;
+    protected View mVENSettingsContainer;
     protected View mSettingsContainer;
 
     private TextView mAlarmStatus;
@@ -123,8 +126,11 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         mDate = findViewById(R.id.date);
 
         mExpandIndicator = findViewById(R.id.expand_indicator);
+        mVENSettingsButton = findViewById(R.id.venom_settings_button);
         mSettingsButton = findViewById(R.id.settings_button);
+        mVENSettingsContainer = findViewById(R.id.venom_settings_button_container);
         mSettingsContainer = findViewById(R.id.settings_button_container);
+        mVENSettingsButton.setOnClickListener(this);
         mSettingsButton.setOnClickListener(this);
 
         mAlarmStatusCollapsed = findViewById(R.id.alarm_status_collapsed);
@@ -136,6 +142,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
+        ((RippleDrawable) mVENSettingsButton.getBackground()).setForceSoftware(true);
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
         ((RippleDrawable) mExpandIndicator.getBackground()).setForceSoftware(true);
 
@@ -156,7 +163,9 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
         int defSpace = mContext.getResources().getDimensionPixelOffset(R.dimen.default_gear_space);
 
         mAnimator = new Builder()
+                .addFloat(mVENSettingsContainer, "translationX", -(remaining - defSpace), 0)
                 .addFloat(mSettingsContainer, "translationX", -(remaining - defSpace), 0)
+                .addFloat(mVENSettingsButton, "rotation", -360, 0)
                 .addFloat(mSettingsButton, "rotation", -120, 0)
                 .build();
         if (mAlarmShowing) {
@@ -344,7 +353,14 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     @Override
     public void onClick(View v) {
-        if (v == mSettingsButton) {
+        if (v == mVENSettingsButton) {
+            if (!Dependency.get(DeviceProvisionedController.class).isCurrentUserSetup()) {
+                // If user isn't setup just unlock the device and dump them back at SUW.
+                mActivityStarter.postQSRunnableDismissingKeyguard(() -> { });
+                return;
+            }
+            startVENSettingsActivity();
+        } else if (v == mSettingsButton) {
             if (!Dependency.get(DeviceProvisionedController.class).isCurrentUserSetup()) {
                 // If user isn't setup just unlock the device and dump them back at SUW.
                 mActivityStarter.postQSRunnableDismissingKeyguard(() -> { });
@@ -382,6 +398,12 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                         AlarmClock.ACTION_SHOW_ALARMS), 0);
             }
         }
+    }
+
+    private void startVENSettingsActivity() {
+        Intent localIntent = new Intent();
+        localIntent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$VenomActivity"));
+        mActivityStarter.startActivity(localIntent, true);
     }
 
     private void startSettingsActivity() {
