@@ -758,8 +758,8 @@
 
     <!-- The radius of the rounded corners on a task view and its shadow (which can be larger
          to create a softer corner effect. -->
-    <dimen name="recents_task_view_rounded_corners_radius">2dp</dimen>
-    <dimen name="recents_task_view_shadow_rounded_corners_radius">6dp</dimen>
+    <dimen name="recents_task_view_rounded_corners_radius">12dp</dimen>
+    <dimen name="recents_task_view_shadow_rounded_corners_radius">12dp</dimen>
 
     <!-- The amount of highlight to make on each task view. -->
     <dimen name="recents_task_view_highlight">1dp</dimen>
@@ -846,8 +846,8 @@
     <dimen name="bottom_padding">48dp</dimen>
     <dimen name="edge_margin">16dp</dimen>
 
-    <dimen name="rounded_corner_radius">0dp</dimen>
-    <dimen name="rounded_corner_content_padding">0dp</dimen>
+    <dimen name="rounded_corner_radius">12dp</dimen>
+    <dimen name="rounded_corner_content_padding">1.0dp</dimen>
     <dimen name="nav_content_padding">0dp</dimen>
 
     <!-- Intended corner radius when drawing the mobile signal -->
