@@ -263,9 +263,9 @@ public class KeyguardStatusView extends GridLayout {
         return mBatteryContainer.getBottom();
     }
 
-    /*public int getClockSelection() {
+    public int getClockSelection() {
         return mClockSelection;
-    }*/
+    }
 
     public float getClockTextSize() {
         return mClockView.getTextSize();
