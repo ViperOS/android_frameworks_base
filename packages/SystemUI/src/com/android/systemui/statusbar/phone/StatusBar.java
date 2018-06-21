@@ -4087,18 +4087,22 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     protected void updateTheme() {
         final boolean inflated = mStackScroller != null && mStatusBarWindowManager != null;
 
+        final Configuration config = mContext.getResources().getConfiguration();
         // The system wallpaper defines if QS should be light or dark.
+        WallpaperColors systemColors = mColorExtractor
+                .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
         int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.SYSTEM_THEME, 0, mLockscreenUserManager.getCurrentUserId());
         boolean useDarkTheme = false;
         boolean useBlackTheme = false;
         boolean useBlueNightTheme = false;
+        final boolean wallpaperWantsDarkTheme = systemColors != null && (
+                systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
+        final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
+                && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
+
         if (userThemeSetting == 0) {
-            // The system wallpaper defines if QS should be light or dark.
-            WallpaperColors systemColors = mColorExtractor
-                    .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
-            useDarkTheme = systemColors != null
-                    && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
+            useDarkTheme = wallpaperWantsDarkTheme || nightModeWantsDarkTheme;
         } else {
             useDarkTheme = userThemeSetting == 2;
             useBlackTheme = userThemeSetting == 3;
