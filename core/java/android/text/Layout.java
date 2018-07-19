@@ -1242,6 +1242,47 @@ public abstract class Layout {
     }
 
     /**
+     * Responds to #getHorizontal queries, by selecting the better strategy between:
+     * - calling #getHorizontal explicitly for each query
+     * - precomputing all #getHorizontal measurements, and responding to any query in constant time
+     * The first strategy is used for LTR-only text, while the second is used for all other cases.
+     * The class is currently only used in #getOffsetForHorizontal, so reuse with care in other
+     * contexts.
+     */
+    private class HorizontalMeasurementProvider {
+        private final int mLine;
+        private final boolean mPrimary;
+
+        private float[] mHorizontals;
+        private int mLineStartOffset;
+
+        HorizontalMeasurementProvider(final int line, final boolean primary) {
+            mLine = line;
+            mPrimary = primary;
+            init();
+        }
+
+        private void init() {
+            final Directions dirs = getLineDirections(mLine);
+            if (dirs == DIRS_ALL_LEFT_TO_RIGHT) {
+                return;
+            }
+
+            mHorizontals = getLineHorizontals(mLine, false, mPrimary);
+            mLineStartOffset = getLineStart(mLine);
+        }
+
+        float get(final int offset) {
+            if (mHorizontals == null || offset < mLineStartOffset
+                    || offset >= mLineStartOffset + mHorizontals.length) {
+                return getHorizontal(offset, mPrimary);
+            } else {
+                return mHorizontals[offset - mLineStartOffset];
+            }
+        }
+    }
+
+    /**
      * Return the text offset after the last character on the specified line.
      */
     public final int getLineEnd(int line) {
