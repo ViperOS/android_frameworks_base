@@ -26,4 +26,7 @@
     <!-- The min animation duration for animating the fab out. -->
     <integer name="recents_animate_fab_exit_duration">125</integer>
 
+    <!-- Config to enable/diaable qs tile tinting -->
+    <bool name="config_enable_qs_tile_tinting">true</bool>
+
 </resources>
