@@ -3085,9 +3085,9 @@ public class StatusBar extends SystemUI implements DemoMode,
 
          // Values in Settings DBs
          int cornerRadius = Settings.System.getInt(mContext.getContentResolver(),
-                 Settings.System.SYSUI_ROUNDED_SIZE, cornerRadiusRes);
+                 Settings.Secure.SYSUI_ROUNDED_SIZE, cornerRadiusRes);
          int contentPadding = Settings.System.getInt(mContext.getContentResolver(),
-                 Settings.System.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes);
+                 Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes);
 
          return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding);
      }
@@ -5061,7 +5061,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void updateRoundedCorner(){
         boolean sysuiRoundedFwvals = Settings.System.getIntForUser(mContext.getContentResolver(),
-                     Settings.System.SYSUI_ROUNDED_FWVALS, 1, mCurrentUserId) == 1;
+                     Settings.Secure.SYSUI_ROUNDED_FWVALS, 1, mCurrentUserId) == 1;
          if (sysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
  
              Resources res = null;
@@ -5070,14 +5070,14 @@ public class StatusBar extends SystemUI implements DemoMode,
              } catch (NameNotFoundException e) {
                  e.printStackTrace();
              }
- 
+
              if (res != null) {
                  int resourceIdRadius = res.getIdentifier("com.android.systemui:dimen/rounded_corner_radius", null, null);
                  Settings.System.putInt(mContext.getContentResolver(),
-                     Settings.System.SYSUI_ROUNDED_SIZE, res.getDimensionPixelSize(resourceIdRadius));
+                     Settings.Secure.SYSUI_ROUNDED_SIZE, res.getDimensionPixelSize(resourceIdRadius));
                  int resourceIdPadding = res.getIdentifier("com.android.systemui:dimen/rounded_corner_content_padding", null, null);
                  Settings.System.putInt(mContext.getContentResolver(),
-                     Settings.System.SYSUI_ROUNDED_CONTENT_PADDING, res.getDimensionPixelSize(resourceIdPadding));
+                     Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, res.getDimensionPixelSize(resourceIdPadding));
              }
          }
     }
@@ -6233,7 +6233,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         void observe() {
             ContentResolver resolver = mContext.getContentResolver();
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.SYSUI_ROUNDED_FWVALS),
+                     Settings.Secure.SYSUI_ROUNDED_FWVALS),
                      false, this, UserHandle.USER_ALL);
             update();
         }

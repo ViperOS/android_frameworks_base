@@ -64,9 +64,7 @@ public class RoundedCorners extends SystemUI implements Tunable {
         setupRounding();
         int padding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
-        if (padding != 0) {
-            setupPadding(padding);
-        }
+        setupPadding(padding);
     }
 
     private void setupRounding() {

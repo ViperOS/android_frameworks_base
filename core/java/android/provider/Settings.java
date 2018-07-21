@@ -3966,18 +3966,6 @@ public final class Settings {
          public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
         /**
-         * Setting to allow setting rounded corner size and content padding
-         */
-        public static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size";
-        public static final String SYSUI_ROUNDED_CONTENT_PADDING = "sysui_rounded_content_padding";
-
-        /**
-          * Setting to disable rounded corner preferences and use frameworks values instead
-          * @hide
-          */
-         public static final String SYSUI_ROUNDED_FWVALS = "sysui_rounded_fwvals";
-
-        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -5182,6 +5170,19 @@ public final class Settings {
         @Deprecated
         public static final String DEVELOPMENT_SETTINGS_ENABLED =
                 Global.DEVELOPMENT_SETTINGS_ENABLED;
+
+         /**
+          * Setting to allow setting rounded corner size and content padding
+          */
+         public static final String SYSUI_ROUNDED_SIZE = "sysui_rounded_size";
+         public static final String SYSUI_ROUNDED_CONTENT_PADDING = "sysui_rounded_content_padding";
+ 
+
+        /**
+         * Setting to disable rounded corner preferences and use frameworks values instead
+         * @hide
+         */
+        public static final String SYSUI_ROUNDED_FWVALS = "sysui_rounded_fwvals";
 
         /**
          * When the user has enable the option to have a "bug report" command
