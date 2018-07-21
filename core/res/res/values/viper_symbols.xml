@@ -123,4 +123,9 @@
   <!-- Icon packs -->
   <java-symbol type="drawable" name="adaptive_icon_drawable_wrapper" />
 
+  <!-- Navigstion gesture -->
+  <java-symbol type="integer" name="nav_gesture_swipe_min_length" />
+  <java-symbol type="integer" name="nav_gesture_swipe_timout" />
+  <java-symbol type="integer" name="nav_gesture_move_threshold" />
+
 </resources>
