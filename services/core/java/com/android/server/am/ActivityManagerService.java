@@ -3792,7 +3792,7 @@ public class ActivityManagerService extends IActivityManager.Stub
             if (DEBUG_PROCESSES || DEBUG_CLEANUP) Slog.v(TAG_PROCESSES, "App died: " + app);
             checkTime(startTime, "startProcess: bad proc running, killing");
             killProcessGroup(app.uid, app.pid);
-            handleAppDiedLocked(app, true, true);
+            handleAppDiedLocked(app, true, true, false);
             checkTime(startTime, "startProcess: done killing old proc");
         }
 
@@ -4073,7 +4073,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                 Slog.w(TAG, "Reusing pid " + startResult.pid
                         + " while app is still mapped to it");
                 cleanUpApplicationRecordLocked(oldApp, false, false, -1,
-                        true /*replacingPid*/);
+                        true /*replacingPid*/, false);
             }
             synchronized (mPidsSelfLocked) {
                 this.mPidsSelfLocked.put(startResult.pid, app);
@@ -5346,10 +5346,10 @@ public class ActivityManagerService extends IActivityManager.Stub
      * to the process.
      */
     private final void handleAppDiedLocked(ProcessRecord app,
-            boolean restarting, boolean allowRestart) {
+            boolean restarting, boolean allowRestart, boolean isAppDied) {
         int pid = app.pid;
         boolean kept = cleanUpApplicationRecordLocked(app, restarting, allowRestart, -1,
-                false /*replacingPid*/);
+                false /*replacingPid*/, isAppDied);
         if (!kept && !restarting) {
             removeLruProcessLocked(app);
             if (pid > 0) {
@@ -5538,7 +5538,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                     app.setAdj, app.setProcState);
             if (DEBUG_CLEANUP) Slog.v(TAG_CLEANUP,
                 "Dying app: " + app + ", pid: " + pid + ", thread: " + thread.asBinder());
-            handleAppDiedLocked(app, false, true);
+            handleAppDiedLocked(app, false, true, true);
 
             if (doOomAdj) {
                 updateOomAdjLocked();
@@ -6913,7 +6913,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                 mBatteryStatsService.removeIsolatedUid(app.uid, app.info.uid);
                 getPackageManagerInternalLocked().removeIsolatedUid(app.uid);
             }
-            handleAppDiedLocked(app, willRestart, allowRestart);
+            handleAppDiedLocked(app, willRestart, allowRestart, false);
             if (willRestart) {
                 removeLruProcessLocked(app);
                 addAppLocked(app.info, null, false, null /* ABI override */);
@@ -6980,6 +6980,11 @@ public class ActivityManagerService extends IActivityManager.Stub
                 Slog.w(TAG, "Unattached app died before broadcast acknowledged, skipping");
                 skipPendingBroadcastLocked(pid);
             }
+            if(app.persistent && !app.isolated) {
+                //Remove this record before add
+                mPersistentStartingProcesses.remove(app);
+                addAppLocked(app.info, null, false, null);
+            }
         } else {
             Slog.w(TAG, "Spurious process start timeout - pid not known for " + app);
         }
@@ -7021,7 +7026,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         // If this application record is still attached to a previous
         // process, clean it up now.
         if (app.thread != null) {
-            handleAppDiedLocked(app, true, true);
+            handleAppDiedLocked(app, true, true, false);
         }
 
         // Tell the process all about itself.
@@ -7276,7 +7281,7 @@ public class ActivityManagerService extends IActivityManager.Stub
 
         if (badApp) {
             app.kill("error during init", true);
-            handleAppDiedLocked(app, false, true);
+            handleAppDiedLocked(app, false, true, false);
             return false;
         }
 
@@ -18095,7 +18100,7 @@ public class ActivityManagerService extends IActivityManager.Stub
      * app that was passed in must remain on the process lists.
      */
     private final boolean cleanUpApplicationRecordLocked(ProcessRecord app,
-            boolean restarting, boolean allowRestart, int index, boolean replacingPid) {
+            boolean restarting, boolean allowRestart, int index, boolean replacingPid, boolean isAppDied) {
         if (index >= 0) {
             removeLruProcessLocked(app);
             ProcessList.remove(app.pid);
@@ -18133,7 +18138,7 @@ public class ActivityManagerService extends IActivityManager.Stub
         app.hasAboveClient = false;
         app.hasClientActivities = false;
 
-        mServices.killServicesLocked(app, allowRestart);
+        mServices.killServicesLocked(app, allowRestart, isAppDied);
 
         boolean restart = false;
 
@@ -23430,7 +23435,7 @@ public class ActivityManagerService extends IActivityManager.Stub
                             // Ignore exceptions.
                         }
                     }
-                    cleanUpApplicationRecordLocked(app, false, true, -1, false /*replacingPid*/);
+                    cleanUpApplicationRecordLocked(app, false, true, -1, false /*replacingPid*/, false);
                     mRemovedProcesses.remove(i);
 
                     if (app.persistent) {
