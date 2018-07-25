@@ -378,6 +378,11 @@ public class SQLiteQueryBuilder
             return null;
         }
 
+        final String sql;
+        final String unwrappedSql = buildQuery(
+                projectionIn, selection, groupBy, having,
+                sortOrder, limit);
+
         if (mStrict && selection != null && selection.length() > 0) {
             // Validate the user-supplied selection to detect syntactic anomalies
             // in the selection string that could indicate a SQL injection attempt.
@@ -395,12 +400,14 @@ public class SQLiteQueryBuilder
             db.validateSql(unwrappedSql, cancellationSignal); // will throw if query is invalid
 
             // Execute wrapped query for extra protection
-            final String wrappedSql = buildQuery(projectionIn, wrap(selection), groupBy,
+            final String wrappedSql = buildQuery(projectionIn, "(" + selection + ")", groupBy,
                     having, sortOrder, limit);
-            db.validateSql(sqlForValidation, cancellationSignal); // will throw if query is invalid
+            sql = wrappedSql;
+        } else {
+            // Execute unwrapped query
+            sql = unwrappedSql;
         }
 
-        final String[] sqlArgs = selectionArgs;
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             if (Build.IS_DEBUGGABLE) {
                 Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));
