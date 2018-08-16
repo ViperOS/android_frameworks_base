@@ -4129,6 +4129,12 @@ public final class Settings {
          */
         public static final String QS_TILE_STYLE = "qs_tile_style";
 
+		/**
+         * Whether to show the battery info on the lockscreen while charging
+         * @hide
+         */
+        public static final String LOCKSCREEN_BATTERY_INFO = "lockscreen_battery_info";
+
         /**
          * Weather lockscreen temperature scale
          * @hide
