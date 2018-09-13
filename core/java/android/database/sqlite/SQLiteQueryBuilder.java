@@ -408,6 +408,7 @@ public class SQLiteQueryBuilder
             sql = unwrappedSql;
         }
 
+        final String[] sqlArgs = selectionArgs;
         if (Log.isLoggable(TAG, Log.DEBUG)) {
             if (Build.IS_DEBUGGABLE) {
                 Log.d(TAG, sql + " with args " + Arrays.toString(sqlArgs));

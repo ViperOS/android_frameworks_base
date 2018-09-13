@@ -8330,7 +8330,7 @@ public final class ActivityManagerService extends ActivityManagerNative
                 // No need to grant the target this permission.
                 if (DEBUG_URI_PERMISSION) Slog.v(TAG_URI_PERMISSION,
                         "Target " + targetPkg + " already has full permission to " + grantUri);
-                return allowedResult;
+                return -1;
             }
         } else {
             // First...  there is no target package, so can anyone access it?
@@ -8346,7 +8346,7 @@ public final class ActivityManagerService extends ActivityManagerNative
                 }
             }
             if (allowed) {
-                return allowedResult;
+                return -1;
             }
         }
 
