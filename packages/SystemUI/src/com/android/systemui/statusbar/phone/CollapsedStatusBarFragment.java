@@ -22,6 +22,7 @@ import static com.android.systemui.statusbar.phone.StatusBar.reinflateSignalClus
 import android.annotation.Nullable;
 import android.app.Fragment;
 import android.app.StatusBarManager;
+import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.ImageSwitcher;
 import android.widget.LinearLayout;
 
+import com.android.internal.util.UserContentObserver;
 import com.android.systemui.Dependency;
 import com.android.systemui.Interpolators;
 import com.android.systemui.R;
@@ -126,7 +128,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mTickerObserver = new TickerObserver(new Handler());
     }
 
-    class TickerObserver extends ContentObserver {
+    class TickerObserver extends UserContentObserver {
 
         TickerObserver(Handler handler) {
             super(handler);
