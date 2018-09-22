@@ -4054,6 +4054,11 @@ public final class Settings {
         public static final String CUSTOM_CARRIER_LABEL = "custom_carrier_label";
 
         /**
+         * @hide
+         */
+        public static final String STATUS_BAR_LOGO = "status_bar_logo";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4229,6 +4234,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_LOW_COLOR_ENABLE);
             PRIVATE_SETTINGS.add(STATUSBAR_BATTERY_FORCE_PERCENT);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_IMAGE);
+            PRIVATE_SETTINGS.add(STATUS_BAR_LOGO);
         }
 
         /**

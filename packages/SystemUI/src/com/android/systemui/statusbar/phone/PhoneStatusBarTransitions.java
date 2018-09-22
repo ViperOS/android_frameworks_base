@@ -35,7 +35,7 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
     private final PhoneStatusBarView mView;
     private final float mIconAlphaWhenOpaque;
 
-    private View mLeftSide, mStatusIcons, mSignalCluster, mBattery, mNetworkTraffic, mBatteryContainer;
+    private View mLeftSide, mStatusIcons, mSignalCluster, mBattery, mNetworkTraffic, mBatteryContainer, mLogoIcon, mLogoIconRight;
     private View mClock, mClockCenter, mClockLeft;
     private Animator mCurrentAnimation;
 
@@ -56,6 +56,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
         mClockLeft = mView.findViewById(R.id.clock_left);
         mNetworkTraffic = mView.findViewById(R.id.network_traffic);
         mBatteryContainer = mView.findViewById(R.id.battery_container);
+        mLogoIcon = mView.findViewById(R.id.status_bar_logo);
+        mLogoIconRight = mView.findViewById(R.id.status_bar_logo_right);
         applyModeBackground(-1, getMode(), false /*animate*/);
         applyMode(getMode(), false /*animate*/);
     }
@@ -98,6 +100,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             animCollection.add(animateTransitionTo(mLeftSide, newAlpha));
             animCollection.add(animateTransitionTo(mStatusIcons, newAlpha));
             animCollection.add(animateTransitionTo(mSignalCluster, newAlpha));
+            animCollection.add(animateTransitionTo(mLogoIcon, newAlpha));
+            animCollection.add(animateTransitionTo(mLogoIconRight, newAlpha));
             if (mBattery != null) {
                 animCollection.add(animateTransitionTo(mBattery, newAlphaBC));
             }
@@ -117,6 +121,8 @@ public final class PhoneStatusBarTransitions extends BarTransitions {
             mLeftSide.setAlpha(newAlpha);
             mStatusIcons.setAlpha(newAlpha);
             mSignalCluster.setAlpha(newAlpha);
+            mLogoIcon.setAlpha(newAlpha);
+            mLogoIconRight.setAlpha(newAlpha);
             if (mBattery != null) {
                 mBattery.setAlpha(newAlphaBC);
             }

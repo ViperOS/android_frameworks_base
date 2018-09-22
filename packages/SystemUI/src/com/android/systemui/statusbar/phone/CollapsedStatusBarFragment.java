@@ -31,6 +31,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.systemui.Dependency;
@@ -69,6 +70,12 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     // Custom Carrier
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
+
+    // Viper Logo
+    private ImageView mVPLogo;
+    private ImageView mVPLogoRight;
+    private int mShowLogo;
+
     private final Handler mHandler = new Handler();
 
     private class ViperSettingsObserver extends ContentObserver {
@@ -79,6 +86,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         void observe() {
             getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_CARRIER),
+                    false, this, UserHandle.USER_ALL);
+            getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_LOGO),
                     false, this, UserHandle.USER_ALL);
         }
 
@@ -125,6 +135,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mClockController = new ClockController(mStatusBar);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
         mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
+        mVPLogo = (ImageView) (ImageView) mStatusBar.findViewById(R.id.status_bar_logo);
+        mVPLogoRight = (ImageView) mStatusBar.findViewById(R.id.status_bar_logo_right);
+        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mVPLogo);
+        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mVPLogoRight);
         updateSettings(false);
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
@@ -154,6 +168,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         super.onDestroyView();
         Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(mSignalClusterView);
         Dependency.get(StatusBarIconController.class).removeIconGroup(mDarkIconManager);
+        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(mVPLogo);
+        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(mVPLogoRight);
         if (mNetworkController.hasEmergencyCryptKeeperText()) {
             mNetworkController.removeCallback(mSignalCallback);
         }
@@ -228,21 +244,33 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     public void hideSystemIconArea(boolean animate) {
         animateHide(mSystemIconArea, animate, true);
         animateHide(mClockController.getClock(), animate, true);
+        if (mShowLogo == 2) {
+            animateHide(mVPLogoRight, animate, false);
+        }
     }
 
     public void showSystemIconArea(boolean animate) {
         animateShow(mSystemIconArea, animate);
         animateShow(mClockController.getClock(), animate);
+        if (mShowLogo == 2) {
+            animateShow(mVPLogoRight, animate);
+        }
     }
 
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate, true);
         animateHide(mClockController.getClock(), animate, true);
+        if (mShowLogo == 1) {
+            animateHide(mVPLogo, animate, false);
+        }
     }
 
     public void showNotificationIconArea(boolean animate) {
         animateShow(mNotificationIconAreaInner, animate);
         animateShow(mClockController.getClock(), animate);
+        if (mShowLogo == 1) {
+            animateShow(mVPLogo, animate);
+        }
     }
 
     public void hideCarrierName(boolean animate) {
@@ -320,10 +348,35 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     }
 
     public void updateSettings(boolean animate) {
+        try {
         mShowCarrierLabel = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_CARRIER, 1,
                 UserHandle.USER_CURRENT);
+        mShowLogo = Settings.System.getIntForUser(
+                getContext().getContentResolver(), Settings.System.STATUS_BAR_LOGO, 0,
+                UserHandle.USER_CURRENT);
+
+       } catch (Exception e) {
+       }
         setCarrierLabel(animate);
+        if (mNotificationIconAreaInner != null) {
+            if (mShowLogo == 1) {
+                if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
+                    animateShow(mVPLogo, animate);
+                }
+            } else if (mShowLogo != 1) {
+                animateHide(mVPLogo, animate, false);
+            }
+        }
+        if (mSystemIconArea != null) {
+            if (mShowLogo == 2) {
+                if (mSystemIconArea.getVisibility() == View.VISIBLE) {
+                    animateShow(mVPLogoRight, animate);
+                }
+            } else if (mShowLogo != 2) {
+                animateHide(mVPLogoRight, animate, false);
+            }
+        }
     }
 
     private void setCarrierLabel(boolean animate) {
