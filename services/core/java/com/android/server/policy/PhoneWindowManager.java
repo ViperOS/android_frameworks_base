@@ -6496,9 +6496,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Context.BIND_AUTO_CREATE | Context.BIND_FOREGROUND_SERVICE_WHILE_AWAKE,
                     UserHandle.CURRENT)) {
                 mScreenshotConnection = conn;
-                if (screenshotType != WindowManager.TAKE_SCREENSHOT_SELECTED_REGION) {
-                    mHandler.postDelayed(mScreenshotTimeout, 10000);
-                }
+                mHandler.postDelayed(mScreenshotTimeout, 10000);
             }
         }
     }

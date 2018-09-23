@@ -106,7 +106,6 @@ public class HardwareUiLayout extends FrameLayout implements Tunable {
                 params.bottomMargin = edge;
             } else {
                 params.rightMargin = edge;
-                params.leftMargin = edge;
             }
             mChild.setLayoutParams(params);
         }
