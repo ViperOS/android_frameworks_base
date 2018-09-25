@@ -6461,11 +6461,21 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.STATUS_BAR_SHOW_TICKER),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HIDE_LOCKSCREEN_ALARM),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HIDE_LOCKSCREEN_CLOCK),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.HIDE_LOCKSCREEN_DATE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_CLOCK_SELECTION),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LOCKSCREEN_DATE_SELECTION),
                     false, this, UserHandle.USER_ALL);
+
             update();
         }
 
@@ -6476,7 +6486,10 @@ public class StatusBar extends SystemUI implements DemoMode,
                      uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_PORTRAIT)) ||
                      uri.equals(Settings.System.getUriFor(Settings.System.QS_COLUMNS_LANDSCAPE))) {
                  setQsRowsColumns();
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_CLOCK_SELECTION)) ||
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_ALARM)) ||
+                    uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_CLOCK)) ||
+                    uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_DATE)) ||
+                    uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_CLOCK_SELECTION)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_DATE_SELECTION))) {
                 updateKeyguardStatusSettings();
             }

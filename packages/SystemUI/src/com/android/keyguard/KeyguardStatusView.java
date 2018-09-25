@@ -27,8 +27,13 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.PowerManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.service.dreams.DreamService;
+import android.service.dreams.IDreamManager;
 import android.support.v4.graphics.ColorUtils;
 import android.text.Html;
 import android.text.TextUtils;
@@ -84,7 +89,10 @@ public class KeyguardStatusView extends GridLayout {
     private BatteryViewManager mBatteryViewManager;
     private LinearLayout mBatteryContainer;
 
+    private boolean mShowAlarm;
     private boolean mAvailableAlarm;
+    private boolean mShowClock;
+    private boolean mShowDate;
     private int mClockSelection;
     private int mDateSelection;
 
@@ -245,6 +253,7 @@ public class KeyguardStatusView extends GridLayout {
 
         refreshTime();
         refreshAlarmStatus(nextAlarm);
+        updateSettings();
     }
 
     void refreshAlarmStatus(AlarmManager.AlarmClockInfo nextAlarm) {
@@ -297,6 +306,7 @@ public class KeyguardStatusView extends GridLayout {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         KeyguardUpdateMonitor.getInstance(mContext).registerCallback(mInfoCallback);
+        updateSettings();
     }
 
     @Override
@@ -331,35 +341,42 @@ public class KeyguardStatusView extends GridLayout {
         switch (mClockSelection) {
             case 0: // default digital
             default:
-                mClockView.setVisibility(View.VISIBLE);
+                mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mAnalogClockView.setVisibility(View.GONE);
                 break;
             case 1: // digital (bold)
-                mClockView.setVisibility(View.VISIBLE);
+                mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mAnalogClockView.setVisibility(View.GONE);
                 break;
             case 2: // analog
-                mAnalogClockView.setVisibility(View.VISIBLE);
+                mAnalogClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mClockView.setVisibility(View.GONE);
                 break;
             case 3: // sammy
-                mClockView.setVisibility(View.VISIBLE);
+                mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mAnalogClockView.setVisibility(View.GONE);
                 break;
             case 4: // sammy (bold)
-                mClockView.setVisibility(View.VISIBLE);
+                mClockView.setVisibility(mDarkAmount != 1 ? (mShowClock ? View.VISIBLE : View.GONE) : View.VISIBLE);
                 mAnalogClockView.setVisibility(View.GONE);
                 break;
         }
 
-        mDateView.setVisibility(View.VISIBLE);
+        mDateView.setVisibility(mDarkAmount != 1 ? (mShowDate ? View.VISIBLE : View.GONE) : View.VISIBLE);
 
-        mAlarmStatusView.setVisibility(mAvailableAlarm ? View.VISIBLE : View.GONE);
+        mAlarmStatusView.setVisibility(mDarkAmount != 1 ? (mShowAlarm && mAvailableAlarm ? View.VISIBLE : View.GONE)
+                : mAvailableAlarm ? View.VISIBLE : View.GONE);
     }
 
     private void updateSettings() {
         final ContentResolver resolver = getContext().getContentResolver();
 
+        mShowAlarm = Settings.System.getIntForUser(resolver,
+                Settings.System.HIDE_LOCKSCREEN_ALARM, 1, UserHandle.USER_CURRENT) == 1;
+        mShowClock = Settings.System.getIntForUser(resolver,
+                Settings.System.HIDE_LOCKSCREEN_CLOCK, 1, UserHandle.USER_CURRENT) == 1;
+        mShowDate = Settings.System.getIntForUser(resolver,
+                Settings.System.HIDE_LOCKSCREEN_DATE, 1, UserHandle.USER_CURRENT) == 1;
         mClockSelection = Settings.System.getIntForUser(resolver,
                 Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, UserHandle.USER_CURRENT);
         mDateSelection = Settings.System.getIntForUser(resolver,
@@ -458,7 +475,10 @@ public class KeyguardStatusView extends GridLayout {
             final Locale locale = Locale.getDefault();
             final Resources res = context.getResources();
 
-            dateViewSkel = res.getString(hasAlarm
+            final ContentResolver resolver = context.getContentResolver();
+            final boolean showAlarm = Settings.System.getIntForUser(resolver,
+                    Settings.System.HIDE_LOCKSCREEN_ALARM, 1, UserHandle.USER_CURRENT) == 1;
+            dateViewSkel = res.getString(hasAlarm && showAlarm
                     ? R.string.abbrev_wday_month_day_no_year_alarm
                     : R.string.abbrev_wday_month_day_no_year);
             final String clockView12Skel = res.getString(R.string.clock_12hr_format);
@@ -510,6 +530,7 @@ public class KeyguardStatusView extends GridLayout {
         int blendedAlarmColor = ColorUtils.blendARGB(mAlarmTextColor, Color.WHITE, darkAmount);
         mAlarmStatusView.setTextColor(blendedAlarmColor);
         mAlarmStatusView.setCompoundDrawableTintList(ColorStateList.valueOf(blendedAlarmColor));
+        refresh();
 
         mAnalogClockView.setDark(dark);
         updateVisibilities(); // with updated mDarkAmount value
@@ -518,6 +539,7 @@ public class KeyguardStatusView extends GridLayout {
     public void setPulsing(boolean pulsing) {
         mPulsing = pulsing;
         updateDozeVisibleViews();
+        refresh();
     }
 
     private void updateDozeVisibleViews() {
