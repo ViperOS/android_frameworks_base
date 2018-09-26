@@ -47,6 +47,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.PowerManager;
+import android.os.Process;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -136,6 +137,7 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
     private static final String GLOBAL_ACTION_KEY_SCREENSHOT = "screenshot";
     private static final String GLOBAL_ACTION_KEY_REBOOT_RECOVERY = "reboot_recovery";
     private static final String GLOBAL_ACTION_KEY_REBOOT_BOOTLOADER = "reboot_bootloader";
+    private static final String GLOBAL_ACTION_KEY_REBOOT_UI = "reboot_ui";
 
     private final Context mContext;
     private final GlobalActionsManager mWindowManagerFuncs;
@@ -333,6 +335,11 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 if (isActionVisible(a)) {
                     items.add(a);
                 }
+            } else if (advancedRebootEnabled(mContext) && GLOBAL_ACTION_KEY_REBOOT_UI.equals(actionKey)) {
+                RebootUiAction a = new RebootUiAction();
+                if (isActionVisible(a)) {
+                    items.add(a);
+                }
             }
         }
         return items;
@@ -384,6 +391,8 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
                 mItems.add(new RebootRecoveryAction());
             } else if (advancedRebootEnabled(mContext) && GLOBAL_ACTION_KEY_REBOOT_BOOTLOADER.equals(actionKey)) {
                 mItems.add(new RebootBootloaderAction());
+            } else if (advancedRebootEnabled(mContext) && GLOBAL_ACTION_KEY_REBOOT_UI.equals(actionKey)) {
+                mItems.add(new RebootUiAction());
             } else {
                 Log.e(TAG, "Invalid global action key " + actionKey);
             }
@@ -695,6 +704,33 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
         @Override
         public boolean showBeforeProvisioning() {
             return false;
+        }
+    }
+
+    private final class RebootUiAction extends SinglePressAction {
+        private RebootUiAction() {
+            super(com.android.systemui.R.drawable.ic_restart_ui, com.android.systemui.R.string.global_action_reboot_ui);
+        }
+
+        @Override
+        public boolean showDuringKeyguard() {
+            return true;
+        }
+
+        @Override
+        public boolean showDuringRestrictedKeyguard() {
+            return false;
+        }
+
+        @Override
+        public boolean showBeforeProvisioning() {
+            return true;
+        }
+
+        @Override
+        public void onPress() {
+            mWindowManagerFuncs.onGlobalActionsHidden();
+            restartSystemUI(mContext);
         }
     }
 
@@ -1723,4 +1759,9 @@ class GlobalActionsDialog implements DialogInterface.OnDismissListener,
             mKeyguardShowing = keyguardShowing;
         }
     }
+
+    public static void restartSystemUI(Context mContext) {
+        Process.killProcess(Process.myPid());
+    }
+
 }
