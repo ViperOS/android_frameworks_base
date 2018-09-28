@@ -31,4 +31,9 @@
   <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
   <string name="permdesc_accessFontManager">Permite que um aplicativo acesse o gerenciador de fontes.</string>
 
+  <!-- Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permlab_restartUI">Reinicie a interface do usuário do sistema</string>
+  <!-- Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permdesc_restartUI">Reinicie o Serviço da interface do usuário do sistema para que as barras do sistema possam carregar recursos temáticos</string>
+
 </resources>
