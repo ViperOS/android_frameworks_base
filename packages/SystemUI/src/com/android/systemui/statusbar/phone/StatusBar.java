@@ -7323,6 +7323,11 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
+    public void restartUI() {
+        Log.d(TAG, "StatusBar API restartUI! Commiting suicide! Goodbye cruel world!");
+        Process.killProcess(Process.myPid());
+    }
+
     protected void toggleKeyboardShortcuts(int deviceId) {
         KeyboardShortcuts.toggle(mContext, deviceId);
     }
