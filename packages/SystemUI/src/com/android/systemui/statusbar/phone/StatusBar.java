@@ -147,6 +147,7 @@ import com.android.internal.statusbar.ThemeAccentUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.MessagingGroup;
 import com.android.internal.widget.MessagingMessage;
+import com.android.internal.util.viper.Utils;
 import com.android.keyguard.KeyguardHostView.OnDismissAction;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
@@ -685,7 +686,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
     private NavigationBarFragment mNavigationBar;
     private View mNavigationBarView;
-    private boolean mNeedsNavigationBar;
     protected ActivityLaunchAnimator mActivityLaunchAnimator;
     private HeadsUpAppearanceController mHeadsUpAppearanceController;
     private boolean mVibrateOnOpening;
@@ -742,16 +742,6 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         mVibratorHelper = Dependency.get(VibratorHelper.class);
         mScrimSrcModeEnabled = res.getBoolean(R.bool.config_status_bar_scrim_behind_use_src);
         mClearAllEnabled = res.getBoolean(R.bool.config_enableNotificationsClearAll);
-        mNeedsNavigationBar = res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
-
-        // Allow a system property to override this. Used by the emulator.
-        // See also hasNavigationBar().
-        String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
-        if ("1".equals(navBarOverride)) {
-            mNeedsNavigationBar = false;
-        } else if ("0".equals(navBarOverride)) {
-            mNeedsNavigationBar = true;
-        }
 
         DateTimeView.setReceiverHandler(Dependency.get(Dependency.TIME_TICK_HANDLER));
         putComponent(StatusBar.class, this);
@@ -991,14 +981,13 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             mNotificationPanelDebugText.setVisibility(View.VISIBLE);
         }
 
-        try {
-            boolean showNav = mWindowManagerService.hasNavigationBar();
-            if (DEBUG) Log.v(TAG, "hasNavigationBar=" + showNav);
-            if (showNav) {
-                createNavigationBar();
-            }
-        } catch (RemoteException ex) {
-            // no window manager? good luck with that
+        boolean showNav = LineageSettings.System.getIntForUser(mContext.getContentResolver(),
+                LineageSettings.System.FORCE_SHOW_NAVBAR,
+                Utils.hasNavbarByDefault(mContext) ? 1 : 0, UserHandle.USER_CURRENT) != 0;
+        if (DEBUG)
+            Log.v(TAG, "hasNavigationBar=" + showNav);
+        if (showNav) {
+            createNavigationBar();
         }
         mScreenPinningNotify = new ScreenPinningNotify(mContext);
         mStackScroller.setLongPressListener(mEntryManager.getNotificationLongClicker());
@@ -1210,6 +1199,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     }
 
     protected void createNavigationBar() {
+        if (mNavigationBarView != null)
+            return;
         mNavigationBarView = NavigationBarFragment.create(mContext, (tag, fragment) -> {
             mNavigationBar = (NavigationBarFragment) fragment;
             if (mLightBarController != null) {
@@ -1221,6 +1212,20 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
     public NotificationMediaManager getMediaManager() {
         return mMediaManager;
+    }
+
+    protected void removeNavigationBar() {
+        if (mNavigationBarView != null) {
+            FragmentHostManager fragmentHost = FragmentHostManager.get(mNavigationBarView);
+            if (mNavigationBarView.isAttachedToWindow()) {
+                mWindowManager.removeViewImmediate(mNavigationBarView);
+            }
+            if (mNavigationBar != null) {
+                fragmentHost.getFragmentManager().beginTransaction().remove(mNavigationBar).commit();
+                mNavigationBar = null;
+            }
+            mNavigationBarView = null;
+        }
     }
 
     /**
@@ -6216,21 +6221,13 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         } else if (LOCKSCREEN_MEDIA_METADATA.equals(key)) {
             mShowMediaMetadata = TunerService.parseIntegerSwitch(newValue, true);
         } else if (mWindowManagerService != null && FORCE_SHOW_NAVBAR.equals(key)) {
-            boolean forcedVisibility = mNeedsNavigationBar ||
-                    TunerService.parseIntegerSwitch(newValue, false);
+            boolean mNavbarVisible =
+                    TunerService.parseIntegerSwitch(newValue, Utils.hasNavbarByDefault(mContext));
 
-            if (forcedVisibility) {
-                if (mNavigationBarView == null) {
-                    createNavigationBar();
-                }
+            if (mNavbarVisible) {
+                createNavigationBar();
             } else {
-                if (mNavigationBarView != null) {
-                    FragmentHostManager fm = FragmentHostManager.get(mNavigationBarView);
-                    mWindowManager.removeViewImmediate(mNavigationBarView);
-                    mNavigationBarView = null;
-                    fm.getFragmentManager().beginTransaction().remove(mNavigationBar).commit();
-                    mNavigationBar = null;
-                }
+                removeNavigationBar();
             }
         }
     }
