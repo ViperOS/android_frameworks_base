@@ -63,6 +63,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp" />
 
+            <include layout="@layout/keyguard_weather_view"
+                android:id="@+id/keyguard_weather_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/keyguard_status_area" />
+
             <LinearLayout
                 android:id="@+id/battery_container"
                 android:layout_width="wrap_content"
