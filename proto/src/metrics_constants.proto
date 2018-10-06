@@ -4619,6 +4619,7 @@ message MetricsEvent {
     VENOM = 1300;
     OMNI_QS_WEATHER = 1301;
     OMNI_QS_WEATHER_DETAILS = 1302;
+    CUSTOM_QUICK_TILES = 1303;
 
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS

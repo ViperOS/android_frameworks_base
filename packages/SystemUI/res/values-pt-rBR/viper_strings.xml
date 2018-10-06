@@ -37,4 +37,8 @@
   <string name="omnijaws_package_not_available">OmniJaws não disponível</string>
   <string name="omnijaws_service_last_update">Última atualização:</string>
 
+  <!-- Screenshot Tile -->
+  <string name="quick_settings_screenshot_label">Captura de tela</string>
+  <string name="quick_settings_region_screenshot_label">Captura de tela parcial</string>
+
 </resources>
