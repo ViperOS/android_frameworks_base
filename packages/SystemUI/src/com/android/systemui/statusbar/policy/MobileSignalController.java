@@ -24,6 +24,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.net.NetworkCapabilities;
 import android.os.Handler;
+import android.os.UserHandle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -85,6 +86,7 @@ public class MobileSignalController extends SignalController<
 
     private boolean mRoamingIconAllowed;
     private boolean mShow4gForLte;
+    private boolean mVoLTEicon;
 	
     private ImsManager mImsManager;
 
@@ -155,6 +157,15 @@ public class MobileSignalController extends SignalController<
             default:
                 break;
         }
+    }
+
+    private void updateSettings() {
+        ContentResolver resolver = mContext.getContentResolver();
+        mVoLTEicon = Settings.System.getIntForUser(resolver,
+                Settings.System.SHOW_VOLTE_ICON, 0,
+                UserHandle.USER_CURRENT) == 1;
+
+        updateTelephony();
     }
 
     public void setConfiguration(Config config) {
@@ -342,7 +353,7 @@ public class MobileSignalController extends SignalController<
     private int getVolteResId() {
         int resId = 0;
 
-        if ( mCurrentState.imsResitered ) {
+        if ( mCurrentState.imsResitered && mVoLTEicon ) {
             resId = R.drawable.ic_volte;
         }
         return resId;
