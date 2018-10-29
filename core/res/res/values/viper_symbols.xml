@@ -45,7 +45,24 @@
   <!-- Two target preference vertical divider color -->
   <java-symbol type="color" name="list_divider_dark" />
 
+
   <!-- Whether device has dash charging support -->
   <java-symbol type="bool" name="config_hasDashCharger" />
+
+  <!-- Weather icons -->
+  <java-symbol type="drawable" name="weather_01" />
+  <java-symbol type="drawable" name="weather_01n" />
+  <java-symbol type="drawable" name="weather_02" />
+  <java-symbol type="drawable" name="weather_02n" />
+  <java-symbol type="drawable" name="weather_03" />
+  <java-symbol type="drawable" name="weather_03n" />
+  <java-symbol type="drawable" name="weather_04" />
+  <java-symbol type="drawable" name="weather_04n" />
+  <java-symbol type="drawable" name="weather_09" />
+  <java-symbol type="drawable" name="weather_10" />
+  <java-symbol type="drawable" name="weather_10n" />
+  <java-symbol type="drawable" name="weather_11" />
+  <java-symbol type="drawable" name="weather_13" />
+  <java-symbol type="drawable" name="weather_50" />
 
 </resources>
