@@ -2175,6 +2175,11 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         return ThemeAccentUtils.isUsingDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Check for the black system theme
+    public boolean isUsingBlackTheme() {
+        return ThemeAccentUtils.isUsingBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     // Unloads the stock dark theme
     public void unloadStockDarkTheme() {
         ThemeAccentUtils.unloadStockDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
@@ -4081,6 +4086,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.SYSTEM_THEME, 0, mLockscreenUserManager.getCurrentUserId());
         boolean useDarkTheme = false;
+        boolean useBlackTheme = false;
         if (userThemeSetting == 0) {
             // The system wallpaper defines if QS should be light or dark.
             WallpaperColors systemColors = mColorExtractor
@@ -4089,10 +4095,15 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                     && (systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
         } else {
             useDarkTheme = userThemeSetting == 2;
+            useBlackTheme = userThemeSetting == 3;
         }
         if (isUsingDarkTheme() != useDarkTheme) {
             unfuckBlackWhiteAccent(); // Check for black and white accent
             ThemeAccentUtils.setLightDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useDarkTheme);
+        }
+        if (isUsingBlackTheme() != useBlackTheme) {
+            unfuckBlackWhiteAccent(); // Check for black and white accent
+            ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlackTheme);
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
