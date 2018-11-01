@@ -742,6 +742,20 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Keygua
         }
     }
 
+    public void setPulseColors(boolean colorizedMedia, int[] colors) {
+        if (mNavigationBarView != null) {
+            mNavigationBarView.setPulseColors(colorizedMedia, colors);
+        }
+    }
+
+
+    @Override
+    public void onMediaUpdated(boolean playing) {
+        if (mNavigationBarView != null) {
+            mNavigationBarView.setMediaPlaying(playing);
+        }
+    }
+
     // ----- Internal stuffz -----
 
     private void refreshLayout(int layoutDirection) {
@@ -795,13 +809,6 @@ public class NavigationBarFragment extends Fragment implements Callbacks, Keygua
     public void onDetach() {
         mNavigationBarView.dispose();
         super.onDetach();
-    }
-
-    @Override
-    public void onMediaUpdated(boolean playing) {
-        if (mNavigationBarView != null) {
-            mNavigationBarView.setMediaPlaying(playing);
-        }
     }
 
     private void prepareNavigationBarView() {
