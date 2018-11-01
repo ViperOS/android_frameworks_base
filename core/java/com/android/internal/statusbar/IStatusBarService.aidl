@@ -105,4 +105,5 @@ interface IStatusBarService
      * ABC
      */
     void toggleCameraFlash();
+    void leftInLandscapeChanged(boolean isLeft);
 }
