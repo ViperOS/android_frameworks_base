@@ -43,6 +43,14 @@ public class ThemeAccentUtils {
         "com.android.gboard.theme.black", // 3
     };
 
+    // BlueNight themes
+    private static final String[] BLUENIGHT_THEMES = {
+        "com.android.system.theme.bluenight", // 0
+        "com.android.settings.theme.bluenight", // 1
+        "com.android.settings.intelligence.theme.bluenight", // 2
+        "com.android.gboard.theme.bluenight", // 3
+    };
+
     // Accents
     private static final String[] ACCENTS = {
         "default_accent", // 0
@@ -115,6 +123,18 @@ public class ThemeAccentUtils {
         return themeInfo != null && themeInfo.isEnabled();
     }
 
+    // Check for the bluenight system theme
+    public static boolean isUsingBlueNightTheme(IOverlayManager om, int userId) {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = om.getOverlayInfo(BLUENIGHT_THEMES[0],
+                    userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return themeInfo != null && themeInfo.isEnabled();
+    }
+
     // Set light / dark theme
     public static void setLightDarkTheme(IOverlayManager om, int userId, boolean useDarkTheme) {
         for (String theme : DARK_THEMES) {
@@ -136,6 +156,18 @@ public class ThemeAccentUtils {
             try {
                 om.setEnabled(theme,
                         useBlackTheme, userId);
+                unfuckBlackWhiteAccent(om, userId);
+            } catch (RemoteException e) {
+            }
+        }
+    }
+
+    // Set light / bluenight theme
+    public static void setLightBlueNightTheme(IOverlayManager om, int userId, boolean useBlueNightTheme) {
+        for (String theme : BLUENIGHT_THEMES) {
+            try {
+                om.setEnabled(theme,
+                        useBlueNightTheme, userId);
                 unfuckBlackWhiteAccent(om, userId);
             } catch (RemoteException e) {
             }

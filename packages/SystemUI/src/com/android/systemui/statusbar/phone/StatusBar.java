@@ -2180,6 +2180,11 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         return ThemeAccentUtils.isUsingBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Check for the bluenight system theme
+    public boolean isUsingBlueNightTheme() {
+        return ThemeAccentUtils.isUsingBlueNightTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     // Unloads the stock dark theme
     public void unloadStockDarkTheme() {
         ThemeAccentUtils.unloadStockDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
@@ -4087,6 +4092,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                 Settings.System.SYSTEM_THEME, 0, mLockscreenUserManager.getCurrentUserId());
         boolean useDarkTheme = false;
         boolean useBlackTheme = false;
+        boolean useBlueNightTheme = false;
         if (userThemeSetting == 0) {
             // The system wallpaper defines if QS should be light or dark.
             WallpaperColors systemColors = mColorExtractor
@@ -4096,6 +4102,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         } else {
             useDarkTheme = userThemeSetting == 2;
             useBlackTheme = userThemeSetting == 3;
+            useBlueNightTheme = userThemeSetting == 4;
         }
         if (isUsingDarkTheme() != useDarkTheme) {
             unfuckBlackWhiteAccent(); // Check for black and white accent
@@ -4104,6 +4111,10 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         if (isUsingBlackTheme() != useBlackTheme) {
             unfuckBlackWhiteAccent(); // Check for black and white accent
             ThemeAccentUtils.setLightBlackTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlackTheme);
+        }
+        if (isUsingBlueNightTheme() != useBlueNightTheme) {
+            unfuckBlackWhiteAccent(); // Check for black and white accent
+            ThemeAccentUtils.setLightBlueNightTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlueNightTheme);
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
