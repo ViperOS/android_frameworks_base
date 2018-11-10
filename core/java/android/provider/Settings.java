@@ -4288,6 +4288,12 @@ public final class Settings {
         public static final String RECENTS_COMPONENT = "recents_component";
 
         /**
+         * Whether to use icon pack for Recents
+         * @hide
+         */
+        public static final String RECENTS_ICON_PACK = "recents_icon_pack";
+
+        /**
          * Whether to display roaming indicator for roaming signal connection
          * @hide
          */
