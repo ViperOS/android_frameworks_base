@@ -52,6 +52,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.StatusBarManager;
 import android.app.TaskStackBuilder;
+import android.app.UiModeManager;
 import android.app.WallpaperColors;
 import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
@@ -461,6 +462,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     private boolean mBrightnessControl;
     private boolean mBrightnessChanged;
     private boolean mJustPeeked;
+
+    private int mPreviousDarkMode;
 
     /**
      * Helper that is responsible for showing the right toast when a disallowed activity operation
@@ -1000,9 +1003,23 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                 if (mDozeServiceHost != null) {
                     mDozeServiceHost.firePowerSaveChanged(isPowerSave);
                 }
+
                 if (NIGHT_MODE_IN_BATTERY_SAVER) {
-                    mContext.getSystemService(UiModeManager.class).setNightMode(
-                        isPowerSave ? UiModeManager.MODE_NIGHT_YES : UiModeManager.MODE_NIGHT_NO);
+                    final UiModeManager umm = mContext.getSystemService(UiModeManager.class);
+                    if (isPowerSave) {
+                        mPreviousDarkMode = umm.getNightMode();
+                    }
+                    switch (mPreviousDarkMode) {
+                        case UiModeManager.MODE_NIGHT_AUTO:
+                        case UiModeManager.MODE_NIGHT_NO:
+                           umm.setNightMode(
+                                    isPowerSave ? UiModeManager.MODE_NIGHT_YES :
+                                            mPreviousDarkMode);
+                            break;
+                        case UiModeManager.MODE_NIGHT_YES:
+                            // do nothing, the user forced dark mode
+                            break;
+                    }
                 }
             }
 
