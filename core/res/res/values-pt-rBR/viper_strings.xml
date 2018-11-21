@@ -30,4 +30,9 @@
   <string name="systemui_restart_title">A reinicialização do SystemUI é necessária</string>
   <string name="systemui_restart_message">Para que todas as alterações entrem em vigor, é necessário reiniciar o SystemUI. Reinicie o SystemUI agora?</string>
 
+  <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permlab_accessFontManager">Acessar gerenciador de fontes</string>
+  <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+  <string name="permdesc_accessFontManager">Permite que um aplicativo acesse o gerenciador de fontes.</string>
+
 </resources>
