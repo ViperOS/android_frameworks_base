@@ -4102,7 +4102,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                 && (config.uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
 
         if (userThemeSetting == 0) {
-            useDarkTheme = wallpaperWantsDarkTheme || nightModeWantsDarkTheme;
+            useDarkTheme = nightModeWantsDarkTheme;
         } else {
             useDarkTheme = userThemeSetting == 2;
             useBlackTheme = userThemeSetting == 3;
