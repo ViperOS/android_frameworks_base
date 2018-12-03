@@ -19,6 +19,7 @@ package com.android.systemui.qs;
 import static android.app.StatusBarManager.DISABLE2_QUICK_SETTINGS;
 
 import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.content.res.ColorStateList;
@@ -67,6 +68,8 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     private ActivityStarter mActivityStarter;
     private UserInfoController mUserInfoController;
+    private ImageView mVenomButton;
+    protected View mVenomContainer;
     private SettingsButton mSettingsButton;
     protected View mSettingsContainer;
     private PageIndicator mPageIndicator;
@@ -89,6 +92,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
     protected View mEdit;
     private TouchAnimator mSettingsCogAnimator;
+    private TouchAnimator mVenomCogAnimator;
 
     private View mActionsContainer;
     private View mDragHandle;
@@ -115,6 +119,10 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
         mPageIndicator = findViewById(R.id.footer_page_indicator);
 
+        mVenomButton = findViewById(R.id.venom_settings_button);
+        mVenomContainer = findViewById(R.id.venom_settings_button_container);
+        mVenomButton.setOnClickListener(this);
+
         mSettingsButton = findViewById(R.id.settings_button);
         mSettingsContainer = findViewById(R.id.settings_button_container);
         mSettingsButton.setOnClickListener(this);
@@ -134,6 +142,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
 
         // RenderThread is doing more harm than good when touching the header (to expand quick
         // settings), so disable it for this view
+        ((RippleDrawable) mVenomButton.getBackground()).setForceSoftware(true);
         ((RippleDrawable) mSettingsButton.getBackground()).setForceSoftware(true);
 
         updateResources();
@@ -156,6 +165,11 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                 .addFloat(mSettingsContainer, "translationX",
                         isLayoutRtl() ? (remaining - defSpace) : -(remaining - defSpace), 0)
                 .addFloat(mSettingsButton, "rotation", -120, 0)
+                .build();
+        mVenomCogAnimator = new Builder()
+                .addFloat(mVenomContainer, "translationX",
+                        isLayoutRtl() ? (remaining - defSpace) : -(remaining - defSpace), 0)
+                .addFloat(mVenomButton, "rotation", -360, 0)
                 .build();
 
         setExpansion(mExpansionAmount);
@@ -223,6 +237,7 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
     public void setExpansion(float headerExpansionFraction) {
         mExpansionAmount = headerExpansionFraction;
         if (mSettingsCogAnimator != null) mSettingsCogAnimator.setPosition(headerExpansionFraction);
+        if (mVenomCogAnimator != null) mVenomCogAnimator.setPosition(headerExpansionFraction);
 
         if (mFooterAnimator != null) {
             mFooterAnimator.setPosition(headerExpansionFraction);
@@ -337,7 +352,14 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
             return;
         }
 
-        if (v == mSettingsButton) {
+        if (v == mVenomButton) {
+            if (!Dependency.get(DeviceProvisionedController.class).isCurrentUserSetup()) {
+                // If user isn't setup just unlock the device and dump them back at SUW.
+                mActivityStarter.postQSRunnableDismissingKeyguard(() -> { });
+                return;
+            }
+            startVenomActivity();
+        } else if (v == mSettingsButton) {
             if (!Dependency.get(DeviceProvisionedController.class).isCurrentUserSetup()) {
                 // If user isn't setup just unlock the device and dump them back at SUW.
                 mActivityStarter.postQSRunnableDismissingKeyguard(() -> { });
@@ -365,6 +387,12 @@ public class QSFooterImpl extends FrameLayout implements QSFooter,
                 startSettingsActivity();
             }
         }
+    }
+
+    private void startVenomActivity() {
+        Intent localIntent = new Intent();
+        localIntent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$VenomActivity"));
+        mActivityStarter.startActivity(localIntent, true);
     }
 
     private void startSettingsActivity() {
