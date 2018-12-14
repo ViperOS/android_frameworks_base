@@ -21,9 +21,9 @@
     <dimen name="qs_detail_item_height_twoline">72dp</dimen>
 
     <!-- Height of tbhe big battery circle icon in the status bar. -->
-    <dimen name="status_bar_battery_bigcircle_icon_height">20.5dp</dimen>
+    <dimen name="status_bar_battery_bigcircle_icon_height">16.5dp</dimen>
      <!-- Width of the big battery circle icon in the status bar. -->
-    <dimen name="status_bar_battery_bigcircle_icon_width">20.5dp</dimen>
+    <dimen name="status_bar_battery_bigcircle_icon_width">16.5dp</dimen>
 
     <!-- Custom Carrier Label -->
     <dimen name="status_bar_carrier_height">14dp</dimen>
