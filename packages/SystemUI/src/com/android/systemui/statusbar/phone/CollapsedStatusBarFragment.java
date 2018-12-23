@@ -31,6 +31,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.android.systemui.Dependency;
@@ -77,6 +79,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private View mCustomCarrierLabel;
     private int mShowCarrierLabel;
 
+    // Viper Logo
+    private ImageView mVPLogo;
+    private boolean mShowLogo;
+
     private class SettingsObserver extends ContentObserver {
        SettingsObserver(Handler handler) {
            super(handler);
@@ -86,11 +92,15 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
          mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_SHOW_CARRIER),
                     false, this, UserHandle.USER_ALL);
+         mContentResolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_LOGO),
+                    false, this, UserHandle.USER_ALL);
        }
 
        @Override
        public void onChange(boolean selfChange) {
            updateSettings(true);
+           updateLogoSettings(true);
        }
     }
     private SettingsObserver mSettingsObserver = new SettingsObserver(mHandler);
@@ -105,9 +115,11 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContentResolver = getContext().getContentResolver();
         mKeyguardMonitor = Dependency.get(KeyguardMonitor.class);
         mNetworkController = Dependency.get(NetworkController.class);
         mStatusBarComponent = SysUiServiceProvider.getComponent(getContext(), StatusBar.class);
+        mSettingsObserver.observe();
     }
 
     @Override
@@ -131,6 +143,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
         mClockController = new ClockController(mStatusBar);
         mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
+        mVPLogo = (ImageView)mStatusBar.findViewById(R.id.status_bar_logo);
+        Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mVPLogo);
+        updateSettings(false);
+        updateLogoSettings(false);
         showSystemIconArea(false);
         initEmergencyCryptkeeperText();
         initOperatorName();
@@ -161,6 +177,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mNetworkController.hasEmergencyCryptKeeperText()) {
             mNetworkController.removeCallback(mSignalCallback);
         }
+        Dependency.get(DarkIconDispatcher.class).removeDarkReceiver(mVPLogo);
     }
 
     public void initNotificationIconArea(NotificationIconAreaController
@@ -257,12 +274,18 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         animateHide(mNotificationIconAreaInner, animate);
         animateHide(mCustomIconArea, animate);
         animateHide(mCenterClockLayout, animate);
+        if (mShowLogo) {
+            animateGone(mVPLogo);
+        }
     }
 
     public void showNotificationIconArea(boolean animate) {
         animateShow(mNotificationIconAreaInner, animate);
         animateShow(mCustomIconArea, animate);
         animateShow(mCenterClockLayout, animate);
+        if (mShowLogo) {
+            animateShow(mVPLogo, animate);
+        }
     }
 
     public void hideOperatorName(boolean animate) {
@@ -372,6 +395,21 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             mOperatorNameFrame = stub.inflate();
         }
     }
+
+    public void updateLogoSettings(boolean animate) {
+        mShowLogo = Settings.System.getIntForUser(
+                getContext().getContentResolver(), Settings.System.STATUS_BAR_LOGO, 0,
+                UserHandle.USER_CURRENT) == 1;
+        if (mNotificationIconAreaInner != null) {
+            if (mShowLogo) {
+                if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
+                    animateShow(mVPLogo, animate);
+                }
+            } else {
+                animateGone(mVPLogo);
+            }
+      }
+   }
 
     public void updateSettings(boolean animate) {
         mShowCarrierLabel = Settings.System.getIntForUser(mContentResolver,
