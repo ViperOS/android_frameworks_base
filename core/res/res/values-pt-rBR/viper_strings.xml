@@ -26,4 +26,8 @@
   <string name="reboot_system_title">Reiniciar o sistema</string>
   <string name="reboot_system_message">A reiniciar o sistema\u2026</string>
 
+  <!-- SystemUI Restart -->
+  <string name="systemui_restart_title">A reinicialização do SystemUI é necessária</string>
+  <string name="systemui_restart_message">Para que todas as alterações entrem em vigor, é necessário reiniciar o SystemUI. Reinicie o SystemUI agora?</string>
+
 </resources>
