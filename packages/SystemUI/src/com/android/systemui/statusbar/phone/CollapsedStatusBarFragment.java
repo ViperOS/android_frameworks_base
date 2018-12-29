@@ -275,7 +275,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         animateHide(mCustomIconArea, animate);
         animateHide(mCenterClockLayout, animate);
         if (mShowLogo) {
-            animateGone(mVPLogo);
+            animateHide(mVPLogo, animate);
         }
     }
 
@@ -302,7 +302,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public void hideCarrierName(boolean animate) {
         if (mCustomCarrierLabel != null) {
-            animateGone(mCustomCarrierLabel);
+            animateHide(mCustomCarrierLabel, animate);
         }
     }
 
@@ -336,13 +336,6 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
      */
     private void animateHide(final View v, boolean animate) {
         animateHiddenState(v, View.INVISIBLE, animate);
-    }
-
-    /**
-     * Remove a view.
-     */
-    private void animateGone(final View v) {
-        animateHiddenState(v, View.GONE, false);
     }
 
     /**
@@ -406,7 +399,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                     animateShow(mVPLogo, animate);
                 }
             } else {
-                animateGone(mVPLogo);
+                animateHiddenState(mVPLogo, View.GONE, animate);
             }
       }
    }
@@ -422,7 +415,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
             animateShow(mCustomCarrierLabel, animate);
         } else {
-            animateGone(mCustomCarrierLabel);
+            animateHiddenState(mCustomCarrierLabel, View.GONE, animate);
         }
     }
 }
