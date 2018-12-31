@@ -5562,6 +5562,9 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.SWITCH_STYLE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CLOCK_SELECTION),
+                    false, this, UserHandle.USER_ALL);
         }
 
          @Override
@@ -5591,6 +5594,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
                     Settings.System.SWITCH_STYLE))) {
                 unlockSwitchStyles();
                 updateSwitchStyle();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_CLOCK_SELECTION))) {
+                updateKeyguardStatusSettings();
             }
         }
 
@@ -5598,8 +5603,10 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             setQsRowsColumns();
             setPulseBlacklist();
             setForceAmbient();
+            updateKeyguardStatusSettings();
         }
     }
+
 
     private void setQsRowsColumns() {
         if (mQSPanel != null) {
@@ -5631,6 +5638,10 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
     private boolean isAmbientContainerAvailable() {
         return mAmbientMediaPlaying && mAmbientIndicationContainer != null;
+    }
+
+    private void updateKeyguardStatusSettings() {
+        mNotificationPanel.updateKeyguardStatusSettings();
     }
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {

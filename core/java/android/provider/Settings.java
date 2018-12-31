@@ -4162,6 +4162,12 @@ public final class Settings {
         public static final String SYSTEM_THEME = "system_theme";
 
         /**
+         * Select which lockscreen clock style to display
+         * @hide
+         */
+        public static final String LOCKSCREEN_CLOCK_SELECTION = "lockscreen_clock_selection";
+
+        /**
          * Select various accents to go along with system themes
          *
          * @hide

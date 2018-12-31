@@ -13,6 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
 <resources>
 
     <!-- Viper bottom navigation -->
@@ -28,6 +29,12 @@
     <color name="bottom_trans_background">@android:color/white</color>
     <color name="venom_cat_background">#1A000000</color>
     <color name="venom_cat_fab_background">#fafafa</color>
+
+    <!-- Custom Analog clock -->
+    <color name="analog_clock_border_color">#212121</color>
+    <color name="analog_clock_face_color">#FFFFFF</color>
+    <color name="analog_clock_hand_hour_color">@*android:color/accent_device_default_light</color>
+    <color name="analog_clock_hand_minute_color">#212121</color>
 
     <!-- Resolver -->
     <color name="resolver_list_bg">@android:color/white</color>
