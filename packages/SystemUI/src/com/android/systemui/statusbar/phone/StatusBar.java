@@ -4131,7 +4131,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         WallpaperColors systemColors = mColorExtractor
                 .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
         int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.SYSTEM_THEME, 0, mLockscreenUserManager.getCurrentUserId());
+                Settings.System.SYSTEM_THEME, 4, mLockscreenUserManager.getCurrentUserId());
         boolean useDarkTheme = false;
         boolean useBlackTheme = false;
         boolean useBlueNightTheme = false;
@@ -4203,7 +4203,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     // Switches qs tile style from stock to custom
     public void updateTileStyle() {
          int qsTileStyle = Settings.System.getIntForUser(mContext.getContentResolver(),
-                 Settings.System.QS_TILE_STYLE, 0, mLockscreenUserManager.getCurrentUserId());
+                 Settings.System.QS_TILE_STYLE, 5, mLockscreenUserManager.getCurrentUserId());
         ThemeAccentUtils.updateTileStyle(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), qsTileStyle);
     }
 

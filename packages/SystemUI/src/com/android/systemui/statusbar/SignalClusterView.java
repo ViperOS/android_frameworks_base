@@ -166,7 +166,7 @@ public class SignalClusterView extends LinearLayout implements NetworkController
     public void onTuningChanged(String key, String newValue) {
         if (STATUS_BAR_BATTERY_STYLE.equals(key)) {
             final int style = newValue == null ?
-                BatteryMeterDrawableBase.BATTERY_STYLE_PORTRAIT : Integer.parseInt(newValue);
+                BatteryMeterDrawableBase.BATTERY_STYLE_BIG_DOTTED_CIRCLE : Integer.parseInt(newValue);
             mBatteryVisible = style != BatteryMeterDrawableBase.BATTERY_STYLE_HIDDEN;
         } else if (!StatusBarIconController.ICON_BLACKLIST.equals(key)) {
             return;

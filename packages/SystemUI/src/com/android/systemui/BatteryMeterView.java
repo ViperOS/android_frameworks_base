@@ -289,7 +289,7 @@ public class BatteryMeterView extends LinearLayout implements
     private void updateShowPercent() {
         final boolean showing = mBatteryPercentView != null;
         int percentageStyle = Settings.System.getIntForUser(getContext().getContentResolver(),
-                SHOW_BATTERY_PERCENT, 1, mUser);
+                SHOW_BATTERY_PERCENT, 2, mUser);
         mShowPercent = percentageStyle;
         boolean showAnyway = alwaysShowPercentage() || mPowerSave || mCharging;
         if (!showAnyway
@@ -433,7 +433,7 @@ public class BatteryMeterView extends LinearLayout implements
 
     private void updateBatteryStyle(String styleStr) {
         final int style = styleStr == null ?
-                BatteryMeterDrawableBase.BATTERY_STYLE_PORTRAIT : Integer.parseInt(styleStr);
+                BatteryMeterDrawableBase.BATTERY_STYLE_BIG_DOTTED_CIRCLE : Integer.parseInt(styleStr);
         mDrawable.setMeterStyle(style);
 
         switch (style) {
