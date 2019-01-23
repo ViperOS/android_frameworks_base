@@ -1592,6 +1592,20 @@ public final class Settings {
     public static final String ACTION_STORAGE_VOLUME_ACCESS_SETTINGS =
             "android.settings.STORAGE_VOLUME_ACCESS_SETTINGS";
 
+    /**
+     * Activity Action: Show first time device intro
+     * <p>
+     * In some cases, a matching Activity may not exist, so ensure you
+     * safeguard against this.
+     * <p>
+     * Input: Nothing.
+     * <p>
+     * Output: Nothing
+     */
+    @SdkConstant(SdkConstantType.ACTIVITY_INTENT_ACTION)
+    public static final String ACTION_DEVICE_INTRODUCTION =
+        "android.settings.DEVICE_INTRODUCTION";
+
     // End of Intent actions for Settings
 
     /**
@@ -4111,6 +4125,16 @@ public final class Settings {
                 new SettingsValidators.InclusiveIntegerRangeValidator(0, 2);
 
         /**
+         * Weather the device introduction is completed
+         * @hide
+         */
+        public static final String DEVICE_INTRODUCTION_COMPLETED = "device_introduction_completed";
+
+        /** @hide */
+        private static final Validator DEVICE_INTRODUCTION_COMPLETED_VALIDATOR =
+               BOOLEAN_VALIDATOR;
+
+        /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
@@ -4466,6 +4490,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(POWER_MENU_ANIMATIONS);
             PRIVATE_SETTINGS.add(STATUS_BAR_LOGO);
             PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
+            PRIVATE_SETTINGS.add(DEVICE_INTRODUCTION_COMPLETED);
         }
 
         /**
@@ -4556,6 +4581,7 @@ public final class Settings {
             VALIDATORS.put(SHOW_BATTERY_PERCENT, SHOW_BATTERY_PERCENT_VALIDATOR);
             VALIDATORS.put(WEATHER_LOCKSCREEN_UNIT, WEATHER_LOCKSCREEN_UNIT_VALIDATOR);
             VALIDATORS.put(FACE_AUTO_UNLOCK, FACE_AUTO_UNLOCK_VALIDATOR);
+            VALIDATORS.put(DEVICE_INTRODUCTION_COMPLETED, DEVICE_INTRODUCTION_COMPLETED_VALIDATOR);
         }
 
         /**
