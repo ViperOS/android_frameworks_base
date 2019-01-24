@@ -4156,6 +4156,7 @@ public final class Settings {
          * 2 - force dark
          * 3 - force black
          * 4 - force bluenight
+         * 5 - force blacksupreme
          * @hide
          */
         public static final String SYSTEM_THEME = "system_theme";

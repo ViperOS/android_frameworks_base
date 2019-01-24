@@ -2211,6 +2211,11 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         return ThemeAccentUtils.isUsingBlueNightTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
     }
 
+    // Check for the blacksupreme system theme
+    public boolean isUsingBlackSupremeTheme() {
+        return ThemeAccentUtils.isUsingBlackSupremeTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
     // Unloads the stock dark theme
     public void unloadStockDarkTheme() {
         ThemeAccentUtils.unloadStockDarkTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
@@ -4131,10 +4136,11 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         WallpaperColors systemColors = mColorExtractor
                 .getWallpaperColors(WallpaperManager.FLAG_SYSTEM);
         int userThemeSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.SYSTEM_THEME, 4, mLockscreenUserManager.getCurrentUserId());
+                Settings.System.SYSTEM_THEME, 5, mLockscreenUserManager.getCurrentUserId());
         boolean useDarkTheme = false;
         boolean useBlackTheme = false;
         boolean useBlueNightTheme = false;
+        boolean useBlackSupremeTheme = false;
         final boolean wallpaperWantsDarkTheme = systemColors != null && (
                 systemColors.getColorHints() & WallpaperColors.HINT_SUPPORTS_DARK_THEME) != 0;
         final boolean nightModeWantsDarkTheme = DARK_THEME_IN_NIGHT_MODE
@@ -4146,6 +4152,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             useDarkTheme = userThemeSetting == 2;
             useBlackTheme = userThemeSetting == 3;
             useBlueNightTheme = userThemeSetting == 4;
+            useBlackSupremeTheme = userThemeSetting == 5;
         }
         if (isUsingDarkTheme() != useDarkTheme) {
             unfuckBlackWhiteAccent(); // Check for black and white accent
@@ -4158,6 +4165,10 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         if (isUsingBlueNightTheme() != useBlueNightTheme) {
             unfuckBlackWhiteAccent(); // Check for black and white accent
             ThemeAccentUtils.setLightBlueNightTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlueNightTheme);
+        }
+        if (isUsingBlackSupremeTheme() != useBlackSupremeTheme) {
+            unfuckBlackWhiteAccent(); // Check for black and white accent
+            ThemeAccentUtils.setLightBlackSupremeTheme(mOverlayManager, mLockscreenUserManager.getCurrentUserId(), useBlackSupremeTheme);
         }
 
         // Lock wallpaper defines the color of the majority of the views, hence we'll use it
