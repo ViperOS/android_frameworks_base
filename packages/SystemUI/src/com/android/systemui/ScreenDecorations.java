@@ -43,6 +43,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.provider.Settings.Secure;
 import android.support.annotation.VisibleForTesting;
 import android.util.DisplayMetrics;
@@ -121,6 +122,10 @@ public class ScreenDecorations extends SystemUI implements Tunable {
         mRotation = RotationUtils.getExactRotation(mContext);
         mWindowManager = mContext.getSystemService(WindowManager.class);
         updateRoundedCornerRadii();
+
+        Dependency.get(Dependency.MAIN_HANDLER).post(
+                () -> Dependency.get(TunerService.class).addTunable(this, SIZE));
+
         if (hasRoundedCorners() || shouldDrawCutout()) {
             setupDecorations();
         }
@@ -195,8 +200,6 @@ public class ScreenDecorations extends SystemUI implements Tunable {
         mWindowManager.getDefaultDisplay().getMetrics(metrics);
         mDensity = metrics.density;
 
-        Dependency.get(Dependency.MAIN_HANDLER).post(
-                () -> Dependency.get(TunerService.class).addTunable(this, SIZE));
 
         // Watch color inversion and invert the overlay as needed.
         SecureSetting setting = new SecureSetting(mContext, mHandler,
@@ -351,8 +354,8 @@ public class ScreenDecorations extends SystemUI implements Tunable {
     }
 
     private boolean hasRoundedCorners() {
-        return true;
-            // return mRoundedDefault > 0 || mRoundedDefaultBottom > 0 || mRoundedDefaultTop > 0;
+        return mRoundedDefault > 0 || mRoundedDefaultBottom > 0 || mRoundedDefaultTop > 0 ||
+                Secure.getIntForUser(mContext.getContentResolver(), SIZE, 0, UserHandle.USER_CURRENT) != 0;
     }
 
     private boolean shouldDrawCutout() {
@@ -370,30 +373,27 @@ public class ScreenDecorations extends SystemUI implements Tunable {
         // screen decorations overlay.
         int padding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
-        int padding_alt = mContext.getResources().getDimensionPixelSize(
-                R.dimen.rounded_corner_content_padding_alt);
-        int qsPadding = mContext.getResources().getDimensionPixelSize(
-                R.dimen.qs_corner_content_padding);
-         setupStatusBarPadding(padding, qsPadding);
-     }
+            setupStatusBarPadding(padding);
 
-     private void setupStatusBarPadding(int padding, int qsPadding) {
+    }
+
+    private void setupStatusBarPadding(int padding) {
         // Add some padding to all the content near the edge of the screen.
         StatusBar sb = getComponent(StatusBar.class);
         View statusBar = (sb != null ? sb.getStatusBarWindow() : null);
-         if (statusBar != null) {
-             TunablePadding.addTunablePadding(statusBar.findViewById(R.id.keyguard_header), PADDING,
-                     padding, FLAG_END);
- 
-             FragmentHostManager fragmentHostManager = FragmentHostManager.get(statusBar);
-             fragmentHostManager.addTagListener(CollapsedStatusBarFragment.TAG,
-                     new TunablePaddingTagListener(padding, R.id.status_bar));
-            if (qsPadding != 0) {
-                fragmentHostManager.addTagListener(QS.TAG,
-                        new TunablePaddingTagListener(qsPadding, R.id.header));
-            }
-         }
-     }
+        if (statusBar != null) {
+            TunablePadding.addTunablePadding(statusBar.findViewById(R.id.keyguard_header), PADDING,
+                    padding, FLAG_END);
+
+            FragmentHostManager fragmentHostManager = FragmentHostManager.get(statusBar);
+/*
+            fragmentHostManager.addTagListener(CollapsedStatusBarFragment.TAG,
+                    new TunablePaddingTagListener(padding, R.id.status_bar));
+*/
+            fragmentHostManager.addTagListener(QS.TAG,
+                    new TunablePaddingTagListener(padding, R.id.header));
+        }
+    }
 
     @VisibleForTesting
     WindowManager.LayoutParams getWindowLayoutParams() {
@@ -449,8 +449,13 @@ public class ScreenDecorations extends SystemUI implements Tunable {
     @Override
     public void onTuningChanged(String key, String newValue) {
         mHandler.post(() -> {
-            if (mOverlay == null) return;
             if (SIZE.equals(key)) {
+                if (mOverlay == null) {
+                    if (newValue != null && Integer.parseInt(newValue) != 0)
+                        setupDecorations();
+                    else
+                        return;
+                }
                 int size = mRoundedDefault;
                 int sizeTop = mRoundedDefaultTop;
                 int sizeBottom = mRoundedDefaultBottom;
@@ -468,6 +473,7 @@ public class ScreenDecorations extends SystemUI implements Tunable {
                     sizeBottom = size;
                 }
 
+                updateWindowVisibilities();
                 setSize(mOverlay.findViewById(R.id.left), sizeTop);
                 setSize(mOverlay.findViewById(R.id.right), sizeTop);
                 setSize(mBottomOverlay.findViewById(R.id.left), sizeBottom);

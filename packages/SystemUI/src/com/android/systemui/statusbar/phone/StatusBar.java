@@ -290,6 +290,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
             "lineagesecure:" + LineageSettings.Secure.LOCKSCREEN_MEDIA_METADATA;
     public static final String FORCE_SHOW_NAVBAR =
             "lineagesystem:" + LineageSettings.System.FORCE_SHOW_NAVBAR;
+    private static final String SYSUI_ROUNDED_FWVALS =
+            Settings.Secure.SYSUI_ROUNDED_FWVALS;
 
     private static final String BANNER_ACTION_CANCEL =
             "com.android.systemui.statusbar.banner_action_cancel";
@@ -465,6 +467,8 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     private boolean mJustPeeked;
 
     private int mPreviousDarkMode;
+
+    private boolean mSysuiRoundedFwvals;
 
     /**
      * Helper that is responsible for showing the right toast when a disallowed activity operation
@@ -719,6 +723,7 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
         tunerService.addTunable(this, STATUS_BAR_BRIGHTNESS_CONTROL);
         tunerService.addTunable(this, LOCKSCREEN_MEDIA_METADATA);
         tunerService.addTunable(this, FORCE_SHOW_NAVBAR);
+        tunerService.addTunable(this, SYSUI_ROUNDED_FWVALS);
 
         mDisplayManager = mContext.getSystemService(DisplayManager.class);
 
@@ -2224,6 +2229,25 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
     // Check for black and white accent overlays
     public void unfuckBlackWhiteAccent() {
         ThemeAccentUtils.unfuckBlackWhiteAccent(mOverlayManager, mLockscreenUserManager.getCurrentUserId());
+    }
+
+    public boolean isCurrentRoundedSameAsFw() {
+        float density = Resources.getSystem().getDisplayMetrics().density;
+        // Resource IDs for framework properties
+        int resourceIdRadius = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_radius);
+        int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
+
+        // Values on framework resources
+        int cornerRadiusRes = (int) (resourceIdRadius / density);
+        int contentPaddingRes = (int) (resourceIdPadding / density);
+
+        // Values in Settings DBs
+        int cornerRadius = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_SIZE, cornerRadiusRes, UserHandle.USER_CURRENT);
+        int contentPadding = Settings.Secure.getIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, contentPaddingRes, UserHandle.USER_CURRENT);
+
+        return (cornerRadiusRes == cornerRadius) && (contentPaddingRes == contentPadding);
     }
 
     @Nullable
@@ -4196,6 +4220,19 @@ public class StatusBar extends SystemUI implements DemoMode, TunerService.Tunabl
 
             // Make sure we have the correct navbar/statusbar colors.
             mStatusBarWindowManager.setKeyguardDark(useDarkText);
+        }
+        updateCorners();
+    }
+
+    private void updateCorners() {
+        if (mSysuiRoundedFwvals && !isCurrentRoundedSameAsFw()) {
+            float density = Resources.getSystem().getDisplayMetrics().density;
+            int resourceIdRadius = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_radius);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_SIZE, (int) (resourceIdRadius / density), UserHandle.USER_CURRENT);
+            int resourceIdPadding = (int) mContext.getResources().getDimension(R.dimen.rounded_corner_content_padding);
+            Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.SYSUI_ROUNDED_CONTENT_PADDING, (int) (resourceIdPadding / density), UserHandle.USER_CURRENT);
         }
     }
 
