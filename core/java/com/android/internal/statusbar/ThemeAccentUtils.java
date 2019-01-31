@@ -34,6 +34,7 @@ public class ThemeAccentUtils {
         "com.android.settings.theme.dark", // 1
         "com.android.settings.intelligence.theme.dark", // 2
         "com.android.gboard.theme.dark", // 3
+        "org.lineageos.updater.theme.dark", // 4
     };
 
     // Black themes
@@ -42,6 +43,7 @@ public class ThemeAccentUtils {
         "com.android.settings.theme.black", // 1
         "com.android.settings.intelligence.theme.black", // 2
         "com.android.gboard.theme.black", // 3
+        "org.lineageos.updater.theme.black", // 4
     };
 
     // BlueNight themes
@@ -50,6 +52,7 @@ public class ThemeAccentUtils {
         "com.android.settings.theme.bluenight", // 1
         "com.android.settings.intelligence.theme.bluenight", // 2
         "com.android.gboard.theme.bluenight", // 3
+        "org.lineageos.updater.theme.bluenight", // 4
     };
 
     // BlackSupreme themes
@@ -58,6 +61,7 @@ public class ThemeAccentUtils {
         "com.android.settings.theme.blacksupreme", // 1
         "com.android.settings.intelligence.theme.blacksupreme", // 2
         "com.android.gboard.theme.blacksupreme", // 3
+        "org.lineageos.updater.theme.blacksupreme", // 4
     };
 
     // Accents
