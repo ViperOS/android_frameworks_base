@@ -248,11 +248,11 @@ public class ThemeAccentUtils {
         }
     }
 
-    // Check for the white accent overlay
-    public static boolean isUsingWhiteAccent(IOverlayManager om, int userId) {
+    // Check for any accent overlay
+    public static boolean isUsingAccent(IOverlayManager om, int userId, int accent) {
         OverlayInfo themeInfo = null;
         try {
-            themeInfo = om.getOverlayInfo(ACCENTS[21],
+            themeInfo = om.getOverlayInfo(ACCENTS[accent],
                     userId);
         } catch (RemoteException e) {
             e.printStackTrace();
