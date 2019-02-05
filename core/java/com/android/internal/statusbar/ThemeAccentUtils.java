@@ -95,6 +95,13 @@ public class ThemeAccentUtils {
         "com.accents.userfive", // 26
         "com.accents.usersix", // 27
         "com.accents.userseven", // 28
+        "com.accents.nblue", // 29
+        "com.accents.nbrown", // 30
+        "com.accents.ngreen", // 31
+        "com.accents.norange", // 32
+        "com.accents.npink", // 33
+        "com.accents.npurple", // 34
+        "com.accents.nred", // 35
     };
 
     private static final String[] QS_TILE_THEMES = {
