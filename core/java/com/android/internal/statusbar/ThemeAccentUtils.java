@@ -31,41 +31,45 @@ public class ThemeAccentUtils {
     // Dark themes
     private static final String[] DARK_THEMES = {
         "com.android.system.theme.dark", // 0
-        "com.android.settings.theme.dark", // 1
-        "com.android.settings.intelligence.theme.dark", // 2
-        "com.android.gboard.theme.dark", // 3
-        "org.lineageos.updater.theme.dark", // 4
-        "com.android.wellbeing.theme.dark", // 5
+        "com.android.systemui.theme.custom.dark", // 1
+        "com.android.settings.theme.dark", // 2
+        "com.android.settings.intelligence.theme.dark", // 3
+        "com.android.gboard.theme.dark", // 4
+        "org.lineageos.updater.theme.dark", // 5
+        "com.android.wellbeing.theme.dark", // 6
     };
 
     // Black themes
     private static final String[] BLACK_THEMES = {
         "com.android.system.theme.black", // 0
-        "com.android.settings.theme.black", // 1
-        "com.android.settings.intelligence.theme.black", // 2
-        "com.android.gboard.theme.black", // 3
-        "org.lineageos.updater.theme.black", // 4
-        "com.android.wellbeing.theme.black", // 5
+        "com.android.systemui.theme.custom.black", // 1
+        "com.android.settings.theme.black", // 2
+        "com.android.settings.intelligence.theme.black", // 3
+        "com.android.gboard.theme.black", // 4
+        "org.lineageos.updater.theme.black", // 5
+        "com.android.wellbeing.theme.black", // 6
     };
 
     // BlueNight themes
     private static final String[] BLUENIGHT_THEMES = {
         "com.android.system.theme.bluenight", // 0
-        "com.android.settings.theme.bluenight", // 1
-        "com.android.settings.intelligence.theme.bluenight", // 2
-        "com.android.gboard.theme.bluenight", // 3
-        "org.lineageos.updater.theme.bluenight", // 4
-        "com.android.wellbeing.theme.bluenight", // 5
+        "com.android.systemui.theme.custom.bluenight", // 1
+        "com.android.settings.theme.bluenight", // 2
+        "com.android.settings.intelligence.theme.bluenight", // 3
+        "com.android.gboard.theme.bluenight", // 4
+        "org.lineageos.updater.theme.bluenight", // 5
+        "com.android.wellbeing.theme.bluenight", // 6
     };
 
     // BlackSupreme themes
     private static final String[] BLACKSUPREME_THEMES = {
         "com.android.system.theme.blacksupreme", // 0
-        "com.android.settings.theme.blacksupreme", // 1
-        "com.android.settings.intelligence.theme.blacksupreme", // 2
-        "com.android.gboard.theme.blacksupreme", // 3
-        "org.lineageos.updater.theme.blacksupreme", // 4
-        "com.android.wellbeing.theme.blacksupreme", // 5
+        "com.android.systemui.theme.custom.blacksupreme", // 1
+        "com.android.settings.theme.blacksupreme", // 2
+        "com.android.settings.intelligence.theme.blacksupreme", // 3
+        "com.android.gboard.theme.blacksupreme", // 4
+        "org.lineageos.updater.theme.blacksupreme", // 5
+        "com.android.wellbeing.theme.blacksupreme", // 6
     };
 
     private static final String[] LIGHT_THEMES = {
