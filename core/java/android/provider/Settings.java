@@ -4286,6 +4286,12 @@ public final class Settings {
         public static final String FLING_PULSE_COLOR = "fling_pulse_color";
 
         /**
+         * Apps to skip for Pulse
+         * @hide
+         */
+        public static final String PULSE_APPS_BLACKLIST = "pulse_apps_blacklist";
+
+        /**
          * Fling pulse lavalamp
          *
          * @hide
