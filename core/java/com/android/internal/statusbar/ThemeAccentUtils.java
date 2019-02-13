@@ -35,6 +35,7 @@ public class ThemeAccentUtils {
         "com.android.settings.intelligence.theme.dark", // 2
         "com.android.gboard.theme.dark", // 3
         "org.lineageos.updater.theme.dark", // 4
+        "com.android.wellbeing.theme.dark", // 5
     };
 
     // Black themes
@@ -44,6 +45,7 @@ public class ThemeAccentUtils {
         "com.android.settings.intelligence.theme.black", // 2
         "com.android.gboard.theme.black", // 3
         "org.lineageos.updater.theme.black", // 4
+        "com.android.wellbeing.theme.black", // 5
     };
 
     // BlueNight themes
@@ -53,6 +55,7 @@ public class ThemeAccentUtils {
         "com.android.settings.intelligence.theme.bluenight", // 2
         "com.android.gboard.theme.bluenight", // 3
         "org.lineageos.updater.theme.bluenight", // 4
+        "com.android.wellbeing.theme.bluenight", // 5
     };
 
     // BlackSupreme themes
@@ -62,6 +65,12 @@ public class ThemeAccentUtils {
         "com.android.settings.intelligence.theme.blacksupreme", // 2
         "com.android.gboard.theme.blacksupreme", // 3
         "org.lineageos.updater.theme.blacksupreme", // 4
+        "com.android.wellbeing.theme.blacksupreme", // 5
+    };
+
+    private static final String[] LIGHT_THEMES = {
+        "com.android.wellbeing.theme.light", // 0
+        "com.android.gboard.theme.light", // 1
     };
 
     // Accents
@@ -182,13 +191,20 @@ public class ThemeAccentUtils {
             try {
                 om.setEnabled(theme,
                         useDarkTheme, userId);
-                unfuckBlackWhiteAccent(om, userId);
                 if (useDarkTheme) {
                     unloadStockDarkTheme(om, userId);
                 }
             } catch (RemoteException e) {
             }
         }
+        for (String theme : LIGHT_THEMES) {
+            try {
+                om.setEnabled(theme,
+                        !useDarkTheme, userId);
+            } catch (RemoteException e) {
+            }
+        }
+        unfuckBlackWhiteAccent(om, userId);
     }
 
     // Set light / black theme
@@ -197,10 +213,17 @@ public class ThemeAccentUtils {
             try {
                 om.setEnabled(theme,
                         useBlackTheme, userId);
-                unfuckBlackWhiteAccent(om, userId);
             } catch (RemoteException e) {
             }
         }
+        for (String theme : LIGHT_THEMES) {
+            try {
+                om.setEnabled(theme,
+                        !useBlackTheme, userId);
+            } catch (RemoteException e) {
+            }
+        }
+        unfuckBlackWhiteAccent(om, userId);
     }
 
     // Set light / bluenight theme
@@ -209,10 +232,17 @@ public class ThemeAccentUtils {
             try {
                 om.setEnabled(theme,
                         useBlueNightTheme, userId);
-                unfuckBlackWhiteAccent(om, userId);
             } catch (RemoteException e) {
             }
         }
+        for (String theme : LIGHT_THEMES) {
+            try {
+                om.setEnabled(theme,
+                        !useBlueNightTheme, userId);
+            } catch (RemoteException e) {
+            }
+        }
+        unfuckBlackWhiteAccent(om, userId);
     }
 
     // Set light / blacksupreme theme
@@ -221,10 +251,17 @@ public class ThemeAccentUtils {
             try {
                 om.setEnabled(theme,
                         useBlackSupremeTheme, userId);
-                unfuckBlackWhiteAccent(om, userId);
             } catch (RemoteException e) {
             }
         }
+        for (String theme : LIGHT_THEMES) {
+            try {
+                om.setEnabled(theme,
+                        !useBlackSupremeTheme, userId);
+            } catch (RemoteException e) {
+            }
+        }
+        unfuckBlackWhiteAccent(om, userId);
     }
 
     // Check for black and white accent overlays
