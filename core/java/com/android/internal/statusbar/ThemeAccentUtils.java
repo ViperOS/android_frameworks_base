@@ -37,6 +37,7 @@ public class ThemeAccentUtils {
         "com.android.gboard.theme.dark", // 4
         "org.lineageos.updater.theme.dark", // 5
         "com.android.wellbeing.theme.dark", // 6
+        "com.google.intelligence.sense.theme.dark", // 7
     };
 
     // Black themes
@@ -48,6 +49,7 @@ public class ThemeAccentUtils {
         "com.android.gboard.theme.black", // 4
         "org.lineageos.updater.theme.black", // 5
         "com.android.wellbeing.theme.black", // 6
+        "com.google.intelligence.sense.theme.black", // 7
     };
 
     // BlueNight themes
@@ -59,6 +61,7 @@ public class ThemeAccentUtils {
         "com.android.gboard.theme.bluenight", // 4
         "org.lineageos.updater.theme.bluenight", // 5
         "com.android.wellbeing.theme.bluenight", // 6
+        "com.google.intelligence.sense.theme.bluenight", // 7
     };
 
     // BlackSupreme themes
@@ -70,6 +73,7 @@ public class ThemeAccentUtils {
         "com.android.gboard.theme.blacksupreme", // 4
         "org.lineageos.updater.theme.blacksupreme", // 5
         "com.android.wellbeing.theme.blacksupreme", // 6
+        "com.google.intelligence.sense.theme.blacksupreme", // 7
     };
 
     private static final String[] LIGHT_THEMES = {
