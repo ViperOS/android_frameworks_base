@@ -79,6 +79,7 @@ public class ThemeAccentUtils {
     private static final String[] LIGHT_THEMES = {
         "com.android.wellbeing.theme.light", // 0
         "com.android.gboard.theme.light", // 1
+        "com.google.intelligence.sense.theme.light", // 2
     };
 
     // Accents
