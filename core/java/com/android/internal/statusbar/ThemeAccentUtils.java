@@ -131,6 +131,13 @@ public class ThemeAccentUtils {
         "com.android.systemui.qstile.doublecircle", // 5
     };
 
+    // Switch themes
+    private static final String[] SWITCH_THEMES = {
+        "default", // 0
+        "com.android.system.switch.md2", // 1
+        "com.android.system.switch.oneplus", // 2
+    };
+
     // Unloads the stock dark theme
     public static void unloadStockDarkTheme(IOverlayManager om, int userId) {
         OverlayInfo themeInfo = null;
@@ -390,6 +397,45 @@ public class ThemeAccentUtils {
         OverlayInfo themeInfo = null;
         try {
             themeInfo = om.getOverlayInfo(QS_TILE_THEMES[qsstyle],
+                    userId);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+        return themeInfo != null && themeInfo.isEnabled();
+    }
+
+    // Switches switch style to user selected.
+    public static void updateSwitchStyle(IOverlayManager om, int userId, int switchStyle) {
+        if (switchStyle == 0) {
+            unlockSwitchStyles(om, userId);
+        } else {
+            try {
+                om.setEnabled(SWITCH_THEMES[switchStyle],
+                        true, userId);
+            } catch (RemoteException e) {
+            }
+        }
+    }
+
+    // Unload all the switch styles
+    public static void unlockSwitchStyles(IOverlayManager om, int userId) {
+        // skip index 0
+        for (int i = 1; i < SWITCH_THEMES.length; i++) {
+            String switchtheme = SWITCH_THEMES[i];
+            try {
+                om.setEnabled(switchtheme,
+                        false /*disable*/, userId);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Check for any switch styles overlay
+    public static boolean isUsingSwitchStyles(IOverlayManager om, int userId, int switchstyle) {
+        OverlayInfo themeInfo = null;
+        try {
+            themeInfo = om.getOverlayInfo(SWITCH_THEMES[switchstyle],
                     userId);
         } catch (RemoteException e) {
             e.printStackTrace();

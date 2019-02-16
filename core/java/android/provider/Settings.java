@@ -4175,6 +4175,11 @@ public final class Settings {
          */
         public static final String QS_TILE_STYLE = "qs_tile_style";
 
+        /**
+         * @hide
+         */
+        public static final String SWITCH_STYLE = "switch_style";
+
 		/**
          * Whether to show the battery info on the lockscreen while charging
          * @hide
