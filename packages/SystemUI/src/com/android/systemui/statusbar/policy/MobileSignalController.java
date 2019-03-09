@@ -87,14 +87,15 @@ public class MobileSignalController extends SignalController<
     private boolean mRoamingIconAllowed;
     private boolean mShow4gForLte;
     private boolean mVoLTEicon;
-	
+
     private ImsManager mImsManager;
 
     private static final String ROAMING_INDICATOR_ICON =
             "system:" + Settings.System.ROAMING_INDICATOR_ICON;
     private static final String SHOW_FOURG_ICON =
             "system:" + Settings.System.SHOW_FOURG_ICON;
-
+    private static final String SHOW_VOLTE_ICON =
+            "system:" + Settings.System.SHOW_VOLTE_ICON;
     // TODO: Reduce number of vars passed in, if we have the NetworkController, probably don't
     // need listener lists anymore.
     public MobileSignalController(Context context, Config config, boolean hasMobileData,
@@ -139,6 +140,8 @@ public class MobileSignalController extends SignalController<
 
         Dependency.get(TunerService.class).addTunable(this, ROAMING_INDICATOR_ICON);
         Dependency.get(TunerService.class).addTunable(this, SHOW_FOURG_ICON);
+        Dependency.get(TunerService.class).addTunable(this, SHOW_VOLTE_ICON);
+
     }
 
     @Override
@@ -154,19 +157,16 @@ public class MobileSignalController extends SignalController<
                         newValue != null && Integer.parseInt(newValue) != 0;
                      mapIconSets();
                 break;
+            case SHOW_VOLTE_ICON:
+                     mVoLTEicon =
+                        newValue != null && Integer.parseInt(newValue) != 0;
+                     updateTelephony();
+                break;
             default:
                 break;
         }
     }
 
-    private void updateSettings() {
-        ContentResolver resolver = mContext.getContentResolver();
-        mVoLTEicon = Settings.System.getIntForUser(resolver,
-                Settings.System.SHOW_VOLTE_ICON, 0,
-                UserHandle.USER_CURRENT) == 1;
-
-        updateTelephony();
-    }
 
     public void setConfiguration(Config config) {
         mConfig = config;
