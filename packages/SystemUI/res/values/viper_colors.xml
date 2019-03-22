@@ -52,6 +52,9 @@
     <!-- Custom Carrier Label -->
     <color name="status_bar_carrier_color">#FFFFFFFF</color>
 
+    <!-- VPN footer -->
+    <color name="quick_settings_footer_background_color">@android:color/transparent</color>
+
     <!-- Floating action button -->
     <color name="fab_color">?android:attr/colorAccent</color>
     <color name="floating_action_button_icon_color">@android:color/white</color>
