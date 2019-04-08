@@ -830,15 +830,6 @@
        Tres <xliff:g id="number">%2$d</xliff:g> intentos fallíos más,
        va reafitase\'l preséu perdiendo tolos datos d\'usuariu.
     </string>
-    <string name="lockscreen_failed_attempts_now_wiping" product="tablet">       Tentesti de desbloquiar incorreutamente la tableta <xliff:g id="number">%d</xliff:g> vegaes.
-       Agora va reafitase\'l preséu.
-    </string>
-    <string name="lockscreen_failed_attempts_now_wiping" product="tv">       Tentesti de desbloquiar incorreutamente la TV <xliff:g id="number">%d</xliff:g> vegaes.
-       Agora va reafitase\'l preséu.
-    </string>
-    <string name="lockscreen_failed_attempts_now_wiping" product="default">       Tentesti de desbloquiar incorreutamente\'l teléfonu <xliff:g id="number">%d</xliff:g> vegaes.
-       Agora va reafitase\'l preséu.
-    </string>
     <string name="lockscreen_too_many_failed_attempts_countdown">Volvi tentalo en <xliff:g id="number">%d</xliff:g> segundos.</string>
     <string name="lockscreen_forgot_pattern_button_text">¿Escaeciesti\'l patrón?</string>
     <string name="lockscreen_glogin_forgot_pattern">Desbloquéu de cuenta</string>
@@ -1608,15 +1599,6 @@
     <string name="kg_failed_attempts_almost_at_wipe" product="default">       Tentesti de desbloquiar incorreutamente\'l teléfonu <xliff:g id="number">%1$d</xliff:g> vegaes.
        Tres <xliff:g id="number">%2$d</xliff:g> intentos fallíos más,
        va reafitase\'l preséu perdiendo tolos datos d\'usuariu.
-    </string>
-    <string name="kg_failed_attempts_now_wiping" product="tablet">       Tentesti de desbloquiar incorreutamente la tableta <xliff:g id="number">%d</xliff:g> vegaes.
-       Agora va reafitase\'l preséu.
-    </string>
-    <string name="kg_failed_attempts_now_wiping" product="tv">       Tentesti de desbloquiar incorreutamente la TV <xliff:g id="number">%d</xliff:g> vegaes.
-       Agora va reafitase\'l preséu.
-    </string>
-    <string name="kg_failed_attempts_now_wiping" product="default">       Tentesti de desbloquiar incorreutamente\'l teléfonu <xliff:g id="number">%d</xliff:g> vegaes.
-       Agora va reafitase\'l preséu.
     </string>
     <string name="kg_failed_attempts_almost_at_login" product="tablet">       Dibuxesti mal el patrón de desbloquéu <xliff:g id="number">%1$d</xliff:g> vegaes.
        Tres <xliff:g id="number">%2$d</xliff:g> intentos fallíos más,
