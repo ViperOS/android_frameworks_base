@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
   ~ Copyright (C) 2018 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,5 +17,5 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="display_cutout_emulation_overlay" msgid="5323179900047630217">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‏‎‎‏‏‏‎‏‏‏‏‏‏‎‏‏‏‎‏‏‏‏‏‎‏‎‏‎‎‏‏‎‏‎‎‏‏‏‎‏‎‏‏‎‏‎‎‏‏‏‏‏‏‎‎‎‏‎‎‏‎Double cutout‎‏‎‎‏‎"</string>
+    <string name="display_cutout_emulation_overlay" msgid="5323179900047630217">"‎‏‎‎‎‎‎‏‎‏‏‏‎‎‎‎‎‎‏‎‎‏‎‎‎‎‏‏‏‏‏‏‏‏‎‎‏‎‎‏‏‏‎‏‏‏‏‏‏‎‏‏‏‎‏‏‏‏‏‎‏‎‏‎‎‏‏‎‏‎‎‏‏‏‎‏‎‏‏‎‏‎‎‏‏‏‏‏‏‎‎‎‏‎‎‏‎Double cutout‎‏‎‎‏‎"</string>
 </resources>
