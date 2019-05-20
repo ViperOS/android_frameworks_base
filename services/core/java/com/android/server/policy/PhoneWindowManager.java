@@ -2945,6 +2945,11 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     LineageSettings.System.FORCE_SHOW_NAVBAR,
                     Utils.hasNavbarByDefault(mContext) ? 1 : 0,
                     UserHandle.USER_CURRENT) == 1;
+
+            if (mLineageHardware.isSupported(LineageHardwareManager.FEATURE_KEY_DISABLE)) {
+                mLineageHardware.set(LineageHardwareManager.FEATURE_KEY_DISABLE,
+                        mNavbarVisible || mUseGestureButton);
+            }
         }
         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
             WindowManagerPolicyControl.reloadFromSetting(mContext);
